@@ -1,2 +1,3 @@
-# leetcode
-Storage for my leetcode solutions
+# LeetCode
+
+Storage for my LeetCode solutions
