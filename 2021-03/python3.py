@@ -1,5 +1,36 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/number-of-good-pairs/submissions/
+class Solution:
+    def numIdenticalPairs(self, nums):
+        indices = {}
+        
+        for i, num in enumerate(nums):
+            if num not in indices.keys():
+                indices[num] = [i]
+            else:
+                indices[num] = indices[num] + [i]
+        
+        count = 0
+        for key in indices.keys():
+            length = len(indices[key])
+            count += (length - 1) * length // 2  # one less than triangular number
+        
+        return count
+
+# -----------------------------------------------------------------------------
+# https://leetcode.com/problems/richest-customer-wealth/submissions/
+class Solution:
+    def maximumWealth(self, accounts):
+        highest = 0
+        for i in range(len(accounts)):
+            wealth = sum(accounts[i])
+            if wealth > highest:
+                highest = wealth
+        
+        return highest
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/submissions/
 class Solution:
     def kidsWithCandies(self, candies, extraCandies):
