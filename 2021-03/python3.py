@@ -1,5 +1,32 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/design-parking-system/submissions/
+class ParkingSystem:
+
+    def __init__(self, big: int, medium: int, small: int):
+        self.carTypes = {}
+        self.carTypes[3] = small
+        self.carTypes[2] = medium
+        self.carTypes[1] = big
+
+    def addCar(self, carType: int) -> bool:
+        if self.carTypes[carType] < 1:
+            return False
+        else:
+            self.carTypes[carType] = self.carTypes[carType] - 1
+            return True
+
+# -----------------------------------------------------------------------------
+# https://leetcode.com/problems/jewels-and-stones/submissions/
+class Solution:
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:
+        counter = 0
+        for stone in stones:
+            if stone in jewels:
+                counter += 1
+        return counter
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/number-of-good-pairs/submissions/
 class Solution:
     def numIdenticalPairs(self, nums):
