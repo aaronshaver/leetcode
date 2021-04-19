@@ -1,5 +1,23 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/check-if-the-sentence-is-pangram/submissions/
+class Solution:
+    def checkIfPangram(self, sentence: str) -> bool:
+        counts = {}
+        for letter in 'abcdefghijklmnopqrstuvwxyz':
+            counts[letter] = 0
+            
+        for char in sentence:
+            counts[char] = counts[char] + 1
+        
+        flag = True
+        for count in counts.values():
+            if count == 0:
+                return False
+
+        return True
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/design-parking-system/submissions/
 class ParkingSystem:
 
