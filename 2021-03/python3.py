@@ -1,5 +1,32 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/
+class Solution:
+    def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
+        sorted_nums = sorted(nums)
+        
+        counts = []
+        for num in nums:
+            counts.append(sorted_nums.index(num))
+        
+        return counts
+            
+# my original, naive algorithm that's N^2:
+#
+#    def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
+#        counts = []
+#        for i, num in enumerate(nums):
+#            count = 0
+#            for j in range(len(nums)):
+#                if j == i:
+#                   continue
+#                if nums[j] < nums[i]:
+#                    count += 1
+#            counts.append(count)
+#        
+#        return counts
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/check-if-the-sentence-is-pangram/submissions/
 class Solution:
     def checkIfPangram(self, sentence: str) -> bool:
