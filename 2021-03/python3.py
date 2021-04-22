@@ -1,5 +1,21 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/shuffle-string/submissions/
+class Solution:
+    def restoreString(self, s: str, indices: List[int]) -> str:
+        # this is (maybe?) intentionally inefficient: I accidently got a peek
+        # at a solution and so I tried to do it in a different way, although 
+        # I think this isn't bad. It's not exponential; it's basically always
+        # looping through n 3 times so the growth rate should be linear
+        output = ""
+        pairs = zip([letter for letter in s], indices)
+        
+        for tuple in sorted(pairs, key=lambda x:x[1]):  # sort by second item in tuple
+            output += tuple[0]
+            
+        return output
+        
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/
 class Solution:
     def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
