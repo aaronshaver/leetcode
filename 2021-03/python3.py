@@ -1,5 +1,70 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/sort-array-by-parity-ii/submissions/
+
+# third solution, a bit better, got it down to ~228 ms runtime
+class Solution:
+    def sortArrayByParityII(self, nums: List[int]) -> List[int]:
+        evens = [x for x in nums if x % 2 == 0]
+        evens_pointer = 0
+        odds = [x for x in nums if x % 2 != 0]
+        odds_pointer = 0
+        
+        output = []
+        even_index = True
+        
+        while len(output) < len(nums):
+            if even_index:
+                output.append(evens[evens_pointer])
+                evens_pointer += 1
+            else:
+                output.append(odds[odds_pointer])
+                odds_pointer += 1
+            even_index = True if even_index is False else False
+                
+        return output
+
+# my second solution, inspired by one I saw in the discussions that I felt was
+# the most readable; it's not an exact copy; I re-implemented it strictly
+# from memory; also it's not the most optimized, but it is twice as fast as my
+# first solution
+class Solution:
+    def sortArrayByParityII(self, nums: List[int]) -> List[int]:
+        evens = [x for x in nums if x % 2 == 0]
+        odds = [x for x in nums if x % 2 != 0]
+        output = []
+        even = True
+        
+        while len(output) < len(nums):
+            if even:
+                output.append(evens.pop(0))
+            else:
+                output.append(odds.pop(0))
+            even = True if even is False else False
+                
+        return output
+
+# my original O(n**2) solution:
+class Solution:
+    def sortArrayByParityII(self, nums: List[int]) -> List[int]:
+        sorted_nums = []
+        for i in range(len(nums)):
+            if i % 2 == 0:
+                for i in range(len(nums)):
+                    if nums[i] % 2 == 0:
+                        sorted_nums.append(nums[i])
+                        del nums[i]
+                        break
+            else:
+                for i, num in enumerate(nums):
+                    if num % 2 != 0:
+                        sorted_nums.append(num)
+                        del nums[i]
+                        break
+        
+        return sorted_nums
+                
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/shuffle-string/submissions/
 class Solution:
     def restoreString(self, s: str, indices: List[int]) -> str:
