@@ -1,5 +1,25 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/submissions/
+
+class Solution:
+    def subtractProductAndSum(self, n: int) -> int:
+        digits = []
+        remaining = n
+        while True:
+            next_num = remaining % 10 
+            remaining = remaining // 10
+            digits.append(next_num)
+            if remaining == 0:
+                break
+
+        product = 1
+        for elem in digits:
+            product = product * elem
+            
+        return product - sum(digits)
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/decode-xored-array/submissions/
 
 class Solution:
