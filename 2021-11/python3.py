@@ -13,6 +13,7 @@ class Solution:
             if remaining == 0:
                 break
 
+        # as of Python 3.8, there's a math.prod() but I wanted to do it without imports
         product = 1
         for elem in digits:
             product = product * elem
