@@ -1,5 +1,17 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/decompress-run-length-encoded-list/submissions/
+class Solution:
+    def decompressRLElist(self, nums: List[int]) -> List[int]:
+        output = []
+        for i in range(0, len(nums), 2):
+            index_of_char = i + 1
+            count_of_char = nums[i] 
+            output = output + [nums[index_of_char] for _ in range(count_of_char)]
+            
+        return output
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/submissions/
 
 class Solution:
