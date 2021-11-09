@@ -1,5 +1,24 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/submissions/
+
+class Solution:
+    def numberOfSteps(self, num: int) -> int:
+        if num == 0:
+            return 0
+        count = 0
+        while True:
+            if num % 2 == 0:
+                num = num / 2
+            else:
+                num -= 1
+            count += 1
+            if num == 0:
+                break
+        
+        return count
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/decompress-run-length-encoded-list/submissions/
 class Solution:
     def decompressRLElist(self, nums: List[int]) -> List[int]:
