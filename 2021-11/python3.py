@@ -1,5 +1,19 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/create-target-array-in-the-given-order/submissions/
+
+class Solution:
+    def createTargetArray(self, nums: List[int], index: List[int]) -> List[int]:
+        target = []
+        for i in range(len(nums)):
+            if index[i] == len(target):
+                target.append(nums[i])
+            else:
+                target.insert(index[i], nums[i])
+        
+        return target
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/submissions/
 
 class Solution:
