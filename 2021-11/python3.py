@@ -1,5 +1,21 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/split-a-string-in-balanced-strings/submissions/
+
+class Solution:
+    def balancedStringSplit(self, s: str) -> int:
+        subsets_count = 0 
+        
+        buffer = ''
+        for char in s:
+            buffer  += char
+            
+            if buffer.count('L') == buffer.count('R'):
+                subsets_count += 1
+        
+        return subsets_count
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/goal-parser-interpretation/submissions/
 
 class Solution:
