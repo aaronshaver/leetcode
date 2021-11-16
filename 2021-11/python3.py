@@ -1,5 +1,18 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/count-items-matching-a-rule/submissions/
+
+class Solution:
+    def countMatches(self, items: List[List[str]], ruleKey: str, ruleValue: str) -> int:
+        
+        if ruleKey == "type":
+            return [x[0] for x in items].count(ruleValue)
+        if ruleKey == "color":
+            return [x[1] for x in items].count(ruleValue)
+        if ruleKey == "name":
+            return [x[2] for x in items].count(ruleValue)
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/split-a-string-in-balanced-strings/submissions/
 
 class Solution:
