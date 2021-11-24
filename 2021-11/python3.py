@@ -1,5 +1,29 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/range-sum-of-bst/submissions/
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    
+    def __init__(self):
+        self.total = 0  # because of goofy LeetCode shared instance
+    
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+        if root.val <= high and root.val >= low:
+            self.total += root.val
+        if root.left:
+            self.rangeSumBST(root.left, low, high)
+        if root.right:
+            self.rangeSumBST(root.right, low, high)
+        
+        return self.total
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/count-items-matching-a-rule/submissions/
 
 class Solution:
