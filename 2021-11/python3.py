@@ -1,5 +1,25 @@
 
 # -----------------------------------------------------------------------------
+# https://leetcode.com/problems/xor-operation-in-an-array/submissions/
+
+class Solution:
+    def xorOperation(self, n: int, start: int) -> int:
+        if n == 1:
+           return start
+    
+        nums = []
+        output = None
+        for i in range(n):
+            nums.append(start + 2 * i)
+            if len(nums) == 1:
+                left_num = nums[0]
+            elif len(nums) > 1:
+                output = left_num ^ nums[-1]
+                left_num = output
+                
+        return output
+
+# -----------------------------------------------------------------------------
 # https://leetcode.com/problems/range-sum-of-bst/submissions/
 
 # Definition for a binary tree node.
