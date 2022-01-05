@@ -1,5 +1,28 @@
 
+
+# https://leetcode.com/problems/sorting-the-sentence/
+
+from operator import itemgetter
+
+class Solution:
+    def sortSentence(self, s: str) -> str:
+        raw_words = s.split()
+        tuples = []
+        for raw_word in raw_words:
+            # extract index, word into a tuple
+            tuples.append((raw_word[-1:], raw_word[:-1]))
+
+        sorted_tuples = sorted(tuples, key=itemgetter(0))
+
+        output = ""
+        for tuple in sorted_tuples:
+            output = output + tuple[1] + ' '
+    
+        return output.rstrip()
+
+
 # https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/submissions/
+
 class Solution:
     def mostWordsFound(self, sentences: List[str]) -> int:
         longest = 0
@@ -9,6 +32,7 @@ class Solution:
                 longest = length
         
         return longest
+
 
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/xor-operation-in-an-array/submissions/
