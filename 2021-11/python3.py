@@ -1,4 +1,15 @@
 
+# https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/submissions/
+class Solution:
+    def mostWordsFound(self, sentences: List[str]) -> int:
+        longest = 0
+        for sentence in sentences:
+            length = len(sentence.split())
+            if length > longest:
+                longest = length
+        
+        return longest
+
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/xor-operation-in-an-array/submissions/
 
