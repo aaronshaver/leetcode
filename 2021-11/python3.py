@@ -1,5 +1,20 @@
 
 
+# https://leetcode.com/problems/find-center-of-star-graph/submissions/
+
+class Solution:
+    def findCenter(self, edges: List[List[int]]) -> int:
+        # return the first node value seen more than once
+        # this works because of the specific shape of this kind of graph
+        node_values = {}
+        for edge in edges:
+            for value in edge:
+                if value in node_values:
+                    return value
+                else:
+                    node_values[value] = 1
+
+
 # https://leetcode.com/problems/sorting-the-sentence/
 
 from operator import itemgetter
