@@ -1,5 +1,32 @@
 
 
+# https://leetcode.com/problems/find-target-indices-after-sorting-array/submissions/
+
+# my solution
+class Solution:
+    def targetIndices(self, nums: List[int], target: int) -> List[int]:
+        sorted_nums = sorted(nums)
+        output = []
+        for i in range(len(nums)):
+            if sorted_nums[i] == target:
+                output.append(i)
+        
+        return output
+
+# clever solution I found in the discussions that skips needing to sort
+# by figuring out the point at which less-than-target numbers start
+class Solution:
+    def targetIndices(self, nums, target):
+        lt_count, eq_count = 0, 0
+        for n in nums:
+            if n < target:
+                lt_count += 1
+            elif n == target:
+                eq_count += 1
+            
+        return list(range(lt_count, lt_count+eq_count))
+
+
 # https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/submissions/
 
 # my solution, which is slow at O(n^2)
