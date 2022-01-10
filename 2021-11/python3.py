@@ -1,5 +1,22 @@
 
 
+class Solution:
+    def maxDepth(self, s: str) -> int:
+        opens = 0 
+        highest_opens = 0
+        stripped = ''.join(char for char in s if char not in '0123456789-+*/')
+
+        for token in stripped:
+            if token == '(':
+                opens += 1
+                if opens > highest_opens:
+                    highest_opens = opens
+            elif token == ')':
+                opens -= 1
+                
+        return highest_opens
+        
+
 # https://leetcode.com/problems/find-target-indices-after-sorting-array/submissions/
 
 # my solution
