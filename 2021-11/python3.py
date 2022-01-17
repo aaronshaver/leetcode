@@ -5,9 +5,9 @@
 
 class Solution:
     def minMovesToSeat(self, seats: List[int], students: List[int]) -> int:
+        
         # account for students already in correct positions
-        seats_deepcopy = seats[:]
-        for i, seat in enumerate(seats_deepcopy):
+        for seat in seats:
             if seat in students:
                 seats.remove(seat)
                 students.remove(seat)
@@ -18,10 +18,12 @@ class Solution:
         # find distance of student to nearest seat, which sorting should have provided
         total_moves = 0
         for student in students:
-            distance = abs(student - seat[0])
+            distance = abs(student - seats[0])
             total_moves += distance
-            del seat[0]
-                
+            del seats[0]
+        
+        return total_moves
+
 
 # https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/
 
