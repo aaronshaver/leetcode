@@ -1,5 +1,30 @@
 
 
+# https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/
+
+
+class Solution:
+    def minMovesToSeat(self, seats: List[int], students: List[int]) -> int:
+        # account for students already in correct positions
+        seats_deepcopy = seats[:]
+        for i, seat in enumerate(seats_deepcopy):
+            if seat in students:
+                seats.remove(seat)
+                students.remove(seat)
+        
+        seats = sorted(seats)
+        students = sorted(students)
+
+        # find distance of student to nearest seat, which sorting should have provided
+        total_moves = 0
+        for student in students:
+            distance = abs(student - seat[0])
+            total_moves += distance
+            del seat[0]
+                
+
+# https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/
+
 class Solution:
     def maxDepth(self, s: str) -> int:
         opens = 0 
