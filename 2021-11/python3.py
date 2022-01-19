@@ -1,5 +1,28 @@
 
 
+# https://leetcode.com/problems/sum-of-all-odd-length-subarrays/submissions/
+
+class Solution:
+    def sumOddLengthSubarrays(self, arr: List[int]) -> int:
+        length = len(arr)
+        if length % 2 != 0:
+            current_odd = length
+        else:
+            current_odd = length - 1
+        
+        total = 0
+        while current_odd >= 1:
+            start = 0
+            end = start + current_odd
+            while end <= length:
+                total += sum(arr[start:end])
+                start += 1
+                end += 1
+            current_odd -= 2
+        
+        return total
+        
+
 # https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/
 
 class Solution:
