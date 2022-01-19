@@ -1,5 +1,25 @@
 
 
+# https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/
+
+class Solution:
+    def getDecimalValue(self, head: ListNode) -> int:
+        binary_values = []
+        current_node = head
+        while True:
+            binary_values.append(current_node.val)
+            if current_node.next == None:
+                break
+            current_node = current_node.next
+
+        decimal = 0
+        length = len(binary_values)
+        for i in range(length):
+            decimal += binary_values[i] * (2 ** (length - 1 - i))
+
+        return decimal
+        
+
 # https://leetcode.com/problems/sum-of-all-odd-length-subarrays/submissions/
 
 class Solution:
