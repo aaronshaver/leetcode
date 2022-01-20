@@ -1,5 +1,19 @@
 
 
+# https://leetcode.com/problems/count-of-matches-in-tournament/submissions/
+
+class Solution:
+    def numberOfMatches(self, n: int) -> int:
+        total_matches = 0
+        while n > 1:
+            in_match = n if n % 2 == 0 else n - 1
+            matches_this_round = in_match // 2
+            total_matches += matches_this_round 
+            n -= matches_this_round
+        
+        return total_matches
+
+
 # https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/
 
 class Solution:
