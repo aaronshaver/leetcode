@@ -13,6 +13,10 @@ class Solution:
         
         return total_matches
 
+# ^ re: above -- after looking at discussion page: the answer is simply n - 1; no algorithm needed
+# in retrospect, next time I could work through more sample inputs and see if I notice
+# a pattern/answer that keeps recurring; I got impatient and jumped ahead to code
+
 
 # https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/
 
