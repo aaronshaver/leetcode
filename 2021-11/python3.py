@@ -1,5 +1,31 @@
 
 
+# https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/submissions/
+
+# my solution
+class Solution:
+    def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
+        return ''.join(word1) == ''.join(word2)
+
+# my gut told me this was O(n) and that it could be better, but I struggled with how to
+# effectively do one char at a time
+# browsing the discussions yielded (get it!?) this super clever yet understandable solution
+# time complexity is O(min(m,n)) -- exits at the first char pair mismatch
+# space complexity is O(1) since nothing is stored
+class Solution:
+    def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
+        for c1, c2 in zip(self.generate(word1), self.generate(word2)):
+            if c1 != c2:
+                return False
+        return True
+
+    def generate(self, wordlist: List[str]):
+        for word in wordlist:
+            for char in word:
+                yield char
+        yield None
+
+
 # https://leetcode.com/problems/count-of-matches-in-tournament/submissions/
 
 class Solution:
