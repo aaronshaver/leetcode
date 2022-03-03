@@ -1,5 +1,53 @@
 
 
+# https://leetcode.com/problems/minimum-sum-of-four-digit-number-after-splitting-digits/
+
+class Solution:
+    
+    def intify(self, nums: list[int]):
+        return int(nums[0] + nums[1])
+    
+    def minimumSum(self, num: int) -> int:
+        as_string = str(num)
+        digits = []
+        for char in as_string:
+            digits.append(char)
+        
+        pairs = []
+        for i in range(len(digits)):
+            for j in range(i + 1, len(digits)):
+                pairs.append([digits[i], digits[j]])
+        copy = [pair for pair in pairs]
+        all_pairs = []
+        for i in range(len(pairs) // 2):
+            all_pairs.append([copy[0], copy[-1:]])
+            del copy[0]
+            del copy[-1:]
+            
+        minimum = 100000
+
+        for pair_of_pairs in all_pairs:
+            first = pair_of_pairs[0]
+            second = pair_of_pairs[1][0]
+            
+            total = self.intify(first) + self.intify(second)
+            if total < minimum:
+                minimum = total
+            
+            total = self.intify([first[1], first[0]]) + self.intify(second)
+            if total < minimum:
+                minimum = total
+            
+            total = self.intify([first[1], first[0]]) + self.intify([second[1], second[0]])
+            if total < minimum:
+                minimum = total
+                
+            total = self.intify(first) + self.intify([second[1], second[0]])
+            if total < minimum:
+                minimum = total
+                
+        return minimum 
+        
 # https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/submissions/
 
 # my solution
