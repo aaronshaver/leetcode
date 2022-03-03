@@ -3,50 +3,48 @@
 # https://leetcode.com/problems/minimum-sum-of-four-digit-number-after-splitting-digits/
 
 class Solution:
+    # note: I deduced 1,3 and 3,1 pairs would not be needed by
+    # testing cases "on paper"
     
-    def intify(self, nums: list[int]):
-        return int(nums[0] + nums[1])
+    def check_minimum(self, minimum, first: list[int], second: list[int]):
+        total_first = int(first[0] + first[1])
+        total_second = int(second[0] + second[1])
+        grand_total = total_first + total_second
+        
+        return grand_total if grand_total < minimum else minimum
     
     def minimumSum(self, num: int) -> int:
-        as_string = str(num)
         digits = []
-        for char in as_string:
+        for char in str(num):
             digits.append(char)
         
+        # generate all unique 2-digit pairs
         pairs = []
         for i in range(len(digits)):
             for j in range(i + 1, len(digits)):
                 pairs.append([digits[i], digits[j]])
-        copy = [pair for pair in pairs]
+
+        # generate all valid pairs of pairs (i.e. use every original digit exactly once)
+        # by grabbing first and last pairs repeatedly
         all_pairs = []
         for i in range(len(pairs) // 2):
-            all_pairs.append([copy[0], copy[-1:]])
-            del copy[0]
-            del copy[-1:]
+            all_pairs.append([pairs[0], pairs[-1:][0]])  # -1: returns a list
+            del pairs[0]
+            del pairs[-1:]
             
         minimum = 100000
 
         for pair_of_pairs in all_pairs:
             first = pair_of_pairs[0]
-            second = pair_of_pairs[1][0]
+            second = pair_of_pairs[1]
             
-            total = self.intify(first) + self.intify(second)
-            if total < minimum:
-                minimum = total
-            
-            total = self.intify([first[1], first[0]]) + self.intify(second)
-            if total < minimum:
-                minimum = total
-            
-            total = self.intify([first[1], first[0]]) + self.intify([second[1], second[0]])
-            if total < minimum:
-                minimum = total
-                
-            total = self.intify(first) + self.intify([second[1], second[0]])
-            if total < minimum:
-                minimum = total
+            minimum = self.check_minimum(minimum, first, second)
+            minimum = self.check_minimum(minimum, [first[1], first[0]], second)
+            minimum = self.check_minimum(minimum, [first[1], first[0]], [second[1], second[0]])
+            minimum = self.check_minimum(minimum, first, [second[1], second[0]])
                 
         return minimum 
+
         
 # https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/submissions/
 
