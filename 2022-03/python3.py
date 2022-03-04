@@ -2,6 +2,14 @@
 
 # https://leetcode.com/problems/rings-and-rods/
 
+# ultra clever solution from Discussions tab
+class Solution:
+    def countPoints(self, rings: str) -> int:
+        return sum(all(color + rod in rings for color in 'RGB') for rod in '0123456789')
+
+# my solution
+# I did try to use all()! But I couldn't figure out the syntax well enough,
+# but I'm glad I at least had the intuition to try it
 class Solution:
     def countPoints(self, rings: str) -> int:
 
