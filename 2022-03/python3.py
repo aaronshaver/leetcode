@@ -1,5 +1,26 @@
 
 
+# https://leetcode.com/problems/cells-in-a-range-on-an-excel-sheet/
+
+class Solution:
+    def cellsInRange(self, s: str) -> List[str]:
+        row_min = int(s[1])
+        row_max = int(s[4])
+        col_min = s[0]
+        col_max = s[3]
+
+        all_cols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        index_col_min = all_cols.index(col_min)
+        index_col_max = all_cols.index(col_max)
+
+        output = []
+        for col in all_cols[index_col_min:index_col_max + 1]:
+            for row in range(row_min, row_max + 1):
+                output.append(col + str(row))
+
+        return output
+
+
 # https://leetcode.com/problems/rings-and-rods/
 
 # ultra clever solution from Discussions tab
@@ -17,18 +38,18 @@ class Solution:
         for i in range(0, len(rings), 2):
             color = rings[i]
             rod = rings[i+1]
-            
+
             if rod in parsed_rings.keys():
                 parsed_rings[rod] = parsed_rings[rod] + color
             else:
                 parsed_rings[rod] = color
-        
+
         count = 0
         for key in parsed_rings.keys():
                 rod = parsed_rings[key]
                 if 'R' in rod and 'G' in rod and 'B' in rod:
                     count += 1
-        
+
         return count
 
 
@@ -48,19 +69,19 @@ class Solution:
 class Solution:
     # note: I deduced 1,3 and 3,1 pairs would not be needed by
     # testing cases "on paper"
-    
+
     def check_minimum(self, minimum, first: list[int], second: list[int]):
         total_first = int(first[0] + first[1])
         total_second = int(second[0] + second[1])
         grand_total = total_first + total_second
-        
+
         return grand_total if grand_total < minimum else minimum
-    
+
     def minimumSum(self, num: int) -> int:
         digits = []
         for char in str(num):
             digits.append(char)
-        
+
         # generate all unique 2-digit pairs
         pairs = []
         for i in range(len(digits)):
@@ -74,21 +95,21 @@ class Solution:
             all_pairs.append([pairs[0], pairs[-1:][0]])  # -1: returns a list
             del pairs[0]
             del pairs[-1:]
-            
+
         minimum = 100000
 
         for pair_of_pairs in all_pairs:
             first = pair_of_pairs[0]
             second = pair_of_pairs[1]
-            
+
             minimum = self.check_minimum(minimum, first, second)
             minimum = self.check_minimum(minimum, [first[1], first[0]], second)
             minimum = self.check_minimum(minimum, [first[1], first[0]], [second[1], second[0]])
             minimum = self.check_minimum(minimum, first, [second[1], second[0]])
-                
-        return minimum 
 
-        
+        return minimum
+
+
 # https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/submissions/
 
 # my solution
@@ -123,9 +144,9 @@ class Solution:
         while n > 1:
             in_match = n if n % 2 == 0 else n - 1
             matches_this_round = in_match // 2
-            total_matches += matches_this_round 
+            total_matches += matches_this_round
             n -= matches_this_round
-        
+
         return total_matches
 
 # ^ re: above -- after looking at discussion page: the answer is simply n - 1; no algorithm needed
@@ -151,7 +172,7 @@ class Solution:
             decimal += binary_values[i] * (2 ** (length - 1 - i))
 
         return decimal
-        
+
 
 # https://leetcode.com/problems/sum-of-all-odd-length-subarrays/submissions/
 
@@ -162,7 +183,7 @@ class Solution:
             current_odd = length
         else:
             current_odd = length - 1
-        
+
         total = 0
         while current_odd >= 1:
             start = 0
@@ -172,15 +193,15 @@ class Solution:
                 start += 1
                 end += 1
             current_odd -= 2
-        
+
         return total
-        
+
 
 # https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/
 
 class Solution:
     def minMovesToSeat(self, seats: List[int], students: List[int]) -> int:
-        
+
         seats = sorted(seats)
         students = sorted(students)
 
@@ -192,7 +213,7 @@ class Solution:
             distance = abs(student - seats[0])
             total_moves += distance
             del seats[0]
-        
+
         return total_moves
 
 
@@ -200,7 +221,7 @@ class Solution:
 
 class Solution:
     def maxDepth(self, s: str) -> int:
-        opens = 0 
+        opens = 0
         highest_opens = 0
         stripped = ''.join(char for char in s if char not in '0123456789-+*/')
 
@@ -211,9 +232,9 @@ class Solution:
                     highest_opens = opens
             elif token == ')':
                 opens -= 1
-                
+
         return highest_opens
-        
+
 
 # https://leetcode.com/problems/find-target-indices-after-sorting-array/submissions/
 
@@ -225,7 +246,7 @@ class Solution:
         for i in range(len(nums)):
             if sorted_nums[i] == target:
                 output.append(i)
-        
+
         return output
 
 # clever solution I found in the discussions that skips needing to sort
@@ -238,7 +259,7 @@ class Solution:
                 lt_count += 1
             elif n == target:
                 eq_count += 1
-            
+
         return list(range(lt_count, lt_count+eq_count))
 
 
@@ -252,7 +273,7 @@ class Solution:
             for j in range (i + 1, len(nums)):
                 if abs(nums[i] - nums[j]) == k:
                     count += 1
-        
+
         return count
 
 # slick, fast, and easy to read solution I saw in the Discussions area:
@@ -260,12 +281,12 @@ class Solution:
     def countKDifference(self, nums: List[int], k: int) -> int:
         d = {}
         count = 0
-        
+
         for num in nums:
             d[num] = d.get(num, 0) + 1
             count += d.get(num - k, 0)
             count += d.get(num + k, 0)
-                
+
         return count
 
 
@@ -301,7 +322,7 @@ class Solution:
         output = ""
         for tuple in sorted_tuples:
             output = output + tuple[1] + ' '
-    
+
         return output.rstrip()
 
 
@@ -314,7 +335,7 @@ class Solution:
             length = len(sentence.split())
             if length > longest:
                 longest = length
-        
+
         return longest
 
 
@@ -325,7 +346,7 @@ class Solution:
     def xorOperation(self, n: int, start: int) -> int:
         if n == 1:
            return start
-    
+
         nums = []
         output = None
         for i in range(n):
@@ -335,7 +356,7 @@ class Solution:
             elif len(nums) > 1:
                 output = left_num ^ nums[-1]
                 left_num = output
-                
+
         return output
 
 # -----------------------------------------------------------------------------
@@ -348,10 +369,10 @@ class Solution:
 #         self.left = left
 #         self.right = right
 class Solution:
-    
+
     def __init__(self):
         self.total = 0  # because of goofy LeetCode shared instance
-    
+
     def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
         if root.val <= high and root.val >= low:
             self.total += root.val
@@ -359,7 +380,7 @@ class Solution:
             self.rangeSumBST(root.left, low, high)
         if root.right:
             self.rangeSumBST(root.right, low, high)
-        
+
         return self.total
 
 # -----------------------------------------------------------------------------
@@ -367,7 +388,7 @@ class Solution:
 
 class Solution:
     def countMatches(self, items: List[List[str]], ruleKey: str, ruleValue: str) -> int:
-        
+
         if ruleKey == "type":
             return [x[0] for x in items].count(ruleValue)
         if ruleKey == "color":
@@ -380,15 +401,15 @@ class Solution:
 
 class Solution:
     def balancedStringSplit(self, s: str) -> int:
-        subsets_count = 0 
-        
+        subsets_count = 0
+
         buffer = ''
         for char in s:
             buffer  += char
-            
+
             if buffer.count('L') == buffer.count('R'):
                 subsets_count += 1
-        
+
         return subsets_count
 
 # -----------------------------------------------------------------------------
@@ -408,7 +429,7 @@ class Solution:
             elif command[i + 1] == 'a':
                 output += 'al'
                 i += 4
-        
+
         return output
 
 # -----------------------------------------------------------------------------
@@ -422,7 +443,7 @@ class Solution:
                 target.append(nums[i])
             else:
                 target.insert(index[i], nums[i])
-        
+
         return target
 
 # -----------------------------------------------------------------------------
@@ -441,7 +462,7 @@ class Solution:
             count += 1
             if num == 0:
                 break
-        
+
         return count
 
 # -----------------------------------------------------------------------------
@@ -451,9 +472,9 @@ class Solution:
         output = []
         for i in range(0, len(nums), 2):
             index_of_char = i + 1
-            count_of_char = nums[i] 
+            count_of_char = nums[i]
             output = output + [nums[index_of_char] for _ in range(count_of_char)]
-            
+
         return output
 
 # -----------------------------------------------------------------------------
@@ -464,7 +485,7 @@ class Solution:
         digits = []
         remaining = n
         while True:
-            next_num = remaining % 10 
+            next_num = remaining % 10
             remaining = remaining // 10
             digits.append(next_num)
             if remaining == 0:
@@ -474,7 +495,7 @@ class Solution:
         product = 1
         for elem in digits:
             product = product * elem
-            
+
         return product - sum(digits)
 
 # -----------------------------------------------------------------------------
@@ -488,7 +509,7 @@ class Solution:
             new = left ^ num  # xor next encoded num with last known unencoded
             output.append(new)
             left = new  # new last known unencoded
-            
+
         return output
 
 # -----------------------------------------------------------------------------
