@@ -2,6 +2,17 @@
 
 # https://leetcode.com/problems/cells-in-a-range-on-an-excel-sheet/
 
+# solution from Discuss tab
+# I had thought time complexity was O(n), but I was wrong
+# author says: "Time: O((c2 - c1 + 1) * (r2 - r1 + 1)), space: O(1)"
+def cellsInRange(self, s: str) -> List[str]:
+    c1, c2 = ord(s[0]), ord(s[3])
+    r1, r2 = int(s[1]), int(s[4])
+    return [chr(c) + str(r) for c in range(c1, c2 + 1) for r in range(r1, r2 + 1)]
+
+# my solution; I did think about doing the "get integer value of letter" thing,
+# I just forgot the syntax; in retrospect I should have followed up on this
+# intuition
 class Solution:
     def cellsInRange(self, s: str) -> List[str]:
         row_min = int(s[1])
