@@ -1,5 +1,45 @@
 
 
+# https://leetcode.com/problems/count-the-number-of-consistent-strings/
+
+# Discuss tab solution; set is implemented as hashset under the hood in Python and has
+# lookup time of O(1); as well, this person does a very clever negative counting of
+# failed words and substracting of total word count
+# time complexity is O(nd), where d is average word length
+
+class Solution:
+    def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
+        allowed = set(allowed)
+        count = 0
+
+        for word in words:
+            for letter in word:
+                if letter not in allowed:
+                    count += 1
+                    break
+
+        return len(words) - count
+
+# my solution; I did have an intuition to make a hashset, just didn't fully follow
+# through or think about how it would work
+# I believe my time complexity is O(n^2) because of the O(n) char in allowed lookup
+class Solution:
+    def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
+
+        count = 0
+        for word in words:
+            flag = True
+            for char in word:
+                if char not in allowed:  # time save from hashset solution above would be here
+                    flag = False
+                    break
+
+            if flag:
+                count += 1
+
+        return count
+
+
 # https://leetcode.com/problems/cells-in-a-range-on-an-excel-sheet/
 
 # solution from Discuss tab
