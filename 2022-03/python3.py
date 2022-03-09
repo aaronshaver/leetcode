@@ -1,12 +1,25 @@
 
 
+# https://leetcode.com/problems/maximum-product-difference-between-two-pairs/
+
+# Discuss tab solution; I was doing more work than necessary by not just doing -1, -2 getter
+def maxProductDifference(self, nums: List[int]) -> int:
+        nums.sort()
+        return nums[-1]*nums[-2]-nums[0]*nums[1]
+
+# my solution; O(n log n) time?; O(1) space?
+class Solution:
+    def maxProductDifference(self, nums: List[int]) -> int:
+        nums.sort()
+        return abs((nums[0] * nums[1]) - (nums[-1:].pop() * nums[-2:-1].pop()))
+
+
 # https://leetcode.com/problems/count-the-number-of-consistent-strings/
 
 # Discuss tab solution; set is implemented as hashset under the hood in Python and has
 # lookup time of O(1); as well, this person does a very clever negative counting of
 # failed words and substracting of total word count
 # time complexity is O(nd), where d is average word length
-
 class Solution:
     def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
         allowed = set(allowed)
