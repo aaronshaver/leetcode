@@ -5,15 +5,15 @@
 # space same as time???
 class Solution:
     def truncateSentence(self, s: str, k: int) -> str:
-        cursor = 0
         output = ''
-        while k > 0 and cursor < len(s):
-            if s[cursor] != ' ':
-                output += s[cursor]
+        for char in s:
+            if char != ' ':
+                output += char
             else:
                 k -= 1
                 output += ' '
-            cursor += 1
+                if k == 0:
+                    break
 
         return output.rstrip()
 
