@@ -1,5 +1,23 @@
 
 
+# my solution
+# time O(k*d) where d is avg word length???; worst case O(n)???
+# space same as time???
+class Solution:
+    def truncateSentence(self, s: str, k: int) -> str:
+        cursor = 0
+        output = ''
+        while k > 0 and cursor < len(s):
+            if s[cursor] != ' ':
+                output += s[cursor]
+            else:
+                k -= 1
+                output += ' '
+            cursor += 1
+
+        return output.rstrip()
+
+
 # https://leetcode.com/problems/maximum-product-difference-between-two-pairs/
 
 # Discuss tab solution; I was doing more work than necessary by not just doing -1, -2 getter
