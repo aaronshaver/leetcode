@@ -1,4 +1,16 @@
 
+# Discuss tab solution
+# author claims time & space: O(w * k), where w = average size of word
+# similar to mine, but terser and less space
+# I like the early return and no output var / string building
+def truncateSentence(self, s: str, k: int) -> str:
+    for i, c in enumerate(s):
+        if c == ' ':
+            k -= 1
+            if k == 0:
+                return s[: i]
+    return s
+
 
 # my solution
 # time O(k*d) where d is avg word length???; worst case O(n)???
