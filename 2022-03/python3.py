@@ -1,4 +1,20 @@
 
+
+# my solution
+# time: O(n)?; space: O(1) because drop constant?
+class Solution:
+    def replaceDigits(self, s: str) -> str:
+        output = list(s)
+        for i in range(1, len(s), 2):
+            to_shift = s[i - 1]
+            shifted = chr(ord(to_shift) + int(s[i]))
+            output[i] = shifted
+
+        return ''.join(output)
+
+
+# https://leetcode.com/problems/truncate-sentence/
+
 # Discuss tab solution
 # author claims time & space: O(w * k), where w = average size of word
 # similar to mine, but terser and less space
