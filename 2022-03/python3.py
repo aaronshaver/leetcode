@@ -1,7 +1,12 @@
 
 
+# Discuss tab solution
+# same solution as mine! wow!
+# It was a little terser; they didn't bother with temp vars, but mine's arguably more readable
+
 # my solution
-# time: O(n)?; space: O(1) because drop constant?
+# time: O(n)?; space: initially thought O(1) because drop constant? I think
+# I'm wrong though, because we're creating a new data structure equal to input size, so O(n)
 class Solution:
     def replaceDigits(self, s: str) -> str:
         output = list(s)
