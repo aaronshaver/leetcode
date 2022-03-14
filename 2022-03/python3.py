@@ -1,5 +1,24 @@
 
 
+# https://leetcode.com/problems/find-first-palindromic-string-in-the-array/
+
+class Solution:
+    def is_palindrome(self, word: str) -> bool:
+        # return word == word[::-1]
+        for i in range(len(word)):
+            if word[i] != word[(len(word) - 1) - i]:
+                return False
+        return True
+
+    def firstPalindrome(self, words: List[str]) -> str:
+        for word in words:
+            if self.is_palindrome(word):
+                return word
+        return ''
+
+
+# https://leetcode.com/problems/replace-all-digits-with-characters/
+
 # Discuss tab solution
 # same solution as mine! wow!
 # It was a little terser; they didn't bother with temp vars, but mine's arguably more readable
