@@ -2,9 +2,18 @@
 
 # https://leetcode.com/problems/find-first-palindromic-string-in-the-array/
 
+# Discuss tab
+# cleverly concise, though it relies on knowing Python iterator syntax
+def firstPalindrome(self, words: List[str]) -> str:
+    return next((word for word in words if word == word[::-1]), "")
+
+# my solution
+# time: worst O(n), avg O(nf) where f is frequency of palindromes in set
+# space: O(1)
 class Solution:
     def is_palindrome(self, word: str) -> bool:
-        # return word == word[::-1]
+        # Seems like this would be a bit faster than:  return word == word[::-1]
+        # because it can "fail out" faster
         for i in range(len(word)):
             if word[i] != word[(len(word) - 1) - i]:
                 return False
