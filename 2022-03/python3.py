@@ -1,5 +1,46 @@
 
 
+# https://leetcode.com/problems/count-equal-and-divisible-pairs-in-an-array/
+
+# Discuss tab solution
+# same logic as mine, but I keep forgetting about this handy defaultdict subclass
+# it differs in that it won't throw an exception of KeyError if a key doesn't exist, it'll
+# just add it when you insert
+def countPairs(self, nums: List[int], k: int) -> int:
+    cnt, d = 0, defaultdict(list)
+    for i, n in enumerate(nums):
+        d[n].append(i)
+    for indices in d.values():
+        for i, a in enumerate(indices):
+            for b in indices[: i]:
+                if a * b % k == 0:
+                    cnt += 1
+    return cnt
+
+# my solution
+# time: O(n); space: O(n)
+class Solution:
+    def countPairs(self, nums: List[int], k: int) -> int:
+        indices = {}
+        for i, num in enumerate(nums):
+            if num in indices:
+                indices[num] = indices[num] + [i]
+            else:
+                indices[num] = [i]
+
+        pairs_count = 0
+        for key in indices.keys():
+            this_value_indices = indices[key]
+            if len(this_value_indices) < 2:
+                continue
+            for i in range(len(this_value_indices)):
+                for j in range(i + 1, len(this_value_indices)):
+                    if (this_value_indices[i] * this_value_indices[j]) % k == 0:
+                        pairs_count += 1
+
+        return pairs_count
+
+
 # https://leetcode.com/problems/find-first-palindromic-string-in-the-array/
 
 # Discuss tab
