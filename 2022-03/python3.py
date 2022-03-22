@@ -1,5 +1,35 @@
 
 
+# https://leetcode.com/problems/flipping-an-image/
+
+# Discuss tab solution
+# similar to mine; says time, space are O(mn) where m*n == image size, which makes sense,
+# but since the image can be represented as one long list of concatenated rows, it's the
+# same as O(n) IMO
+#
+# some debate on [::-1] vs reversed(), theoretically reversed() is better, BUT:
+# 'The time complexity is O(1), but in practice, that rarely matters, because if you are calling
+# reversed then you are also iterating over it, which takes at least O(n) time. If you break early
+# from the iteration then it will matter'
+# https://stackoverflow.com/questions/65540349/time-complexity-of-reversed-in-python-3#comment115874825_65540349
+class Solution:
+    def flipAndInvertImage(self, A):
+        return [[1^q for q in row[::-1]] for row in A]
+
+# my solution
+# time: O(n); space: O(n)
+class Solution:
+    def flipAndInvertImage(self, image: List[List[int]]) -> List[List[int]]:
+        output = []
+        for row in image:
+            new_row = []
+            for pixel in row[::-1]:
+                new_row.append(abs(pixel - 1))
+            output.append(new_row)
+
+        return output
+
+
 # https://leetcode.com/problems/count-equal-and-divisible-pairs-in-an-array/
 
 # Discuss tab solution
