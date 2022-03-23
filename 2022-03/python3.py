@@ -1,5 +1,34 @@
 
 
+# https://leetcode.com/problems/number-of-strings-that-appear-as-substrings-in-word/
+
+# Discuss tab solution
+# cleverly removes the need to declare a counter variable
+#
+# I also need to read up on the KMP Algorithm for Pattern Searching
+class Solution:
+    def numOfStrings(self, patterns: List[str], word: str) -> int:
+        return sum(x in word for x in patterns)
+
+# my solution
+# time: O(mn) where m is number of patterns; space: O(1), basically
+#
+# I thought about comparing the patterns with each other and maybe saving work by excluding
+# ones that can't match: if "a" isn't in the word, "ab" will never be
+#
+# I thought about implementing a "cursor" approach of scanning through 'word' but it
+# seemed like my impl would be worse than using built-in contains() which averages
+# O(n)
+class Solution:
+    def numOfStrings(self, patterns: List[str], word: str) -> int:
+        count = 0
+        for pattern in patterns:
+            if pattern in word:
+                count += 1
+
+        return count
+
+
 # https://leetcode.com/problems/flipping-an-image/
 
 # Discuss tab solution
