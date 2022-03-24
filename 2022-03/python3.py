@@ -1,5 +1,32 @@
 
 
+# https://leetcode.com/problems/minimum-time-visiting-all-points/
+
+# Discuss tab solution?
+# ?????
+
+# my solution
+# time: O(n); space: effectively O(1)
+class Solution:
+    def minTimeToVisitAllPoints(self, points: List[List[int]]) -> int:
+        count = 0
+        for i, point in enumerate(points):
+            if i + 1 < len(points):
+                next_position = points[i + 1]
+                x_difference = abs(point[0] - next_position[0])
+                y_difference = abs(point[1] - next_position[1])
+
+                num_diagonals = min(x_difference, y_difference)
+                count += num_diagonals
+
+                # now add leftover vertical, horizontal movement that cannot
+                # be done diagonally; this might be 0 in one or both cases
+                count += x_difference - num_diagonals
+                count += y_difference - num_diagonals
+
+        return count
+
+
 # https://leetcode.com/problems/number-of-strings-that-appear-as-substrings-in-word/
 
 # Discuss tab solution
