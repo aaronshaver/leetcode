@@ -2,8 +2,13 @@
 
 # https://leetcode.com/problems/minimum-time-visiting-all-points/
 
-# Discuss tab solution?
-# ?????
+# Discuss tab solution
+# this cleverly takes advantage of the mathematical truth that the answer is always
+# the greater of the two differences (x difference, y difference)
+# Also remove the need for a counter
+# big O time and space are the same as mine (aside from counter)
+def minTimeToVisitAllPoints(self, p: List[List[int]]) -> int:
+    return sum(max(abs(p[i][0] - p[i - 1][0]), abs(p[i][1] - p[i - 1][1])) for i in range(1, len(p)))
 
 # my solution
 # time: O(n); space: effectively O(1)
