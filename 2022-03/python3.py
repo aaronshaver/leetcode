@@ -2,21 +2,25 @@
 
 # https://leetcode.com/problems/matrix-diagonal-sum/
 
+# Discuss tab solutions
+# I saw a lot of terse solutions like the one below, but they aren't any faster,
+# and they're IMO much harder to read
+def diagonalSum(self, mat: List[List[int]]) -> int:
+    n = len(mat)
+    return sum(row[r] + row[n - 1 - r] for r, row in enumerate(mat)) - (0, mat[n // 2][n // 2])[n % 2]
+
 # my solution
-# time: O(n log n), I think?
-# not O(n) because e.g. a 5x5 matrix needs doesn't needs 5/3 == 1.66 more processing, not
-# 25/9 == 2.77 more processing; but we can see it's not linear growth, because e.g.
-# 9x9 matrix needs 9/3 == 3x more processing than a 3x3 matrix
+# time: O(n) where n is the length of a side of the square matrix
 # space: effectively O(1)
 class Solution:
     def diagonalSum(self, mat: List[List[int]]) -> int:
-        if len(mat) in [1,2]:
-            return sum([item for sublist in mat for item in sublist])
+        if len(mat) == 1:  # special case of 1x1 matrix
+            return mat[0][0]
 
         total = 0
-        j = len(mat[0]) - 1
+        j = len(mat) - 1
         for i in range(len(mat)):
-            if i == j:
+            if i == j:  # middle item for odd-size matrices
                 total += mat[i][i]
             else:
                 total += mat[i][i]
