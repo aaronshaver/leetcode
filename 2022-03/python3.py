@@ -1,5 +1,32 @@
 
 
+# https://leetcode.com/problems/matrix-diagonal-sum/
+
+# my solution
+# time: O(n log n), I think?
+# not O(n) because e.g. a 5x5 matrix needs doesn't needs 5/3 == 1.66 more processing, not
+# 25/9 == 2.77 more processing; but we can see it's not linear growth, because e.g.
+# 9x9 matrix needs 9/3 == 3x more processing than a 3x3 matrix
+# space: effectively O(1)
+class Solution:
+    def diagonalSum(self, mat: List[List[int]]) -> int:
+        if len(mat) in [1,2]:
+            return sum([item for sublist in mat for item in sublist])
+
+        total = 0
+        j = len(mat[0]) - 1
+        for i in range(len(mat)):
+            if i == j:
+                total += mat[i][i]
+            else:
+                total += mat[i][i]
+                total += mat[i][j]
+            i += 1
+            j -= 1
+
+        return total
+
+
 # https://leetcode.com/problems/minimum-time-visiting-all-points/
 
 # Discuss tab solution
