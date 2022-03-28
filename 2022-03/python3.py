@@ -1,5 +1,17 @@
 
 
+# https://leetcode.com/problems/find-the-highest-altitude/
+
+# my solution
+# time:
+class Solution:
+    def largestAltitude(self, gain: List[int]) -> int:
+        #[-5,1,5,0,-7]
+        # -7, -5, 0, 1, 5
+        # order of each gain/loss matters; can't seem to use sorting to benefit us, nor adding all the values
+
+
+
 # https://leetcode.com/problems/matrix-diagonal-sum/
 
 # Discuss tab solutions
