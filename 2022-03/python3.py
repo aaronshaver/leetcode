@@ -2,14 +2,34 @@
 
 # https://leetcode.com/problems/find-the-highest-altitude/
 
-# my solution
-# time:
-class Solution:
-    def largestAltitude(self, gain: List[int]) -> int:
-        #[-5,1,5,0,-7]
-        # -7, -5, 0, 1, 5
-        # order of each gain/loss matters; can't seem to use sorting to benefit us, nor adding all the values
+# Discuss tab solution
+def largestAltitude(self, A):
+    return max(0, max(accumulate(A)))
+# note 1: the reason for the "0, " is because of data sets like [-4,-3,-2,-1,4,3,2]
+# where the accumulated addition of those values is -1, yet starting altitude is 0,
+# which is higher
+#
+# note 2: LeetCode seems to have imported already, but you'll need to do:
+#     from itertools import accumulate
+# or similar to start working with accumulate
+# simple example:
+#
+# > max(accumulate([1,2,3]))
+# > 6
 
+# my solution
+# time: O(n); space: O(1)
+# I did have the intuition that we wanted an accumulator / reducer here
+# (as I've used in TypeScript/JavaScript) I simply didn't know the syntax
+class Solution:
+    def largestAltitude(self, gains: List[int]) -> int:
+        highest, current = 0, 0
+        for gain in gains:
+            current += gain
+            if current > highest:
+                highest = current
+
+        return highest
 
 
 # https://leetcode.com/problems/matrix-diagonal-sum/
