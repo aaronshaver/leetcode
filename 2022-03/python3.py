@@ -1,5 +1,28 @@
 
 
+# https://leetcode.com/problems/maximum-69-number/
+
+# my solution
+# time: O(n); space: need to clean up..................... remove output
+
+class Solution:
+    def maximum69Number (self, num: int) -> int:
+        output = num
+        i = 0
+        six_locations = []  # decimal place within the original num
+        while output > 0:
+            output = num // (10 ** i)
+            if output % 10 == 6:
+                six_locations.append(i)
+            i += 1
+
+        if len(six_locations) == 0:
+            return num
+
+        largest_six = max(six_locations)
+        return num + (3 * (10 ** largest_six))  # 3 because we're tring to get up to 9
+
+
 # https://leetcode.com/problems/find-the-highest-altitude/
 
 # Discuss tab solution
