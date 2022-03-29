@@ -2,22 +2,57 @@
 
 # https://leetcode.com/problems/maximum-69-number/
 
-# my solution
-# time: O(n); space: need to clean up..................... remove output
+# Discuss tab solution
+# there were solutions like this that involve string conversion, which I tried to avoid, because
+# I've gotten a real inteview question where the interviewer said "now do it without string conversion"
+def maximum69Number(self, num):
+    return int(str(num).replace('6', '9', 1))
 
+# I was happy to see another person had a solution similar to mine without string conversion;
+# theirs is a little better in using an int for the "six index" instead of my list, and it's shorter
 class Solution:
     def maximum69Number (self, num: int) -> int:
-        output = num
         i = 0
+        tem = num
+        sixidx = -1
+        while tem > 0:
+            if tem % 10 == 6:
+                sixidx = i  #refresh sixidx when found 6 at large digit.
+            tem = tem//10
+            i += 1
+        return (num + 3 *(10**sixidx)) if sixidx != -1 else num
+# here's a very clean solution using divmod, which I hadn't heard of:
+def maximum69Number (self, num: int) -> int:
+
+    six_index = -1
+    remainder = num
+    pos = 0
+
+    while remainder:
+        remainder, digit = divmod(remainder, 10)
+        if digit == 6:
+            six_index = pos
+        pos += 1
+
+    return num + 3 * 10 ** six_index if six_index >= 0 else num
+
+# my solution
+# time: O(n); I'm not totally sure; input being 10x bigger won't make the algorithm 10x slower
+# but it's also not strictly linear with n?; there's one more iteration for every 10x of n
+# space: O(1) except for a small, slow-growing list
+class Solution:
+    def maximum69Number (self, num: int) -> int:
         six_locations = []  # decimal place within the original num
-        while output > 0:
+        for i in range(999):
             output = num // (10 ** i)
+            if output == 0:
+                break
             if output % 10 == 6:
                 six_locations.append(i)
             i += 1
 
         if len(six_locations) == 0:
-            return num
+            return num  # number was all 6s
 
         largest_six = max(six_locations)
         return num + (3 * (10 ** largest_six))  # 3 because we're tring to get up to 9
