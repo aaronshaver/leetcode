@@ -1,5 +1,23 @@
 
 
+# Discuss tab solution(s)
+
+
+# my solution
+# time: O(n); space: close to O(1), just a couple of ints
+class Solution:
+    def countGoodRectangles(self, rectangles: List[List[int]]) -> int:
+        largest_seen, count = 0, 0
+        for rectangle in rectangles:
+            shortest_side = min(rectangle)
+            if shortest_side > largest_seen:
+                largest_seen = shortest_side
+                count = 1
+            elif shortest_side == largest_seen:
+                count += 1
+        return count
+
+
 # https://leetcode.com/problems/maximum-69-number/
 
 # Discuss tab solution
