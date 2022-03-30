@@ -1,10 +1,18 @@
 
 
 # Discuss tab solution(s)
-
+# didn't find anything mind-blowing, but this was cute using dictionaries, which I'd briefly considered,
+# but it is less space efficient:
+class Solution:
+    def countGoodRectangles(self, rectangles):
+        d = {}
+        for i,j in rectangles:
+            minimum = min(i,j)
+            d[minimum] = d.get(minimum,0)+1
+        return d[max(d)]
 
 # my solution
-# time: O(n); space: close to O(1), just a couple of ints
+# time: O(n); space: O(1)
 class Solution:
     def countGoodRectangles(self, rectangles: List[List[int]]) -> int:
         largest_seen, count = 0, 0
