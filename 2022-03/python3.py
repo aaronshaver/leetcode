@@ -1,5 +1,44 @@
 
 
+# https://leetcode.com/problems/sum-of-all-subset-xor-totals/
+
+# my solution
+# time: O(n^2); space: O(n^2)
+#
+# This was a tough one. I spent time reading:
+# https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
+# but it was a little much, and so I resorted to the library function .combinations()
+#
+# as an aside, I don't quite understand why single numbers aren't 0;
+# number XORed with itself should be 0; problem wants it to be the number itself
+import itertools
+
+class Solution:
+    def subsetXORSum(self, nums: List[int]) -> int:
+        if len(nums) == 0:
+            return 0
+        elif len(nums) == 1:
+            return nums[0]
+
+        singles_total = 0
+        for num in nums:
+            singles_total += num  # for case of group size == 1
+
+        groups = []
+        for group_size in range(2, len(nums) + 1):
+            for subset in itertools.combinations(nums, group_size):
+                groups.append(subset)
+
+        groups_total = 0
+        for group in groups:
+            total = 0
+            # := is assignment expression, introduced in Python 3.8 in 2019; acts as reducer
+            temp = [total := total ^ x for x in group]
+            groups_total += total
+
+        return singles_total + groups_total
+
+
 # Discuss tab solution(s)
 # didn't find anything mind-blowing, but this was cute using dictionaries, which I'd briefly considered,
 # but it is less space efficient:
