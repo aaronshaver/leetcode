@@ -2,6 +2,13 @@
 
 # https://leetcode.com/problems/sum-of-all-subset-xor-totals/
 
+# Disuss tab solutions
+# pasting links instead of solutions here
+# there's a few different ways: recursive, iterative, and math-trick
+# I'll read through these after lunch!
+# https://leetcode.com/problems/sum-of-all-subset-xor-totals/discuss/1211213/Python-Bitwise-OR-with-explanation-O(n)
+# https://leetcode.com/problems/sum-of-all-subset-xor-totals/discuss/1230324/Python-all-the-4-different-ways-to-solve-this-problem
+
 # my solution
 # time: O(n^2); space: O(n^2)
 #
