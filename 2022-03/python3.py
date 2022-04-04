@@ -2,8 +2,16 @@
 
 # https://leetcode.com/problems/minimum-bit-flips-to-convert-number/
 
+# Discuss tab
+# well this is humbling... >_<
+# it makes sense, too. XOR will show all the spots where only one of the two
+# binary numbers is 1, thus implicitly adding those spots up == number of flips needed
+# to reach an AND state... clever
+def minBitFlips(self, start: int, goal: int) -> int:
+    return (start ^ goal).bit_count()
+
 # my solution
-# time: O(n) where n is number of digits in longest of the two nums
+# time: O(n) where n is number of binary digits in longest of the two nums
 # space: effectively O(1)
 #
 # this works by making a bit mask using left shift 1 << i, e.g. 1 << 3 == a mask of 1000
