@@ -1,5 +1,28 @@
 
 
+# https://leetcode.com/problems/minimum-bit-flips-to-convert-number/
+
+# my solution
+# time: O(n) where n is number of digits in longest of the two nums
+# space: effectively O(1)
+#
+# this works by making a bit mask using left shift 1 << i, e.g. 1 << 3 == a mask of 1000
+# then bitwise AND with the num, gives us a binary num that indicates whether both mask
+# and num have a 1 in that digit; e.g. 10 & (1<<2) == 000, and 7 & (1<<2) == 100
+# then bit shift right chops off the trailing 0s
+# so in this case we'd have 0 for the start, and 1 for the goal, meaning digit at that
+# place has to change for the start num, and thus our count of operations has to increase
+class Solution:
+    def minBitFlips(self, start: int, goal: int) -> int:
+        length = max(len(bin(start)[2:]), len(bin(goal)[2:]))  # '2:'' chops off 0b
+        count = 0
+        for i in range(length):
+            if ((start & (1 << i)) >> i) != ((goal & (1 << i)) >> i):
+                count += 1
+
+        return count
+
+
 # https://leetcode.com/problems/sum-of-all-subset-xor-totals/
 
 # Disuss tab solutions
