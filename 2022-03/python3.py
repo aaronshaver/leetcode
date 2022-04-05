@@ -1,5 +1,29 @@
 
 
+# https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-mapping/
+
+# my solution
+# time: O(n); space: O(n)
+class Solution:
+    def freqAlphabets(self, s: str) -> str:
+        output = ''
+        i = 0
+        offset = 96
+        while i < len(s):
+            current_char = s[i]
+            if (i + 2) < len(s):
+                if s[i + 2] == '#':
+                    output += chr(int(current_char + s[i + 1]) + offset)
+                    i += 2
+                else:
+                    output += chr(int(current_char) + offset)
+            else:
+                output += chr(int(current_char) + offset)
+            i += 1
+
+        return output
+
+
 # https://leetcode.com/problems/minimum-bit-flips-to-convert-number/
 
 # Discuss tab
