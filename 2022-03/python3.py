@@ -2,8 +2,16 @@
 
 # https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-mapping/
 
+# Discuss tab solution
+# this is obnoxiously good, haha
+# I would say I need to get better at regex; however, I find I seldom use it at jobs
+# and it can sometimes become "write-only code", i.e. easy to write, hard to read
+def freqAlphabets(self, s):
+    return ''.join(chr(int(i[:2]) + 96) for i in re.findall(r'\d\d#|\d', s))
+
 # my solution
 # time: O(n); space: O(n)
+# should probably extract out the chr(int() stuff into a function
 class Solution:
     def freqAlphabets(self, s: str) -> str:
         output = ''
@@ -12,13 +20,13 @@ class Solution:
         while i < len(s):
             current_char = s[i]
             if (i + 2) < len(s):
-                if s[i + 2] == '#':
+                if s[i + 2] == '#':  # j char or higher
                     output += chr(int(current_char + s[i + 1]) + offset)
                     i += 2
                 else:
-                    output += chr(int(current_char) + offset)
+                    output += chr(int(current_char) + offset)  # a-i
             else:
-                output += chr(int(current_char) + offset)
+                output += chr(int(current_char) + offset)  # a-i
             i += 1
 
         return output
