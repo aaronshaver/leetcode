@@ -1,5 +1,16 @@
 
 
+# https://leetcode.com/problems/reverse-words-in-a-string-iii/
+
+# Discuss tab
+
+# my solution
+# time: ; space:
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        return ' '.join([''.join(letter for letter in reversed(word)) for word in s.split()])
+
+
 # https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-mapping/
 
 # Discuss tab solution
