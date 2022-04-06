@@ -3,9 +3,21 @@
 # https://leetcode.com/problems/reverse-words-in-a-string-iii/
 
 # Discuss tab
+# reverse the words, then reverse the sentence
+# he has metrics for it and thinks it's fast because it's mostly calling C code
+# https://leetcode.com/problems/reverse-words-in-a-string-iii/discuss/101909/1-line-Ruby-Python
+def reverseWords(self, s):
+    return ' '.join(s.split()[::-1])[::-1]
+# slower but more readable/understandable:
+def reverseWords(self, s):
+    return ' '.join(x[::-1] for x in s.split())
+# in both cases, I think it's the same O(3n) -> O(n) as mine, but may be objectively faster
 
 # my solution
-# time: ; space:
+# time: O(n); space: O(1)
+# I had considered a pointer/cursor approach like:
+# https://leetcode.com/problems/reverse-words-in-a-string-iii/discuss/1051657/Python-3%3A-Two-pointer-approach-(for-the-sake-of-practice)
+# but I felt it wouldn't have been any faster, and would be considerably more verbose code
 class Solution:
     def reverseWords(self, s: str) -> str:
         return ' '.join([''.join(letter for letter in reversed(word)) for word in s.split()])
