@@ -1,13 +1,32 @@
 
 
+# https://leetcode.com/problems/minimum-operations-to-make-the-array-increasing/
+# my solution
+# time: O(n)
+# space: O(1)
+class Solution:
+    def minOperations(self, nums: List[int]) -> int:
+        count = 0
+        last_seen = nums[0]
+        for i in range(len(nums) - 1):  # forward-looking, so no need to process final num
+            next_num = nums[i + 1]
+            if next_num <= last_seen:
+                added_amount = abs(next_num - last_seen) + 1
+                count += added_amount
+                last_seen = next_num + added_amount
+            else:
+                last_seen = next_num
+        return count
+
 # https://leetcode.com/problems/reverse-words-in-a-string-iii/
 
 # Discuss tab
 # reverse the words, then reverse the sentence
 # he has metrics for it and thinks it's fast because it's mostly calling C code
 # https://leetcode.com/problems/reverse-words-in-a-string-iii/discuss/101909/1-line-Ruby-Python
-def reverseWords(self, s):
-    return ' '.join(s.split()[::-1])[::-1]
+class Solution:
+    def reverseWords(self, s):
+        return ' '.join(s.split()[::-1])[::-1]
 # slower but more readable/understandable:
 def reverseWords(self, s):
     return ' '.join(x[::-1] for x in s.split())
