@@ -1,6 +1,20 @@
 
 
 # https://leetcode.com/problems/minimum-operations-to-make-the-array-increasing/
+
+# Discuss tab
+# I didn't see anything interesting. A few were shorter than mine (e.g. below),
+# but often at the cost of readability. I didn't see any performance improvements.
+def minOperations(self, nums: List[int]) -> int:
+    ans = 0
+
+    for i in range(1, len(nums)):
+        if nums[i] <= nums[i - 1]:
+            ans += (nums[i - 1] - nums[i] + 1)
+            nums[i] = (nums[i - 1] + 1)
+
+    return ans
+
 # my solution
 # time: O(n)
 # space: O(1)
@@ -17,6 +31,7 @@ class Solution:
             else:
                 last_seen = next_num
         return count
+
 
 # https://leetcode.com/problems/reverse-words-in-a-string-iii/
 
