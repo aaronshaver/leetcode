@@ -3,7 +3,31 @@
 # https://leetcode.com/problems/determine-if-string-halves-are-alike/
 
 # Discuss tab
+#  important point from this one I missed: should make vowels a set, because
+# searching a set is O(1) (except in very large worst cases where it can be O(n))
+# whereas searching a Python list, which is implemented as an array internally
+# is O(n) on average
 #
+# I was curious and did an experiment:
+# >>> timeit.timeit('99999 in setty', number=1000000, setup='setty=set([i for i in range(100000)])')
+# 0.03980070797842927
+# >>> timeit.timeit('99999 in listy', number=1000000, setup='listy=[i for i in range(100000)]')
+# 545.9460717499896
+
+def halvesAreAlike(self, s: str) -> bool:
+    vowels = set('aeiouAEIOU')
+    a = b = 0
+    i, j = 0, len(s) - 1
+    while i < j:
+        a += s[i] in vowels
+        b += s[j] in vowels
+        i += 1
+        j -= 1
+    return a == b
+#
+# clever point: "We could have used a single vowel counter for both left and right
+# part. For each vowel on the left side increment the counter and for each vowel on
+# right side decrement the counter"
 
 # my solution
 # time: O(n)  -- O(n/2) for each slice operation, and n for going through each
