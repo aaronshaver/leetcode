@@ -1,5 +1,28 @@
 
 
+# https://leetcode.com/problems/determine-if-string-halves-are-alike/
+
+# Discuss tab
+#
+
+# my solution
+# time: O(n)  -- O(n/2) for each slice operation, and n for going through each
+# char
+# space: O(n) to create the two halves; if we just return len() == len() instead would
+# that be O(1)? not sure
+class Solution:
+    def halvesAreAlike(self, s: str) -> bool:
+        vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+
+        left = s[0:len(s) // 2]
+        right = s[len(s) // 2:]
+
+        count_left = len([char for char in left if char in vowels])
+        count_right = len([char for char in right if char in vowels])
+
+        return count_left == count_right
+
+
 # https://leetcode.com/problems/minimum-operations-to-make-the-array-increasing/
 
 # Discuss tab
