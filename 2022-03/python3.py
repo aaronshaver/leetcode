@@ -1,5 +1,33 @@
 
 
+#
+
+# discuss tab solution
+
+
+# my solution
+# time:
+# space:
+
+
+# https://leetcode.com/problems/reverse-prefix-of-word/
+
+# discuss tab solution
+
+
+# my solution
+# time: O(n)
+# space: O(1)
+class Solution:
+    def reversePrefix(self, word: str, ch: str) -> str:
+        index = 0
+        try:
+            index = word.index(ch)
+        except ValueError:
+            return word
+        return word[0:index + 1][::-1] + word[index + 1:]
+
+
 # https://leetcode.com/problems/determine-if-string-halves-are-alike/
 
 # Discuss tab
