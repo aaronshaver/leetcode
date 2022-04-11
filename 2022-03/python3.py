@@ -13,7 +13,20 @@
 # https://leetcode.com/problems/reverse-prefix-of-word/
 
 # discuss tab solution
-
+# find() doesn't return an exception, and is perhaps better suited for cases like this
+# where we don't know if the substring exists; it returns -1 if not found
+class Solution:
+    def reversePrefix(self, word: str, ch: str) -> str:
+        return word[:word.find(ch) + 1][::-1] + word[word.find(ch) + 1:]
+# I like how this one reads more cleanly than mine, and negates need for storing index
+# in outside scope
+class Solution:
+    def reversePrefix(self, word: str, ch: str) -> str:
+        try:
+            ix = word.index(ch)
+            return word[:ix+1][::-1] + word[ix+1:]
+        except ValueError:
+            return word
 
 # my solution
 # time: O(n)
