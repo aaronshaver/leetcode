@@ -37,9 +37,18 @@ class Solution:
     def findGCD(self, nums: List[int]) -> int:
         low = min(nums)
         high = max(nums)
+        previous_r = low
         while True:
+            # high = low * quotient + remainder
+            # e.g. for 10, 45 -> 45 = 10 * 4 + 5
             q = high // low
-
+            r = high % low
+            if r == 0:  # evenly divides; we're done
+                return previous_r
+            else:
+                previous_r = r
+                high = low  # move e.g. the 10 to the new high number position to left of =
+                low = r  # move reminder e.g. 5 to low number position just to right of =
 
 # my solution
 # time: O(n log(n)) because of the sort; don't see a way to improve on that
@@ -52,8 +61,6 @@ class Solution:
         for i in range(low,0,-1):
             if low % i == 0 and high % i == 0:
                 return i
-
-
 # ---------------------------------------------------------------------------
 
 
