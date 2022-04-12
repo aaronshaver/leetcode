@@ -1,6 +1,6 @@
-
-
-#
+# vvvv template vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+# ---------------------------------------------------------------------------
+# url:
 
 # discuss tab solution
 
@@ -8,6 +8,53 @@
 # my solution
 # time:
 # space:
+
+
+
+# ---------------------------------------------------------------------------
+# ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+# ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/find-greatest-common-divisor-of-array/
+
+# discuss tab solution
+# of course there is a math trick; I should have known!
+# you can use Euclidean algorithm to find GCD very quickly and cheaply
+# explanation: https://www.youtube.com/watch?v=JUzYl1TYMcU
+#
+# time: O(n) -- min and max are O(n)
+class Solution:
+    def findGCD(self, nums: List[int]) -> int:
+        a, b = min(nums), max(nums)
+        while a:
+            a, b = b % a, a
+        return b
+
+# my solution #2, trying to implement the Euclidean algorithm
+# time: O(n) -- min and max are O(n)
+class Solution:
+    def findGCD(self, nums: List[int]) -> int:
+        low = min(nums)
+        high = max(nums)
+        while True:
+            q = high // low
+
+
+# my solution
+# time: O(n log(n)) because of the sort; don't see a way to improve on that
+# space: O(1)
+class Solution:
+    def findGCD(self, nums: List[int]) -> int:
+        nums.sort()
+        low = nums[0]
+        high = nums[-1]
+        for i in range(low,0,-1):
+            if low % i == 0 and high % i == 0:
+                return i
+
+
+# ---------------------------------------------------------------------------
 
 
 # https://leetcode.com/problems/reverse-prefix-of-word/
