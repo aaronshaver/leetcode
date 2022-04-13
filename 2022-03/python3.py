@@ -19,11 +19,19 @@
 # url: https://leetcode.com/problems/merge-two-binary-trees/
 
 # discuss tab solution
-
+# certainly more concise than mine, though it does rely on an unintuitive Python feature
+# where 'a and b' will return 'b' as the last true value if both are true; it's cute and
+# clever, but I don't like relying on stuff like that
+def mergeTrees(self, t1, t2):
+    if not t1 and not t2: return None
+    ans = TreeNode((t1.val if t1 else 0) + (t2.val if t2 else 0))
+    ans.left = self.mergeTrees(t1 and t1.left, t2 and t2.left)
+    ans.right = self.mergeTrees(t1 and t1.right, t2 and t2.right)
+    return ans
 
 # my solution
 # time: O(n)
-# space:
+# space: O(1)
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -53,12 +61,11 @@ class Solution:
         if root2 and root2.right:
             right2 = root2.right
 
-        tree_node = TreeNode(
+        return TreeNode(
             new_val,
             self.mergeTrees(left, left2),
             self.mergeTrees(right, right2)
         )
-        return tree_node
 # ---------------------------------------------------------------------------
 
 
