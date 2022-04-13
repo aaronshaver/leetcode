@@ -16,6 +16,53 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/merge-two-binary-trees/
+
+# discuss tab solution
+
+
+# my solution
+# time: O(n)
+# space:
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root1 and not root2:
+            return None
+
+        new_val = None
+        if root1 and root2:
+            new_val = root1.val + root2.val
+        elif root1:
+            new_val = root1.val
+        elif root2:
+            new_val = root2.val
+
+        left = left2 = right = right2 = None
+        if root1 and root1.left:
+            left = root1.left
+        if root2 and root2.left:
+            left2 = root2.left
+        if root1 and root1.right:
+            right = root1.right
+        if root2 and root2.right:
+            right2 = root2.right
+
+        tree_node = TreeNode(
+            new_val,
+            self.mergeTrees(left, left2),
+            self.mergeTrees(right, right2)
+        )
+        return tree_node
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/find-greatest-common-divisor-of-array/
 
 # discuss tab solution
