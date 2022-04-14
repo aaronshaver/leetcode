@@ -16,6 +16,29 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/divide-array-into-equal-pairs/
+
+# discuss tab solution
+
+
+# my solution
+# time:
+# space:
+from collections import defaultdict
+
+class Solution:
+    def divideArray(self, nums: List[int]) -> bool:
+        counts = defaultdict(lambda: 0)  # argument is a func to return default for missing key
+        for num in nums:
+            counts[num] = counts[num] + 1
+        for key in counts.keys():
+            if counts[key] % 2 != 0:
+                return False
+        return True
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/merge-two-binary-trees/
 
 # discuss tab solution
