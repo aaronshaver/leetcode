@@ -19,11 +19,25 @@
 # url: https://leetcode.com/problems/divide-array-into-equal-pairs/
 
 # discuss tab solution
-
+# this Counter class is cool, TIL
+from collections import Counter
+class Solution:
+    def divideArray(self, nums: List[int]) -> bool:
+        return all(v % 2 == 0 for v in Counter(nums).values())
+# this is super clever; very space efficient
+class Solution:
+    def divideArray(self, nums: List[int]) -> bool:
+        seen = set()
+        for num in nums:
+            if num in seen:
+                seen.discard(num)
+            else:
+                seen.add(num)
+        return not seen
 
 # my solution
-# time:
-# space:
+# time: O(n)
+# space: O(k) where k is average number of groups?
 from collections import defaultdict
 
 class Solution:
