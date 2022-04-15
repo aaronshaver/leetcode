@@ -16,6 +16,41 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/counting-words-with-a-given-prefix/
+
+# discuss tab solution
+# succint, but I don't think it's faster than my solution
+# .find() in Python uses a C code "fastsearch" algo under the hood which is:
+# "worst case O(N*M) (The same as a naive approach), but can do O(N/M) in some
+# cases (where N and M are the lengths of the string and substring respectively),
+# and O(N) in frequent cases" from: https://stackoverflow.com/a/26009111/1759987
+class Solution:
+    def prefixCount(self, words: List[str], pref: str) -> int:
+        return sum(w.find(pref) == 0 for w in words)  # find() returns -1 for no match
+
+# my solution
+# time: O(k*m) where k is length of prefix, m is number of words; worst case O(n),
+# i.e. having to look at every character of every word
+# space: O(1)
+class Solution:
+    def prefixCount(self, words: List[str], pref: str) -> int:
+        count = 0
+        for word in words:
+            flag = True
+            if len(word) < len(pref):
+                flag = False
+            else:
+                for i in range(len(pref)):
+                    if word[i] != pref[i]:
+                        flag = False
+                        break
+                if flag:
+                    count += 1
+        return count
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/divide-array-into-equal-pairs/
 
 # discuss tab solution
