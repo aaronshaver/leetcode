@@ -29,8 +29,8 @@ class Solution:
         return sum(w.find(pref) == 0 for w in words)  # find() returns -1 for no match
 
 # my solution
-# time: O(k*m) where k is length of prefix, m is number of words; worst case O(n),
-# i.e. having to look at every character of every word
+# time: O(n*k) worst case, where k is length of prefix; average case will be lower
+# when we can skip short words or early mismatches
 # space: O(1)
 class Solution:
     def prefixCount(self, words: List[str], pref: str) -> int:
