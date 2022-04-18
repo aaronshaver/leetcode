@@ -18,12 +18,50 @@
 # ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/increasing-order-search-tree/
 
-# discuss tab solution
+# It's really hard to follow any of these solutions
+# discuss tab solution 1
+# O(N) time traversal of all nodes; O(height) space
+class Solution:
+    def increasingBST(self, root, tail = None):
+        if not root: return tail
+        res = self.increasingBST(root.left, root)
+        root.left = None
+        root.right = self.increasingBST(root.right, tail)
+        return res
+# discuss tab solution 2
+class Solution:
+    def increasingBST(self, root):
+        def dfs(node):
+            l1, r2 = node, node
 
+            if node.left:
+                l1, l2 = dfs(node.left)
+                l2.right = node
+                node.left = None
 
-# my solution
-# time:
-# space:
+            if node.right:
+                r1, r2 = dfs(node.right)
+                node.right = r1
+
+            return (l1, r2)
+
+        return dfs(root)[0]
+
+# my solution - 2nd attempt!
+# after looking up in-order traversal
+# this does print out the vals in order, but doesn't contruct the TreeNode
+class Solution:
+    def increasingBST(self, root: TreeNode) -> TreeNode:
+        if root.left:
+            self.increasingBST(root.left)
+        if root and root.val:
+            print(root.val)
+        if root.right:
+            self.increasingBST(root.right)
+# my solution - 1st attempt!
+#
+# time: lol
+# space: lol
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -32,9 +70,9 @@
 #         self.right = right
 class Solution:
     def increasingBST(self, root: TreeNode) -> TreeNode:
-        if root.val == 8:
-            print(root)
-        if root.left and root.left.val < root.val:
+        if root and root.right:
+            root.right = self.increasingBST(root.right)
+        if root and root.left and root.left.val < root.val:
             temp = root.left
             if not temp.right:
                 temp.right = root
@@ -42,8 +80,7 @@ class Solution:
                 temp.right.right = root
             root.left = None
             return self.increasingBST(temp)
-        else:
-            return root
+        return root
 # ---------------------------------------------------------------------------
 
 
