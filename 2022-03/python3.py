@@ -18,6 +18,22 @@
 # ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/increasing-order-search-tree/
 
+# official LeetCode solution using yields (which I'd thought about using) and
+# sort of cheating by creating a new structure
+# I can mostly understand this
+class Solution:
+    def increasingBST(self, root):
+        def inorder(node):
+            if node:
+                yield from inorder(node.left)
+                yield node.val
+                yield from inorder(node.right)
+
+        ans = cur = TreeNode(None)
+        for v in inorder(root):
+            cur.right = TreeNode(v)
+            cur = cur.right
+        return ans.right
 # It's really hard to follow any of these solutions
 # discuss tab solution 1
 # O(N) time traversal of all nodes; O(height) space
