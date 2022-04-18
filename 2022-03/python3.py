@@ -16,6 +16,38 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/increasing-order-search-tree/
+
+# discuss tab solution
+
+
+# my solution
+# time:
+# space:
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def increasingBST(self, root: TreeNode) -> TreeNode:
+        if root.val == 8:
+            print(root)
+        if root.left and root.left.val < root.val:
+            temp = root.left
+            if not temp.right:
+                temp.right = root
+            else:
+                temp.right.right = root
+            root.left = None
+            return self.increasingBST(temp)
+        else:
+            return root
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/counting-words-with-a-given-prefix/
 
 # discuss tab solution
