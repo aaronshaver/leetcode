@@ -16,6 +16,28 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/destination-city/
+
+# discuss tab solution
+
+
+# my solution
+# time:
+# space:
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        candidates = set()
+        rejects = set()
+        for path in paths:
+            candidates.add(path[1])
+            rejects.add(path[0])
+        return list(candidates.difference(rejects))[0]  # in candidates but not in rejects
+
+
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/increasing-order-search-tree/
 
 # official LeetCode solution using yields (which I'd thought about using) and
