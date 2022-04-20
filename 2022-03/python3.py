@@ -19,11 +19,23 @@
 # url: https://leetcode.com/problems/destination-city/
 
 # discuss tab solution
-
+# freakin clever, though the unpacking * operator is a bit weird
+# https://geekflare.com/python-unpacking-operators/
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        A, B = map(set, zip(*paths))
+        return (B - A).pop()
+# I kinda like this one better; more readable
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        src = set(src for (src, dst) in paths)
+        dst = set(dst for (src, dst) in paths)
+        return list(dst - src)[0]
 
 # my solution
-# time:
-# space:
+# time: O(n)
+# space: O(n) - a bit less since no dupes - so you could almost say O(n*k) where k
+# is the "dupiness" of the data ;-)
 class Solution:
     def destCity(self, paths: List[List[str]]) -> str:
         candidates = set()
