@@ -34,8 +34,7 @@ class Solution:
 
 # my solution
 # time: O(n)
-# space: O(n) - a bit less since no dupes - so you could almost say O(n*k) where k
-# is the "dupiness" of the data ;-)
+# space: O(num of cities) -- because dupes removed
 class Solution:
     def destCity(self, paths: List[List[str]]) -> str:
         candidates = set()
