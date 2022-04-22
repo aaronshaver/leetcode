@@ -18,11 +18,24 @@
 # url: https://leetcode.com/problems/middle-of-the-linked-list/
 
 # discuss tab solution
+# https://leetcode.com/problems/middle-of-the-linked-list/discuss/154619/C++JavaPython-Slow-and-Fast-Pointers
+# time still O(n) but space O(1)
+# beautiful; I had to work through test cases to prove to myself it works
+# distance between slow and faster pointers grows by 1 each iteration which
+# accounts for the growing list
+class Solution:
+    def middleNode(self, head):
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
 
-
-# my solution, 1st attempt
-# time:
-# space:
+# my solution
+# I tried finding something better that wouldn't create a new data structure
+# but couldn't figure it out
+# time: O(n)
+# space: O(n)
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
