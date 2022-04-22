@@ -88,8 +88,6 @@ class Solution:
             candidates.add(path[1])
             rejects.add(path[0])
         return list(candidates.difference(rejects))[0]  # in candidates but not in rejects
-
-
 # ---------------------------------------------------------------------------
 
 
