@@ -10,9 +10,41 @@
 # space:
 
 
-
 # ---------------------------------------------------------------------------
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+# ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/middle-of-the-linked-list/
+
+# discuss tab solution
+
+
+# my solution, 1st attempt
+# time:
+# space:
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+import math
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        middle = head
+        seen = [head]
+
+        while True:
+            current_node = head.next
+            if not current_node:
+                break
+            seen.append(current_node)
+            head = current_node
+
+        middle_index = math.floor(len(seen) / 2)
+
+        return seen[middle_index]
+# ---------------------------------------------------------------------------
 
 
 # ---------------------------------------------------------------------------
