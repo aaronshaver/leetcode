@@ -15,6 +15,46 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/reverse-linked-list/
+
+# discuss tab solution
+
+
+# my solution
+# time:
+# space:
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # empty and single node cases
+        if not head:
+            return None
+        elif not head.next:
+            return head
+
+        # collect each node
+        collected = []
+        while head:
+            collected.append(head)
+            head = head.next
+
+        # reverse the collection, then fix the next pointers
+        reversed_collection = list(reversed(collected))
+        for i in range(len(reversed_collection)):
+            if i == len(reversed_collection) - 1:
+                value = None
+            else:
+                value = reversed_collection[i + 1]
+            reversed_collection[i].next = value
+        return reversed_collection[0]
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/middle-of-the-linked-list/
 
 # discuss tab solution
