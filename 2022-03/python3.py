@@ -18,11 +18,27 @@
 # url: https://leetcode.com/problems/reverse-linked-list/
 
 # discuss tab solution
-
+# time: O(n) just iterating through once
+# space: O(n)? because creating a new equal size linked list, not modifying in place?
+# comment: obviously a terse solution; I had to work through it on a small LL to prove
+# it worked
+# it seems like a common pattern for these LL problems is to keep a memory of at least
+# one node back, to be used later
+class Solution:
+# @param {ListNode} head
+# @return {ListNode}
+def reverseList(self, head):
+    prev = None
+    while head:
+        curr = head
+        head = head.next
+        curr.next = prev
+        prev = curr
+    return prev
 
 # my solution
-# time:
-# space:
+# time: O(2n) -> O(n)
+# space: O(n^2)? it's not great
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
