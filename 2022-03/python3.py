@@ -30,6 +30,9 @@
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        # visit each node
+        # gather up into list
+        # return list == list[::-1]
 
 
 # ---------------------------------------------------------------------------
