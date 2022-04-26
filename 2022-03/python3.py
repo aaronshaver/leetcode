@@ -15,6 +15,27 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/palindrome-linked-list/
+
+# discuss tab solution
+
+
+# my solution
+# time:
+# space:
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+
+
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/reverse-linked-list/
 
 # discuss tab solution
@@ -24,17 +45,17 @@
 # it worked
 # it seems like a common pattern for these LL problems is to keep a memory of at least
 # one node back, to be used later
-class Solution:
 # @param {ListNode} head
 # @return {ListNode}
-def reverseList(self, head):
-    prev = None
-    while head:
-        curr = head
-        head = head.next
-        curr.next = prev
-        prev = curr
-    return prev
+class Solution:
+    def reverseList(self, head):
+        prev = None
+        while head:
+            curr = head
+            head = head.next
+            curr.next = prev
+            prev = curr
+        return prev
 
 # my solution
 # time: O(2n) -> O(n)
