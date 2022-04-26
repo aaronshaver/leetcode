@@ -18,23 +18,58 @@
 # url: https://leetcode.com/problems/palindrome-linked-list/
 
 # discuss tab solution
+def isPalindrome(self, head):
+    fast = slow = head
+    # find the mid node
+    while fast and fast.next:
+        fast = fast.next.next
+        slow = slow.next
+    # reverse the second half
+    node = None
+    while slow:
+        nxt = slow.next
+        slow.next = node
+        node = slow
+        slow = nxt
+    # compare the first and second half nodes
+    while node: # while node and head:
+        if node.val != head.val:
+            return False
+        node = node.next
+        head = head.next
+    return True
+# (This explanation from a Java solution, but the same ideas apply)
+# This can be solved by reversing the 2nd half and compare the two halves.
+# Let's start with an example [1, 1, 2, 1].
 
+# In the beginning, set two pointers fast and slow starting at the head.
+
+# 1 -> 1 -> 2 -> 1 -> null
+# sf
+# (1) Move: fast pointer goes to the end, and slow goes to the middle.
+
+# 1 -> 1 -> 2 -> 1 -> null
+#           s          f
+# (2) Reverse: the right half is reversed, and slow pointer becomes the 2nd head.
+
+# 1 -> 1    null <- 2 <- 1
+# h                      s
+# (3) Compare: run the two pointers head and slow together and compare.
+
+# 1 -> 1    null <- 2 <- 1
+#      h            s
 
 # my solution
-# time:
-# space:
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
+# time: O(2n) -> O(n); going through all inputs, and then reversing the list is O(n)
+# space: O(n); problem states it's possible to get O(1) space but I'm not sure how
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        # visit each node
-        # gather up into list
-        # return list == list[::-1]
+        values = []
+        while head:
+            values.append(head.val)
+            head = head.next
 
-
+        return values == values[::-1]
 # ---------------------------------------------------------------------------
 
 
