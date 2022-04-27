@@ -15,6 +15,31 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/determine-color-of-a-chessboard-square/
+
+# discuss tab solution
+# very clever; relies on the opposite nature of the grid squares/alignment
+# uses a little less space than mine, and is super terse, though as usual for
+# these short ones, it's arguably less readable/understandable
+class Solution:
+    def squareIsWhite(self, a):
+        return ord(a[0]) % 2 != int(a[1]) % 2
+
+# my solution
+# time: O(1) argument could be made for O(1) because no matter the size of the
+# grid, the operations are constant; for example, a 3000x3000 grid size will evaluate
+# just as quickly as an 8x8 (assumption: that ord() keeps working when you get way
+# past ASCII chars)
+# space: O(1)
+class Solution:
+    def squareIsWhite(self, coordinates: str) -> bool:
+        col = ord(coordinates[0])
+        row = int(coordinates[1])
+        return (col % 2 == 0 and row % 2 != 0) or (col % 2 != 0 and row % 2 == 0)
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/palindrome-linked-list/
 
 # discuss tab solution
