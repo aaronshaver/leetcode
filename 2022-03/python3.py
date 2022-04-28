@@ -18,7 +18,14 @@
 # url: https://leetcode.com/problems/find-numbers-with-even-number-of-digits/
 
 # discuss tab solution
-
+# a lot of them used str() conversion, which I rejected because usually in interviews
+# you're not allowed to use string conversion in these types of problems, and it can
+# be slower
+#
+# a genuinely interesting one was this, though:
+class Solution:
+    def findNumbers(self, nums: List[int]) -> int:
+        return sum(int(math.log10(n)) % 2 for n in nums) # log10(n) + 1 is the # of digits.
 
 # my solution
 # time: O(n)
