@@ -15,6 +15,31 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/find-numbers-with-even-number-of-digits/
+
+# discuss tab solution
+
+
+# my solution
+# time: O(n)
+# space: O(1)
+class Solution:
+    def getNumberOfDigits(self, num: int):
+        output = -1
+        magnitude = 10
+        count = 0
+        while output != num:
+            output = num % magnitude
+            magnitude *= 10
+            count += 1
+        return count
+
+    def findNumbers(self, nums: List[int]) -> int:
+        return len([True for x in nums if self.getNumberOfDigits(x) % 2 == 0])
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/determine-color-of-a-chessboard-square/
 
 # discuss tab solution
