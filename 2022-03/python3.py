@@ -18,6 +18,11 @@
 # url: https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/
 
 # discuss tab solution
+# I forgot about the Counter() class
+# very clever too with the set of unique counts of each char == 1
+class Solution:
+    def areOccurrencesEqual(self, s: str) -> bool:
+        return len(set(Counter(s).values())) == 1
 
 # my solution
 # time: O(n)
