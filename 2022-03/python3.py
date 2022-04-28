@@ -15,6 +15,24 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/
+
+# discuss tab solution
+
+# my solution
+# time: O(n)
+# space: O(n) worst; O(k) average where k is num of unique chars
+from collections import defaultdict
+class Solution:
+    def areOccurrencesEqual(self, s: str) -> bool:
+        chars = defaultdict(lambda: 0)
+        for char in s:
+            chars[char] = chars[char] + 1
+        return all(element == list(chars.values())[0] for element in chars.values())
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/find-numbers-with-even-number-of-digits/
 
 # discuss tab solution
