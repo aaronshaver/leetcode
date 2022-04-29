@@ -15,6 +15,36 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/search-in-a-binary-search-tree/
+
+# discuss tab solution
+
+
+# my solution
+# time: O(n) worst; O(log(n)) average
+# space: O(1)
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if root.val == val:
+            return root
+        if root.left:
+            search_left_result = self.searchBST(root.left, val)
+            if search_left_result and search_left_result.val == val:
+                return search_left_result
+        if root.right:
+            search_right_result = self.searchBST(root.right, val)
+            if search_right_result and search_right_result.val == val:
+                return search_right_result
+        return None
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/
 
 # discuss tab solution
