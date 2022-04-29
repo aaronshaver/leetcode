@@ -18,6 +18,21 @@
 # url: https://leetcode.com/problems/search-in-a-binary-search-tree/
 
 # discuss tab solution
+# okay, I forgot an important thing in my first draft solution: it's a binary
+# SEARCH tree, i.e. it's structured and you know properties about it, like that
+# vals to the left are smaller and those to the right are greater (DUH, now that
+# I think about it)
+# as well, we can skip evaluating .left and .right if root itself is null
+#
+# I'll update my solution and re-run it and see if performance improves (it should)
+# update 1: returning None right away if root==None made barely any difference
+# update 2: checking if val < or > than root.val made a huge difference:
+# 70 ms new best time when 1st draft solution best was 90 ms
+class Solution:
+    def searchBST(self, root, val):
+        if root and val < root.val: return self.searchBST(root.left, val)
+        elif root and val > root.val: return self.searchBST(root.right, val)
+        return root
 
 
 # my solution
@@ -30,13 +45,15 @@
 #         self.right = right
 class Solution:
     def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if not root:
+            return None
         if root.val == val:
             return root
-        if root.left:
+        if val < root.val:
             search_left_result = self.searchBST(root.left, val)
             if search_left_result and search_left_result.val == val:
                 return search_left_result
-        if root.right:
+        if val > root.val:
             search_right_result = self.searchBST(root.right, val)
             if search_right_result and search_right_result.val == val:
                 return search_right_result
