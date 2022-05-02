@@ -15,6 +15,65 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/n-ary-tree-postorder-traversal/
+
+# discuss tab solution
+# dang; my solution was almost there (and I knew this, because when I printed root.val,
+# it had the right stuff in stdout), I just didn't think to call the function from an
+# enclosing/outside function
+class Solution:
+    def postorder(self, root):
+            """
+            :type root: Node
+            :rtype: List[int]
+            """
+            res = []
+            if root == None: return res
+
+            def recursion(root, res):
+                for child in root.children:
+                    recursion(child, res)
+                res.append(root.val)
+
+            recursion(root, res)
+            return res
+
+# my solution (2nd attempt, re-write after looking at solution just for the practice of
+# writing it out
+class Solution:
+    def recursive(self, root: 'Node', accumulator=[]) -> List[int]:
+        if not root:
+            return accumulator
+        for child in root.children:
+            self.recursive(child, accumulator)
+        accumulator += [root.val]
+        return accumulator
+
+    def postorder(self, root):
+        accumulator = []
+        self.recursive(root, accumulator)
+        return accumulator
+
+# my solution (1st attempt / best attempt without looking anything up;
+# I couldn't solve every test case)
+# time:
+# space:
+# class Node:
+#     def __init__(self, val=None, children=None):
+#         self.val = val
+#         self.children = children
+# post-order is left-right-root
+class Solution:
+    def postorder(self, root: 'Node', vals=[]) -> List[int]:
+        for child in root.children:
+            self.postorder(child, vals)
+        print(root.val)
+        vals += [root.val]
+        return vals
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/search-in-a-binary-search-tree/
 
 # discuss tab solution
