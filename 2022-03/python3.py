@@ -15,6 +15,39 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/n-ary-tree-preorder-traversal/
+
+# discuss tab solution
+
+
+# my solution
+# time:
+# space:
+# class Node:
+#     def __init__(self, val=None, children=None):
+#         self.val = val
+#         self.children = children
+class Solution:
+    def recursive(node, accumulator):
+        if not node:
+            return accumulator
+        for child in root.children[::-1]:
+            pass
+
+
+    def preorder(self, root: 'Node') -> List[int]:
+        accumulator = []
+
+        self.recursive(root, accumulator)
+        accumulator += [root.val]
+
+        return accumulator
+
+
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/n-ary-tree-postorder-traversal/
 
 # discuss tab solution
