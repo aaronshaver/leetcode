@@ -21,29 +21,28 @@
 
 
 # my solution
-# time:
-# space:
+# didn't look anything up! except the order, which I can't be bothered to memorize
+# when I can google that in 10 seconds
+# time: O(n)
+# space: O(n); there's probably some clever way to do it without storage
 # class Node:
 #     def __init__(self, val=None, children=None):
 #         self.val = val
 #         self.children = children
+# preorder is root->left->right
 class Solution:
-    def recursive(node, accumulator):
-        if not node:
-            return accumulator
-        for child in root.children[::-1]:
-            pass
-
+    def recursive(self, root, accumulator):
+        if not root:
+            return None
+        accumulator += [root.val]
+        for child in root.children:
+            self.recursive(child, accumulator)
 
     def preorder(self, root: 'Node') -> List[int]:
         accumulator = []
-
         self.recursive(root, accumulator)
-        accumulator += [root.val]
 
         return accumulator
-
-
 # ---------------------------------------------------------------------------
 
 
