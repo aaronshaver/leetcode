@@ -18,7 +18,32 @@
 # url: https://leetcode.com/problems/n-ary-tree-preorder-traversal/
 
 # discuss tab solution
+# pasting an iterative solution here for my education
+class Solution(object):
+    def preorder(self, root):
+        if root is None:
+            return []
 
+        stack = [root]
+        output = []
+
+        # while there is element in stack the loop runs
+        while stack:
+
+            #pop the last element from the stack and store it into temp.
+            temp = stack.pop()
+
+            # append. the value of temp to output
+            output.append(temp.val)
+
+            #add the children of the temp into the stack in reverse order.
+            # children of 1 = [3,2,4], if not reveresed then 4 will be popped out first from the stack.
+            # if reversed then stack = [4,2,3]. Here 3 will pop out first.
+            # This continues till the stack is empty.
+            stack.extend(temp.children[::-1])
+
+        #return the output
+        return output
 
 # my solution
 # didn't look anything up! except the order, which I can't be bothered to memorize
