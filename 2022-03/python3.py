@@ -15,6 +15,40 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/copy-list-with-random-pointer/
+# doing this for practice: got it as a question for Labelbox interview
+
+# discuss tab solution
+
+
+# my solution
+# time:
+# space:
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+class Solution:
+    def recurse(node):
+        if not node:  # went past tail of list, so can exit instead of continuing to recurse
+            return None
+        return Node(node.value, recurse(node.next))
+
+    def deep_copy(node):
+        return Node(node.value, recurse(node.next))
+
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        return deep_copy(head)
+
+
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/n-ary-tree-preorder-traversal/
 
 # discuss tab solution
