@@ -18,33 +18,41 @@
 # url: https://leetcode.com/problems/copy-list-with-random-pointer/
 # doing this for practice: got it as a question for Labelbox interview
 
-# discuss tab solution
+# actual solution
+# I need to work on understanding how this works
+# https://www.youtube.com/watch?v=5Y2EiZST97Y
 
-
-# my solution
-# time:
-# space:
-"""
-# Definition for a Node.
-class Node:
-    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
-        self.val = int(x)
-        self.next = next
-        self.random = random
-"""
+# my solution attempt (failed - didn't preserve the .random when copying)
+# time: O(n)
+# space: O(n)
 class Solution:
-    def recurse(node):
+    def recurse(self, node):
         if not node:  # went past tail of list, so can exit instead of continuing to recurse
             return None
-        return Node(node.value, recurse(node.next))
+        if node.random:
+            print("saw random pointer with val of {}".format(node.random.val))
+        return Node(node.val, self.recurse(node.next))
 
-    def deep_copy(node):
-        return Node(node.value, recurse(node.next))
+    def get_random_mappings(self, node):
+        seen = {}
+        head = node
+        while True:
+            if not head:
+                break
+            seen[head.val] = head.random
+            head = head.next
+        return seen
+
+    def deep_copy(self, node):
+        if node.random:
+            print("saw random pointer with val of {}".format(node.random.val))
+
+        new_head = Node(node.val, self.recurse(node.next))
+        random_mappings = self.get_random_mappings(new_head)
+        print(random_mappings)
 
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        return deep_copy(head)
-
-
+        return self.deep_copy(head)
 # ---------------------------------------------------------------------------
 
 
