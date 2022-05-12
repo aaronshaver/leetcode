@@ -15,6 +15,29 @@
 
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/sort-array-by-parity/
+
+# discuss tab solution
+
+
+# my solution
+# there's probably some better solution using pointers is my intuition
+# and likely a storage O(1) in-place list rearranging
+# time: O(n)
+# space: O(n)
+class Solution:
+    def sortArrayByParity(self, nums: List[int]) -> List[int]:
+        sorted_nums = []
+        for num in nums:
+            if num % 2 == 0:
+                sorted_nums.insert(0, num)
+            else:
+                sorted_nums.append(num)
+        return sorted_nums
+# ---------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/copy-list-with-random-pointer/
 # doing this for practice: got it as a question for Labelbox interview
 
