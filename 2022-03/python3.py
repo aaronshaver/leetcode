@@ -18,7 +18,21 @@
 # url: https://leetcode.com/problems/sort-array-by-parity/
 
 # discuss tab solution
-
+# in place swapping
+# my intuition was right; it involved pointers
+# I ran through this solution and paper to make sure I understood it
+# key is that if left is even, we can move forward/right
+# if right is odd, we can move backward/left
+# and if neither of those is true, we KNOW that left is odd and right is even
+# therefore the swap will work to put even toward the left, odd toward the right
+class Solution:
+    def sortArrayByParity(self, nums: List[int]) -> List[int]:
+        left, right = 0, len(nums)-1
+        while left < right:
+            if nums[left]%2 == 0: left += 1
+            elif nums[right]%2 == 1: right -= 1
+            else: nums[left], nums[right] = nums[right], nums[left]
+        return nums
 
 # my solution
 # there's probably some better solution using pointers is my intuition
