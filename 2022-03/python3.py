@@ -14,6 +14,13 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
+from operator import itemgetter
+import itertools
+from collections import Counter
+import math
+from collections import defaultdict
+
+
 # ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/sort-array-by-parity/
 
@@ -27,11 +34,14 @@
 # therefore the swap will work to put even toward the left, odd toward the right
 class Solution:
     def sortArrayByParity(self, nums: List[int]) -> List[int]:
-        left, right = 0, len(nums)-1
+        left, right = 0, len(nums) - 1
         while left < right:
-            if nums[left]%2 == 0: left += 1
-            elif nums[right]%2 == 1: right -= 1
-            else: nums[left], nums[right] = nums[right], nums[left]
+            if nums[left] % 2 == 0:
+                left += 1
+            elif nums[right] % 2 == 1:
+                right -= 1
+            else:
+                nums[left], nums[right] = nums[right], nums[left]
         return nums
 
 # my solution
@@ -109,19 +119,19 @@ class Solution(object):
         # while there is element in stack the loop runs
         while stack:
 
-            #pop the last element from the stack and store it into temp.
+            # pop the last element from the stack and store it into temp.
             temp = stack.pop()
 
             # append. the value of temp to output
             output.append(temp.val)
 
-            #add the children of the temp into the stack in reverse order.
+            # add the children of the temp into the stack in reverse order.
             # children of 1 = [3,2,4], if not reveresed then 4 will be popped out first from the stack.
             # if reversed then stack = [4,2,3]. Here 3 will pop out first.
             # This continues till the stack is empty.
             stack.extend(temp.children[::-1])
 
-        #return the output
+        # return the output
         return output
 
 # my solution
@@ -134,6 +144,8 @@ class Solution(object):
 #         self.val = val
 #         self.children = children
 # preorder is root->left->right
+
+
 class Solution:
     def recursive(self, root, accumulator):
         if not root:
@@ -159,23 +171,26 @@ class Solution:
 # enclosing/outside function
 class Solution:
     def postorder(self, root):
-            """
-            :type root: Node
-            :rtype: List[int]
-            """
-            res = []
-            if root == None: return res
-
-            def recursion(root, res):
-                for child in root.children:
-                    recursion(child, res)
-                res.append(root.val)
-
-            recursion(root, res)
+        """
+        :type root: Node
+        :rtype: List[int]
+        """
+        res = []
+        if root == None:
             return res
+
+        def recursion(root, res):
+            for child in root.children:
+                recursion(child, res)
+            res.append(root.val)
+
+        recursion(root, res)
+        return res
 
 # my solution (2nd attempt, re-write after looking at solution just for the practice of
 # writing it out
+
+
 class Solution:
     def recursive(self, root: 'Node', accumulator=[]) -> List[int]:
         if not root:
@@ -199,6 +214,8 @@ class Solution:
 #         self.val = val
 #         self.children = children
 # post-order is left-right-root
+
+
 class Solution:
     def postorder(self, root: 'Node', vals=[]) -> List[int]:
         for child in root.children:
@@ -225,8 +242,10 @@ class Solution:
 # 70 ms new best time when 1st draft solution best was 90 ms
 class Solution:
     def searchBST(self, root, val):
-        if root and val < root.val: return self.searchBST(root.left, val)
-        elif root and val > root.val: return self.searchBST(root.right, val)
+        if root and val < root.val:
+            return self.searchBST(root.left, val)
+        elif root and val > root.val:
+            return self.searchBST(root.right, val)
         return root
 
 
@@ -266,10 +285,12 @@ class Solution:
     def areOccurrencesEqual(self, s: str) -> bool:
         return len(set(Counter(s).values())) == 1
 
+
 # my solution
 # time: O(n)
 # space: O(n) worst; O(k) average where k is num of unique chars
-from collections import defaultdict
+
+
 class Solution:
     def areOccurrencesEqual(self, s: str) -> bool:
         chars = defaultdict(lambda: 0)
@@ -290,11 +311,14 @@ class Solution:
 # a genuinely interesting one was this, though:
 class Solution:
     def findNumbers(self, nums: List[int]) -> int:
-        return sum(int(math.log10(n)) % 2 for n in nums) # log10(n) + 1 is the # of digits.
+        # log10(n) + 1 is the # of digits.
+        return sum(int(math.log10(n)) % 2 for n in nums)
 
 # my solution
 # time: O(n)
 # space: O(1)
+
+
 class Solution:
     def getNumberOfDigits(self, num: int):
         output = -1
@@ -328,6 +352,8 @@ class Solution:
 # just as quickly as an 8x8 (assumption: that ord() keeps working when you get way
 # past ASCII chars)
 # space: O(1)
+
+
 class Solution:
     def squareIsWhite(self, coordinates: str) -> bool:
         col = ord(coordinates[0])
@@ -354,7 +380,7 @@ def isPalindrome(self, head):
         node = slow
         slow = nxt
     # compare the first and second half nodes
-    while node: # while node and head:
+    while node:  # while node and head:
         if node.val != head.val:
             return False
         node = node.next
@@ -384,6 +410,8 @@ def isPalindrome(self, head):
 # my solution
 # time: O(2n) -> O(n); going through all inputs, and then reversing the list is O(n)
 # space: O(n); problem states it's possible to get O(1) space but I'm not sure how
+
+
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         values = []
@@ -425,6 +453,8 @@ class Solution:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # empty and single node cases
@@ -468,6 +498,7 @@ class Solution:
             fast = fast.next.next
         return slow
 
+
 # my solution
 # I tried finding something better that wouldn't create a new data structure
 # but couldn't figure it out
@@ -478,7 +509,8 @@ class Solution:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-import math
+
+
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         middle = head
@@ -508,6 +540,8 @@ class Solution:
         A, B = map(set, zip(*paths))
         return (B - A).pop()
 # I kinda like this one better; more readable
+
+
 class Solution:
     def destCity(self, paths: List[List[str]]) -> str:
         src = set(src for (src, dst) in paths)
@@ -517,6 +551,8 @@ class Solution:
 # my solution
 # time: O(n)
 # space: O(num of cities) -- because dupes removed
+
+
 class Solution:
     def destCity(self, paths: List[List[str]]) -> str:
         candidates = set()
@@ -524,7 +560,8 @@ class Solution:
         for path in paths:
             candidates.add(path[1])
             rejects.add(path[0])
-        return list(candidates.difference(rejects))[0]  # in candidates but not in rejects
+        # in candidates but not in rejects
+        return list(candidates.difference(rejects))[0]
 # ---------------------------------------------------------------------------
 
 
@@ -550,14 +587,19 @@ class Solution:
 # It's really hard to follow any of these solutions
 # discuss tab solution 1
 # O(N) time traversal of all nodes; O(height) space
+
+
 class Solution:
-    def increasingBST(self, root, tail = None):
-        if not root: return tail
+    def increasingBST(self, root, tail=None):
+        if not root:
+            return tail
         res = self.increasingBST(root.left, root)
         root.left = None
         root.right = self.increasingBST(root.right, tail)
         return res
 # discuss tab solution 2
+
+
 class Solution:
     def increasingBST(self, root):
         def dfs(node):
@@ -579,6 +621,8 @@ class Solution:
 # my solution - 2nd attempt!
 # after looking up in-order traversal
 # this does print out the vals in order, but doesn't contruct the TreeNode
+
+
 class Solution:
     def increasingBST(self, root: TreeNode) -> TreeNode:
         if root.left:
@@ -597,6 +641,8 @@ class Solution:
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+
 class Solution:
     def increasingBST(self, root: TreeNode) -> TreeNode:
         if root and root.right:
@@ -624,12 +670,15 @@ class Solution:
 # and O(N) in frequent cases" from: https://stackoverflow.com/a/26009111/1759987
 class Solution:
     def prefixCount(self, words: List[str], pref: str) -> int:
-        return sum(w.find(pref) == 0 for w in words)  # find() returns -1 for no match
+        # find() returns -1 for no match
+        return sum(w.find(pref) == 0 for w in words)
 
 # my solution
 # time: O(n*k) worst case, where k is length of prefix; average case will be lower
 # when we can skip short words or early mismatches
 # space: O(1)
+
+
 class Solution:
     def prefixCount(self, words: List[str], pref: str) -> int:
         count = 0
@@ -653,11 +702,14 @@ class Solution:
 
 # discuss tab solution
 # this Counter class is cool, TIL
-from collections import Counter
+
+
 class Solution:
     def divideArray(self, nums: List[int]) -> bool:
         return all(v % 2 == 0 for v in Counter(nums).values())
 # this is super clever; very space efficient
+
+
 class Solution:
     def divideArray(self, nums: List[int]) -> bool:
         seen = set()
@@ -668,14 +720,16 @@ class Solution:
                 seen.add(num)
         return not seen
 
+
 # my solution
 # time: O(n)
 # space: O(k) where k is average number of groups?
-from collections import defaultdict
+
 
 class Solution:
     def divideArray(self, nums: List[int]) -> bool:
-        counts = defaultdict(lambda: 0)  # argument is a func to return default for missing key
+        # argument is a func to return default for missing key
+        counts = defaultdict(lambda: 0)
         for num in nums:
             counts[num] = counts[num] + 1
         for key in counts.keys():
@@ -693,7 +747,8 @@ class Solution:
 # where 'a and b' will return 'b' as the last true value if both are true; it's cute and
 # clever, but I don't like relying on stuff like that
 def mergeTrees(self, t1, t2):
-    if not t1 and not t2: return None
+    if not t1 and not t2:
+        return None
     ans = TreeNode((t1.val if t1 else 0) + (t2.val if t2 else 0))
     ans.left = self.mergeTrees(t1 and t1.left, t2 and t2.left)
     ans.right = self.mergeTrees(t1 and t1.right, t2 and t2.right)
@@ -708,6 +763,8 @@ def mergeTrees(self, t1, t2):
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+
 class Solution:
     def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root1 and not root2:
@@ -757,6 +814,8 @@ class Solution:
 
 # my solution #2, trying to implement the Euclidean algorithm
 # time: O(n) -- min and max are O(n)
+
+
 class Solution:
     def findGCD(self, nums: List[int]) -> int:
         low = min(nums)
@@ -777,12 +836,14 @@ class Solution:
 # my solution
 # time: O(n log(n)) because of the sort; don't see a way to improve on that
 # space: O(1)
+
+
 class Solution:
     def findGCD(self, nums: List[int]) -> int:
         nums.sort()
         low = nums[0]
         high = nums[-1]
-        for i in range(low,0,-1):
+        for i in range(low, 0, -1):
             if low % i == 0 and high % i == 0:
                 return i
 # ---------------------------------------------------------------------------
@@ -798,6 +859,8 @@ class Solution:
         return word[:word.find(ch) + 1][::-1] + word[word.find(ch) + 1:]
 # I like how this one reads more cleanly than mine, and negates need for storing index
 # in outside scope
+
+
 class Solution:
     def reversePrefix(self, word: str, ch: str) -> str:
         try:
@@ -809,6 +872,8 @@ class Solution:
 # my solution
 # time: O(n)
 # space: O(1)
+
+
 class Solution:
     def reversePrefix(self, word: str, ch: str) -> str:
         index = 0
@@ -853,6 +918,8 @@ def halvesAreAlike(self, s: str) -> bool:
 # char
 # space: O(n) to create the two halves; if we just return len() == len() instead would
 # that be O(1)? not sure
+
+
 class Solution:
     def halvesAreAlike(self, s: str) -> bool:
         vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
@@ -884,6 +951,8 @@ def minOperations(self, nums: List[int]) -> int:
 # my solution
 # time: O(n)
 # space: O(1)
+
+
 class Solution:
     def minOperations(self, nums: List[int]) -> int:
         count = 0
@@ -909,6 +978,8 @@ class Solution:
     def reverseWords(self, s):
         return ' '.join(s.split()[::-1])[::-1]
 # slower but more readable/understandable:
+
+
 def reverseWords(self, s):
     return ' '.join(x[::-1] for x in s.split())
 # in both cases, I think it's the same O(3n) -> O(n) as mine, but may be objectively faster
@@ -918,6 +989,8 @@ def reverseWords(self, s):
 # I had considered a pointer/cursor approach like:
 # https://leetcode.com/problems/reverse-words-in-a-string-iii/discuss/1051657/Python-3%3A-Two-pointer-approach-(for-the-sake-of-practice)
 # but I felt it wouldn't have been any faster, and would be considerably more verbose code
+
+
 class Solution:
     def reverseWords(self, s: str) -> str:
         return ' '.join([''.join(letter for letter in reversed(word)) for word in s.split()])
@@ -935,6 +1008,8 @@ def freqAlphabets(self, s):
 # my solution
 # time: O(n); space: O(n)
 # should probably extract out the chr(int() stuff into a function
+
+
 class Solution:
     def freqAlphabets(self, s: str) -> str:
         output = ''
@@ -975,9 +1050,12 @@ def minBitFlips(self, start: int, goal: int) -> int:
 # then bit shift right chops off the trailing 0s
 # so in this case we'd have 0 for the start, and 1 for the goal, meaning digit at that
 # place has to change for the start num, and thus our count of operations has to increase
+
+
 class Solution:
     def minBitFlips(self, start: int, goal: int) -> int:
-        length = max(len(bin(start)[2:]), len(bin(goal)[2:]))  # '2:'' chops off 0b
+        length = max(len(bin(start)[2:]), len(
+            bin(goal)[2:]))  # '2:'' chops off 0b
         count = 0
         for i in range(length):
             if ((start & (1 << i)) >> i) != ((goal & (1 << i)) >> i):
@@ -1004,7 +1082,7 @@ class Solution:
 #
 # as an aside, I don't quite understand why single numbers aren't 0;
 # number XORed with itself should be 0; problem wants it to be the number itself
-import itertools
+
 
 class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
@@ -1038,13 +1116,15 @@ class Solution:
 class Solution:
     def countGoodRectangles(self, rectangles):
         d = {}
-        for i,j in rectangles:
-            minimum = min(i,j)
-            d[minimum] = d.get(minimum,0)+1
+        for i, j in rectangles:
+            minimum = min(i, j)
+            d[minimum] = d.get(minimum, 0)+1
         return d[max(d)]
 
 # my solution
 # time: O(n); space: O(1)
+
+
 class Solution:
     def countGoodRectangles(self, rectangles: List[List[int]]) -> int:
         largest_seen, count = 0, 0
@@ -1068,19 +1148,23 @@ def maximum69Number(self, num):
 
 # I was happy to see another person had a solution similar to mine without string conversion;
 # theirs is a little better in using an int for the "six index" instead of my list, and it's shorter
+
+
 class Solution:
-    def maximum69Number (self, num: int) -> int:
+    def maximum69Number(self, num: int) -> int:
         i = 0
         tem = num
         sixidx = -1
         while tem > 0:
             if tem % 10 == 6:
-                sixidx = i  #refresh sixidx when found 6 at large digit.
+                sixidx = i  # refresh sixidx when found 6 at large digit.
             tem = tem//10
             i += 1
-        return (num + 3 *(10**sixidx)) if sixidx != -1 else num
+        return (num + 3 * (10**sixidx)) if sixidx != -1 else num
 # here's a very clean solution using divmod, which I hadn't heard of:
-def maximum69Number (self, num: int) -> int:
+
+
+def maximum69Number(self, num: int) -> int:
 
     six_index = -1
     remainder = num
@@ -1098,8 +1182,10 @@ def maximum69Number (self, num: int) -> int:
 # time: O(n); I'm not totally sure; input being 10x bigger won't make the algorithm 10x slower
 # but it's also not strictly linear with n?; there's one more iteration for every 10x of n
 # space: O(1) except for a small, slow-growing list
+
+
 class Solution:
-    def maximum69Number (self, num: int) -> int:
+    def maximum69Number(self, num: int) -> int:
         six_locations = []  # decimal place within the original num
         for i in range(999):
             output = num // (10 ** i)
@@ -1113,7 +1199,8 @@ class Solution:
             return num  # number was all 6s
 
         largest_six = max(six_locations)
-        return num + (3 * (10 ** largest_six))  # 3 because we're tring to get up to 9
+        # 3 because we're tring to get up to 9
+        return num + (3 * (10 ** largest_six))
 
 
 # https://leetcode.com/problems/find-the-highest-altitude/
@@ -1137,6 +1224,8 @@ def largestAltitude(self, A):
 # time: O(n); space: O(1)
 # I did have the intuition that we wanted an accumulator / reducer here
 # (as I've used in TypeScript/JavaScript) I simply didn't know the syntax
+
+
 class Solution:
     def largestAltitude(self, gains: List[int]) -> int:
         highest, current = 0, 0
@@ -1160,6 +1249,8 @@ def diagonalSum(self, mat: List[List[int]]) -> int:
 # my solution
 # time: O(n) where n is the length of a side of the square matrix
 # space: effectively O(1)
+
+
 class Solution:
     def diagonalSum(self, mat: List[List[int]]) -> int:
         if len(mat) == 1:  # special case of 1x1 matrix
@@ -1191,6 +1282,8 @@ def minTimeToVisitAllPoints(self, p: List[List[int]]) -> int:
 
 # my solution
 # time: O(n); space: effectively O(1)
+
+
 class Solution:
     def minTimeToVisitAllPoints(self, points: List[List[int]]) -> int:
         count = 0
@@ -1230,6 +1323,8 @@ class Solution:
 # I thought about implementing a "cursor" approach of scanning through 'word' but it
 # seemed like my impl would be worse than using built-in contains() which averages
 # O(n)
+
+
 class Solution:
     def numOfStrings(self, patterns: List[str], word: str) -> int:
         count = 0
@@ -1254,10 +1349,12 @@ class Solution:
 # https://stackoverflow.com/questions/65540349/time-complexity-of-reversed-in-python-3#comment115874825_65540349
 class Solution:
     def flipAndInvertImage(self, A):
-        return [[1^q for q in row[::-1]] for row in A]
+        return [[1 ^ q for q in row[::-1]] for row in A]
 
 # my solution
 # time: O(n); space: O(n)
+
+
 class Solution:
     def flipAndInvertImage(self, image: List[List[int]]) -> List[List[int]]:
         output = []
@@ -1289,6 +1386,8 @@ def countPairs(self, nums: List[int], k: int) -> int:
 
 # my solution
 # time: O(n); space: O(n)
+
+
 class Solution:
     def countPairs(self, nums: List[int], k: int) -> int:
         indices = {}
@@ -1321,6 +1420,8 @@ def firstPalindrome(self, words: List[str]) -> str:
 # my solution
 # time: worst O(n), avg O(nf) where f is frequency of palindromes in set
 # space: O(1)
+
+
 class Solution:
     def is_palindrome(self, word: str) -> bool:
         # Seems like this would be a bit faster than:  return word == word[::-1]
@@ -1394,10 +1495,12 @@ class Solution:
 
 # Discuss tab solution; I was doing more work than necessary by not just doing -1, -2 getter
 def maxProductDifference(self, nums: List[int]) -> int:
-        nums.sort()
-        return nums[-1]*nums[-2]-nums[0]*nums[1]
+    nums.sort()
+    return nums[-1]*nums[-2]-nums[0]*nums[1]
 
 # my solution; O(n log n) time?; O(1) space?
+
+
 class Solution:
     def maxProductDifference(self, nums: List[int]) -> int:
         nums.sort()
@@ -1426,6 +1529,8 @@ class Solution:
 # my solution; I did have an intuition to make a hashset, just didn't fully follow
 # through or think about how it would work
 # I believe my time complexity is O(n^2) because of the O(n) char in allowed lookup
+
+
 class Solution:
     def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
 
@@ -1456,6 +1561,8 @@ def cellsInRange(self, s: str) -> List[str]:
 # my solution; I did think about doing the "get integer value of letter" thing,
 # I just forgot the syntax; in retrospect I should have followed up on this
 # intuition
+
+
 class Solution:
     def cellsInRange(self, s: str) -> List[str]:
         row_min = int(s[1])
@@ -1485,6 +1592,8 @@ class Solution:
 # my solution
 # I did try to use all()! But I couldn't figure out the syntax well enough,
 # but I'm glad I at least had the intuition to try it
+
+
 class Solution:
     def countPoints(self, rings: str) -> int:
 
@@ -1500,9 +1609,9 @@ class Solution:
 
         count = 0
         for key in parsed_rings.keys():
-                rod = parsed_rings[key]
-                if 'R' in rod and 'G' in rod and 'B' in rod:
-                    count += 1
+            rod = parsed_rings[key]
+            if 'R' in rod and 'G' in rod and 'B' in rod:
+                count += 1
 
         return count
 
@@ -1515,10 +1624,11 @@ class Solution:
 
 class Solution:
     def minimumSum(self, num: int) -> int:
-        a,b,c,d=sorted(str(num))
+        a, b, c, d = sorted(str(num))
         return int(a+c) + int(b+d)
 
 # my solution:
+
 
 class Solution:
     # note: I deduced 1,3 and 3,1 pairs would not be needed by
@@ -1558,8 +1668,10 @@ class Solution:
 
             minimum = self.check_minimum(minimum, first, second)
             minimum = self.check_minimum(minimum, [first[1], first[0]], second)
-            minimum = self.check_minimum(minimum, [first[1], first[0]], [second[1], second[0]])
-            minimum = self.check_minimum(minimum, first, [second[1], second[0]])
+            minimum = self.check_minimum(
+                minimum, [first[1], first[0]], [second[1], second[0]])
+            minimum = self.check_minimum(
+                minimum, first, [second[1], second[0]])
 
         return minimum
 
@@ -1576,6 +1688,8 @@ class Solution:
 # browsing the discussions yielded (get it!?) this super clever yet understandable solution
 # time complexity is O(min(m,n)) -- exits at the first char pair mismatch
 # space complexity is O(1) since nothing is stored
+
+
 class Solution:
     def arrayStringsAreEqual(self, word1: List[str], word2: List[str]) -> bool:
         for c1, c2 in zip(self.generate(word1), self.generate(word2)):
@@ -1705,6 +1819,8 @@ class Solution:
 
 # clever solution I found in the discussions that skips needing to sort
 # by figuring out the point at which less-than-target numbers start
+
+
 class Solution:
     def targetIndices(self, nums, target):
         lt_count, eq_count = 0, 0
@@ -1724,13 +1840,15 @@ class Solution:
     def countKDifference(self, nums: List[int], k: int) -> int:
         count = 0
         for i in range(len(nums)):
-            for j in range (i + 1, len(nums)):
+            for j in range(i + 1, len(nums)):
                 if abs(nums[i] - nums[j]) == k:
                     count += 1
 
         return count
 
 # slick, fast, and easy to read solution I saw in the Discussions area:
+
+
 class Solution:
     def countKDifference(self, nums: List[int], k: int) -> int:
         d = {}
@@ -1761,7 +1879,6 @@ class Solution:
 
 # https://leetcode.com/problems/sorting-the-sentence/
 
-from operator import itemgetter
 
 class Solution:
     def sortSentence(self, s: str) -> str:
@@ -1799,7 +1916,7 @@ class Solution:
 class Solution:
     def xorOperation(self, n: int, start: int) -> int:
         if n == 1:
-           return start
+            return start
 
         nums = []
         output = None
@@ -1822,6 +1939,8 @@ class Solution:
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+
 class Solution:
 
     def __init__(self):
@@ -1840,6 +1959,7 @@ class Solution:
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/count-items-matching-a-rule/submissions/
 
+
 class Solution:
     def countMatches(self, items: List[List[str]], ruleKey: str, ruleValue: str) -> int:
 
@@ -1853,13 +1973,14 @@ class Solution:
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/split-a-string-in-balanced-strings/submissions/
 
+
 class Solution:
     def balancedStringSplit(self, s: str) -> int:
         subsets_count = 0
 
         buffer = ''
         for char in s:
-            buffer  += char
+            buffer += char
 
             if buffer.count('L') == buffer.count('R'):
                 subsets_count += 1
@@ -1868,6 +1989,7 @@ class Solution:
 
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/goal-parser-interpretation/submissions/
+
 
 class Solution:
     def interpret(self, command: str) -> str:
@@ -1889,6 +2011,7 @@ class Solution:
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/create-target-array-in-the-given-order/submissions/
 
+
 class Solution:
     def createTargetArray(self, nums: List[int], index: List[int]) -> List[int]:
         target = []
@@ -1902,6 +2025,7 @@ class Solution:
 
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/submissions/
+
 
 class Solution:
     def numberOfSteps(self, num: int) -> int:
@@ -1921,18 +2045,22 @@ class Solution:
 
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/decompress-run-length-encoded-list/submissions/
+
+
 class Solution:
     def decompressRLElist(self, nums: List[int]) -> List[int]:
         output = []
         for i in range(0, len(nums), 2):
             index_of_char = i + 1
             count_of_char = nums[i]
-            output = output + [nums[index_of_char] for _ in range(count_of_char)]
+            output = output + [nums[index_of_char]
+                               for _ in range(count_of_char)]
 
         return output
 
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/submissions/
+
 
 class Solution:
     def subtractProductAndSum(self, n: int) -> int:
@@ -1955,6 +2083,7 @@ class Solution:
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/decode-xored-array/submissions/
 
+
 class Solution:
     def decode(self, encoded: List[int], first: int) -> List[int]:
         output = [first]
@@ -1969,6 +2098,7 @@ class Solution:
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/build-array-from-permutation/submissions/
 
+
 class Solution:
     def buildArray(self, nums):
         output = []
@@ -1979,12 +2109,14 @@ class Solution:
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/concatenation-of-array/submissions/
 
+
 class Solution:
     def getConcatenation(self, nums):
         return nums * 2
 
 # -----------------------------------------------------------------------------
 # https://leetcode.com/problems/final-value-of-variable-after-performing-operations/submissions/
+
 
 class Solution:
     def finalValueAfterOperations(self, operations: List[str]) -> int:
