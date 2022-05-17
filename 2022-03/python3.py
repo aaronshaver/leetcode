@@ -49,6 +49,8 @@ class Solution:
 # and likely a storage O(1) in-place list rearranging
 # time: O(n)
 # space: O(n)
+
+
 class Solution:
     def sortArrayByParity(self, nums: List[int]) -> List[int]:
         sorted_nums = []
