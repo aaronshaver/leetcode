@@ -13,11 +13,19 @@
 # ---------------------------------------------------------------------------
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
 # url: https://leetcode.com/problems/merge-strings-alternately/?envType=study-plan-v2&envId=leetcode-75
 
 # discuss tab solution
-
+# near as I can tell, there's no way to improve the time or space complexity of
+# O(n)
+#
+# there was this "clever" one-liner in the Discussion tab (below); it's actually
+# not that bad in terms of understandability given it's so terse; a key to
+# understanding it is: The zip function stops pairing when the shortest input
+# iterable is exhausted.
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        return "".join(a + b for a, b in zip(word1, word2)) + word1[len(word2):] + word2[len(word1):]
 
 # my solution
 # I don't believe there is a way to get below O(n) with either time or space
