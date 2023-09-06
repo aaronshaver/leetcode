@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------------
 # url:
 
-# discuss tab solution
+# notes from LeetCode Solutions tab and/or ChatGPT
 
 
 # my solution
@@ -12,6 +12,28 @@
 
 # ---------------------------------------------------------------------------
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+# ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/?envType=study-plan-v2&envId=leetcode-75
+
+# notes from LeetCode Solutions tab and/or ChatGPT
+# someone on the site noticed you can get O(1) space complexity by modifying the list
+# after doing the comparison, e.g.:
+for idx, candy in enumerate(candies):
+    canHaveMaxCandies = (candy + extraCandies) >= maxNumCandies
+    candies[idx] = canHaveMaxCandies
+
+# my solution
+# time: O(n)
+# space: O(n)
+class Solution:
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        largest = max(candies)
+        has_greatest = []
+        for item in candies:
+            has_greatest.append(item + extraCandies >= largest)
+        return has_greatest
+# ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/greatest-common-divisor-of-strings/?envType=study-plan-v2&envId=leetcode-75
@@ -34,6 +56,7 @@ class Solution:
         return ""
 
 # my solution
+# I had to get a hint; went down a wrong rabbithole with .count()
 # time: O(n)?
 # space: O(m) where m is the shorter of the two strings??
 class Solution:
