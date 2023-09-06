@@ -45,8 +45,8 @@ class Solution:
             if size > len(str2) or size > len(str1):
                 return candidate
             chunk = str1[0:size]
-            if chunk * (len(str1) // len(chunk)) == str1 and \
-            chunk * (len(str2) // len(chunk)) == str2:
+            if chunk * (len(str1) // size) == str1 and \
+            chunk * (len(str2) // size) == str2:
                 candidate = chunk
         return candidate
 # ---------------------------------------------------------------------------
