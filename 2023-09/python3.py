@@ -17,8 +17,21 @@
 # url: https://leetcode.com/problems/can-place-flowers/?envType=study-plan-v2&envId=leetcode-75
 
 # notes from LeetCode Solutions tab and/or ChatGPT
-# I didn't particularly find any better solutions; ChatGPT hallucinated a shorter solution
-# and the leetcode solutions were no more readable than mine
+# solution from mulliganaceous on leetcode that's quite terse:
+class Solution(object):
+    def canPlaceFlowers(self, flowerbed, n):
+        count = 1
+        beds = 0
+        for bed in flowerbed:
+            if bed:
+                beds += (count - 1) // 2
+                count = 0
+            else:
+                count += 1
+
+        beds += count // 2
+
+        return beds >= n
 
 # my solution
 # time: O(n)
