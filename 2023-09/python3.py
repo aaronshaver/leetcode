@@ -14,6 +14,46 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/two-sum/
+
+# notes from LeetCode Solutions tab and/or ChatGPT
+# with GPT-4's hints, made code cleaner and now we don't loop through things
+# twice
+# time and space are still O(n) in worst case
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        table = {}
+        for i, num in enumerate(nums):
+            if table.get(num) == None:
+                table[num] = i
+            difference = target - num
+            if table.get(difference) != None:
+                if table[difference] != i:
+                    return [i,table[difference]]
+
+# my solution
+# time: O(n)
+# space: O(n) (worst-case scenario, every number is unique, requiring n slots)
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        table = {}
+        for i, num in enumerate(nums):
+            if not table.get(num):
+                table[num] = [i]
+            else:
+                table[num].append(i)
+
+        for key in table.keys():
+            difference = target - key
+            if table.get(difference):
+                if len(table[difference]) == 1:
+                    if table[difference][0] != table[key][0]:
+                        return [table[key][0], table[difference][0]]
+                else:
+                    return [table[difference][0], table[difference][1]]
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/can-place-flowers/?envType=study-plan-v2&envId=leetcode-75
 
 # notes from LeetCode Solutions tab and/or ChatGPT
