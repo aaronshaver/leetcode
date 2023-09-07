@@ -14,6 +14,51 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/can-place-flowers/?envType=study-plan-v2&envId=leetcode-75
+
+# notes from LeetCode Solutions tab and/or ChatGPT
+# I didn't particularly find any better solutions; ChatGPT hallucinated a shorter solution
+# and the leetcode solutions were no more readable than mine
+
+# my solution
+# time: O(n)
+# space: O(1)
+class Solution:
+    def getCapacity(self, capacity, counter):
+        if counter == 2:
+            return capacity + 1
+        else:
+            return capacity + ceil(counter / 2)
+
+    def canPlaceFlowers(self, flowerBed: List[int], n: int) -> bool:
+        capacity = 0
+        counter = 0
+        flowersSeen = 0
+
+        # special case of [0]
+        if len(flowerBed) == 1 and flowerBed[0] == 0:
+            return True
+
+        for i, plot in enumerate(flowerBed):
+            if not plot: # empty space
+                counter += 1
+            else:
+                flowersSeen += 1
+                if flowersSeen == 1:
+                    if counter != 1:
+                        capacity = self.getCapacity(capacity, counter)
+                elif counter != 0:
+                    capacity += ceil(counter / 2 - 1)
+                counter = 0
+
+        # end zeroes
+        if counter > 1:
+            capacity = self.getCapacity(capacity, counter)
+
+        return capacity >= n
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/?envType=study-plan-v2&envId=leetcode-75
 
 # notes from LeetCode Solutions tab and/or ChatGPT
