@@ -30,6 +30,19 @@ class Solution:
             if table.get(difference) != None:
                 if table[difference] != i:
                     return [i,table[difference]]
+# and here's a super clean solution from leetcode solutions tab:
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        numMap = {}
+        n = len(nums)
+
+        for i in range(n):
+            complement = target - nums[i]
+            if complement in numMap:
+                return [numMap[complement], i]
+            numMap[nums[i]] = i
+
+        return []  # No solution found
 
 # my solution
 # time: O(n)
