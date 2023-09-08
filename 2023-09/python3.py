@@ -2,16 +2,60 @@
 # ---------------------------------------------------------------------------
 # url:
 
-# notes from LeetCode Solutions tab and/or ChatGPT
+# (notes from LeetCode Solutions tab and/or ChatGPT)
 
 
-# my solution
+# (my solution)
 # time:
 # space:
 
 
 # ---------------------------------------------------------------------------
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+# ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/valid-parentheses/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+# GPT-4 suggested this slick solution where we have a map of closer to opener,
+# which simplifies the conditional
+# it also combines the conditionals for a one-liner conditional
+# and the in <string> method instead of my ["l", "i", "s", "t"] is clever
+class Solution:
+    def isValid(self, s: str) -> bool:
+        open_brackets = []
+        bracket_map = {')': '(', '}': '{', ']': '['}
+
+        for bracket in s:
+            if bracket in "({[":
+                open_brackets.append(bracket)
+            else:
+                if not open_brackets or open_brackets[-1] != bracket_map[bracket]:
+                    return False
+                open_brackets.pop()
+
+        return len(open_brackets) == 0
+
+# (my solution)
+# time: O(n)
+# space: O(n) -- worst is all open brackets
+class Solution:
+    def isValid(self, s: str) -> bool:
+        open_brackets = []
+        for bracket in s:
+            if bracket in ["(", "[", "{"]:
+                open_brackets.append(bracket)
+            else:
+                if not open_brackets: # close bracket with no opens available
+                    return False
+                if (bracket == ")" and open_brackets[-1] == "(") or \
+                (bracket == "]" and open_brackets[-1] == "[") or \
+                (bracket == "}" and open_brackets[-1] == "{"):
+                    open_brackets.pop()
+                else:
+                    return False
+        return len(open_brackets) == 0
+# ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/two-sum/
