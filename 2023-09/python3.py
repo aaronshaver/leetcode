@@ -17,7 +17,32 @@
 # url: https://leetcode.com/problems/merge-two-sorted-lists/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
+# this solution is functionally equivalent, but it greatly simplifies the code
+#
+# it uses the original lists, and it uses `current` as a pointer that can
+# bounce back and forth between the lists, taking the smaller (or equal) value
+#
+# to have something clean to return, it starts with a dummy empty ListNode, to
+# which we append new nodes, and cleverly return the dummy's .next instead of
+# dummy itself, essentially moving "forward" one step away from the dummy
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        current = dummy
 
+        while list1 and list2:
+            if list1.val <= list2.val:
+                current.next = list1
+                list1 = list1.next
+            else:
+                current.next = list2
+                list2 = list2.next
+
+            current = current.next
+
+        current.next = list1 or list2
+
+        return dummy.next
 
 # (my solution)
 # time: O(n)
