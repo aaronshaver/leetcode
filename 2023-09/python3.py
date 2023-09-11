@@ -27,33 +27,57 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        # deal with edge of cases of either list being None/null:
+        # deal with edge of cases of either or both lists being None/null:
         if not list1:
             return list2
         elif not list2:
             return list1
 
-        list1_current = list1
-        list2_current = list2
+        # deal with second list starting val > first list starting value:
+        if list2.val >= list1.val:
+            first = list1
+            second = list2
+            final_list = list1
+        else:
+            first = list2
+            second = list1
+            final_list = list2
 
-        while list2_current and list1_current:
-            print(list1)
-            print(list1_current.val)
-            print(list2_current.val)
+        while first and second:
+            print(first)
+            print(second)
             print()
-            if list2_current.val >= list1_current.val and list2_current.val <= list1_current.next.val:
-                # print(f"yes, {list2_current.val} is between {list1_current.val} and {list1_current.next.val}")
-                # create and insert new node into first list
-                new_node = ListNode(list2_current.val, list1_current.next)
-                list1_current.next = new_node # actually inserts
-                list1_current = new_node # move forward in first list
-                list2_current = list2_current.next # move forward in second list
-            elif list2_current.val > list1_current.next.val:
-                list1_current = list1_current.next
-                # list2_current = list2_current.next
-        return list1
+            if second.val >= first.val:
+                print("0")
+                if first.next:
+                    print("1")
+                    if second.val <= first.next.val:
+                        print("2")
+                        # create and insert new node into first list
+                        new_node = ListNode(second.val, first.next) # point to original
+                        first.next = new_node # pointer from original list to new node
+                        first = new_node # move forward in first list
+                        second = second.next # move forward in second list
+                    else:
+                        first = first.next
+                else:
+                    print("3")
+                    new_node = ListNode(second.val, first.next) # point to original
+                    first.next = new_node # pointer from original list to new node
+                    first = new_node # move forward in first list
+                    second = second.next # move forward in second list
+                    print(final_list)
+            else:
+                print("4")
+                first = first.next
+        return final_list
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
