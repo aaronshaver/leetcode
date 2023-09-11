@@ -22,19 +22,14 @@
 # (my solution)
 # time: O(n)
 # space: O(1) because in-place modification
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
-# Definition for singly-linked list.
+# Definition for singly-linked list
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        # deal with edge of cases of either or both lists being None/null:
+        # deal with edge of case of either or both lists being None/null:
         if not list1:
             return list2
         elif not list2:
@@ -51,32 +46,20 @@ class Solution:
             final_list = list2
 
         while first and second:
-            print(first)
-            print(second)
-            print()
-            if second.val >= first.val:
-                print("0")
-                if first.next:
-                    print("1")
-                    if second.val <= first.next.val:
-                        print("2")
-                        # create and insert new node into first list
-                        new_node = ListNode(second.val, first.next) # point to original
-                        first.next = new_node # pointer from original list to new node
-                        first = new_node # move forward in first list
-                        second = second.next # move forward in second list
-                    else:
-                        first = first.next
-                else:
-                    print("3")
-                    new_node = ListNode(second.val, first.next) # point to original
-                    first.next = new_node # pointer from original list to new node
-                    first = new_node # move forward in first list
-                    second = second.next # move forward in second list
-                    print(final_list)
-            else:
-                print("4")
+            # second val is still too large to fit before next node, so move
+            # forward in first list
+            if first.next and second.val > first.next.val:
                 first = first.next
+                continue
+
+            # point new node's next to next node in original list
+            new_node = ListNode(second.val, first.next)
+            # update original list next to be this new node
+            first.next = new_node
+            # move forward in both lists
+            first = new_node
+            second = second.next
+
         return final_list
 # ---------------------------------------------------------------------------
 
