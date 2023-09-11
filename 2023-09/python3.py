@@ -14,6 +14,49 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/merge-two-sorted-lists/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+
+
+# (my solution)
+# time: O(n)
+# space: O(1) because in-place modification
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        # deal with edge of cases of either list being None/null:
+        if not list1:
+            return list2
+        elif not list2:
+            return list1
+
+        list1_current = list1
+        list2_current = list2
+
+        while list2_current and list1_current:
+            print(list1)
+            print(list1_current.val)
+            print(list2_current.val)
+            print()
+            if list2_current.val >= list1_current.val and list2_current.val <= list1_current.next.val:
+                # print(f"yes, {list2_current.val} is between {list1_current.val} and {list1_current.next.val}")
+                # create and insert new node into first list
+                new_node = ListNode(list2_current.val, list1_current.next)
+                list1_current.next = new_node # actually inserts
+                list1_current = new_node # move forward in first list
+                list2_current = list2_current.next # move forward in second list
+            elif list2_current.val > list1_current.next.val:
+                list1_current = list1_current.next
+                # list2_current = list2_current.next
+        return list1
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/valid-parentheses/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
