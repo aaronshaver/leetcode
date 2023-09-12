@@ -14,6 +14,42 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/submissions/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+# GPT-4 suggested a clever way of simplifying the code while still maintaining
+# readability:
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        lowest = prices[0]
+        max_profit = 0
+
+        for item in prices[1:]:
+            lowest = min(lowest, item)
+            max_profit = max(max_profit, item - lowest)
+
+        return max_profit
+
+# (my solution)
+# time: O(n)
+# space: O(1)
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        lowest = prices[0]
+        max_profit = 0
+
+        for item in prices[1:]:
+            if item < lowest:
+                lowest = item
+            elif item > lowest:
+                new_max_profit = item - lowest
+                if new_max_profit > max_profit:
+                    max_profit = new_max_profit
+
+        return max_profit
+# ---------------------------------------------------------------------------
+#
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/merge-two-sorted-lists/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
