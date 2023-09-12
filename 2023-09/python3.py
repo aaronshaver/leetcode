@@ -25,6 +25,11 @@
 # to have something clean to return, it starts with a dummy empty ListNode, to
 # which we append new nodes, and cleverly return the dummy's .next instead of
 # dummy itself, essentially moving "forward" one step away from the dummy
+#
+# desipte us creating a new ListNode(), there's effectively zero extra space
+# being used and space complexity is still O(1); this is because dummy/curent
+# are merely referring to existing nodes, not creating any more additional nodes
+# (aside from the trivial initial dummy node)
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode()
