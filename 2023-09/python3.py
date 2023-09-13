@@ -14,6 +14,30 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/valid-palindrome/description/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+# here's a way to do O(n/2) for the reverse-checking, though it's considered
+# O(n) as constant factors are usually ommited
+#
+# but it was interesting to find, and I went down a rabbithole of refreshing my
+# memory on two's complement / bitwise operators
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        s = [c.lower() for c in s if c.isalnum()]
+        return all (s[i] == s[~i] for i in range(len(s)//2))
+
+# (my solution)
+# time: O(n)
+# space: O(n)
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        lowercase = s.lower()
+        stripped = ''.join(filter(str.isalnum, lowercase))
+        return stripped == ''.join(reversed(stripped))
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/submissions/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
