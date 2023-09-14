@@ -24,10 +24,16 @@
 # worst case, this could be O(n) for a skewed tree and O(log n) for a balanced
 # tree."
 #
+# "Space complexity is not just about the new variables you explicitly allocate;
+# it also includes the memory taken up by the function call stack, especially
+# for recursive functions. Each recursive call adds a new frame to the call
+# stack, and these frames take up memory. So when you're analyzing space
+# complexity, you need to consider both the variables you allocate and the call
+# stack."
 
 # (my solution)
 # time: O(n)
-# space: O(1)
+# space: O(1) [this is wrong; see above]
 # Proud of myself: I got this one without any hints, just using hazy memory of
 # when I'd done similar puzzles in the past!
 #
