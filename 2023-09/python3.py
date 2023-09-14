@@ -14,6 +14,41 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/invert-binary-tree/description/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+# I was wrong about the space complexity:
+#
+# "the space complexity is not O(1). The space complexity is actually O(h),
+# where h is the height of the tree, due to the recursive call stack. In the
+# worst case, this could be O(n) for a skewed tree and O(log n) for a balanced
+# tree."
+#
+
+# (my solution)
+# time: O(n)
+# space: O(1)
+# Proud of myself: I got this one without any hints, just using hazy memory of
+# when I'd done similar puzzles in the past!
+#
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root:
+            return None
+        root.left, root.right = root.right, root.left
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        return root
+
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/valid-palindrome/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
