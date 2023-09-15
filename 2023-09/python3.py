@@ -14,6 +14,62 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/valid-anagram/description/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+# here's an option that uses an imported library:
+from collections import Counter
+
+def isAnagram(self, s: str, t: str) -> bool:
+    return Counter(s) == Counter(t)
+
+# here's a non-import solution that uses only a single dictionary and some slick
+# ideas like a default value for non-existent keys:
+def isAnagram(self, s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+
+    counts = {}
+
+    for char in s:
+        counts[char] = counts.get(char, 0) + 1 # get returns 0 if not exists
+
+    for char in t:
+        if char not in counts:
+            return False
+        counts[char] -= 1
+        if counts[char] < 0:
+            return False
+
+    return True
+
+# (my solution)
+# time: O(n)
+# space: O(n) worst case when each char is unique, e.g. "abcdefg"
+class Solution:
+    def map_counts(self, string):
+        counts_map = {}
+        for char in string:
+            if char not in counts_map:
+                counts_map[char] = 1
+            else:
+                counts_map[char] += 1
+        return counts_map
+
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+
+        s_counts = self.map_counts(s)
+        t_counts = self.map_counts(t)
+
+        for key, value in s_counts.items():
+            if key not in t_counts or value != t_counts[key]:
+                return False
+        return True
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/invert-binary-tree/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
