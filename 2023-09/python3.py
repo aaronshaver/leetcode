@@ -17,7 +17,27 @@
 # url: https://leetcode.com/problems/binary-search/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
-
+# this solution is able to remove my extraneous guards/catches and simplifies
+# the code; it calculates the midpoint directly instead of difference between
+# upper and lower plus lower; and it moves the pointer around more effectively
+# by setting upperbound to below pointer if candidate is too high and vice versa
+# for candidate too lower, set lowerbound to just above pointer
+#
+# time and space are still the same, but this has fewer special cases
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        lowerbound = 0
+        upperbound = len(nums) - 1
+        while lowerbound <= upperbound:
+            pointer = (upperbound + lowerbound) // 2
+            candidate = nums[pointer]
+            if candidate == target:
+                return pointer
+            elif candidate > target:
+                upperbound = pointer - 1
+            else:
+                lowerbound = pointer + 1
+        return -1
 
 # (my solution)
 # time: O(log n)
