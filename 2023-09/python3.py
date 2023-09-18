@@ -14,6 +14,34 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/binary-search/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+
+
+# (my solution)
+# time: O(log n)
+# space: O(1)
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        lowerbound = 0
+        upperbound = len(nums)
+        while True:
+            pointer = (upperbound - lowerbound) // 2 + lowerbound
+            if pointer >= len(nums) or pointer < 0:
+                return -1
+            candidate = nums[pointer]
+            if candidate == target:
+                return pointer
+            if pointer in [lowerbound, upperbound]:
+                return -1
+            elif candidate > target:
+                upperbound = pointer
+            else:
+                lowerbound = pointer
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/valid-anagram/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
