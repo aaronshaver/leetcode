@@ -23,11 +23,11 @@
 # time:
 # space:
 class Solution:
-    def should_paint(self, source_color, target_color):
-        return source_color != target_color
+    def should_paint(self, start_color, actual_color, target_color):
+        return start_color == actual_color and actual_color != target_color
 
     # return up to four valid neighbors within contraints of image size
-    def get_neighbors(self, width, height, x, y):
+    def get_neighbors(self, image, start_color, width, height, x, y):
         neighbors = []
         if x - 1 >= 0:
             neighbors.append((x - 1, y))
@@ -44,19 +44,20 @@ class Solution:
         candidates = [(sr, sc)]
         height = len(image)
         width = len(image[0])
+        start_color = image[sr][sc]
 
         while candidates:
             # check to see if current pixels under evaluation need to be painted
             new_should_paint = set()
             for candidate in candidates:
-                if self.should_paint(image[candidate[1]][candidate[0]], color):
+                if self.should_paint(start_color, image[candidate[1]][candidate[0]], color):
                     new_should_paint.add(candidate)
             needs_painting.update(new_should_paint)
 
             # find neighbors of all current pixels under evaluation
             neighbors = set()
             for candidate in candidates:
-                new_neighbors = self.get_neighbors(width, height, candidate[0], candidate[1])
+                new_neighbors = self.get_neighbors(image, start_color, width, height, candidate[0], candidate[1])
                 neighbors.update(new_neighbors)
 
             # create a new list of candidate pixels for later evaluation when the loop repeats
