@@ -38,10 +38,6 @@ class Solution:
         return neighbors
 
     def floodFill(self, image: List[List[int]], sr: int, sc: int, target_color: int) -> List[List[int]]:
-        # short circuit basic negative case of first pixel already being the target color
-        if image[sr][sc] == target_color:
-            return image
-
         needs_painting = set()  # for all pixels that need to change
         candidates = [(sr, sc)]
         height = len(image)
