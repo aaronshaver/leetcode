@@ -24,8 +24,9 @@
 # "In computational geometry and algorithms dealing with matrices or grids,
 # O(m * n) is often preferred for clarity."
 #
-# here's GPT-4's solution, which cleans up a lot of the verbosity in mine by
-# eliminating extraneous temp vars and doing fewer checks in loops
+# here's GPT-4's streamlined version of my solution, which cleans up a lot of
+# the verbosity in mine by eliminating extraneous temp vars and doing fewer
+# checks in loops
 from typing import List
 
 class Solution:
@@ -57,6 +58,32 @@ class Solution:
                 if image[new_y][new_x] == start_color:
                     needs_painting.add((new_y, new_x))
 
+        return image
+# and here's a recursive solution using depth-first search; time and space
+# complexity remain the same, since there's a call stack involved in the
+# recursion
+from typing import List
+
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, target_color: int) -> List[List[int]]:
+        start_color = image[sr][sc]
+        if start_color == target_color:
+            return image
+
+        def dfs(x, y):
+            if x < 0 or x >= len(image[0]) or y < 0 or y >= len(image):
+                return
+            if image[y][x] != start_color:
+                return
+
+            image[y][x] = target_color
+
+            dfs(x+1, y)
+            dfs(x-1, y)
+            dfs(x, y+1)
+            dfs(x, y-1)
+
+        dfs(sc, sr)
         return image
 
 # (my solution)
