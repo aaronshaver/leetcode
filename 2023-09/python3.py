@@ -17,12 +17,54 @@
 # url: https://leetcode.com/problems/flood-fill/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
+#
+# I was wrong about the time complexity. It's basically O(n), although it's
+# more precisely described as O(m * n) where m and n are the dimensions of the
+# pixel matrix:
+# "In computational geometry and algorithms dealing with matrices or grids,
+# O(m * n) is often preferred for clarity."
+#
+# here's GPT-4's solution, which cleans up a lot of the verbosity in mine by
+# eliminating extraneous temp vars and doing fewer checks in loops
+from typing import List
 
+class Solution:
+    def get_neighbors(self, x, y, width, height):
+        neighbors = []
+        if x - 1 >= 0:
+            neighbors.append((y, x - 1))
+        if x + 1 < width:
+            neighbors.append((y, x + 1))
+        if y - 1 >= 0:
+            neighbors.append((y - 1, x))
+        if y + 1 < height:
+            neighbors.append((y + 1, x))
+        return neighbors
+
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, target_color: int) -> List[List[int]]:
+        height, width = len(image), len(image[0])
+        start_color = image[sr][sc]
+        if start_color == target_color:
+            return image
+
+        needs_painting = {(sr, sc)}
+
+        while needs_painting:
+            y, x = needs_painting.pop()
+            image[y][x] = target_color
+
+            for new_y, new_x in self.get_neighbors(x, y, width, height):
+                if image[new_y][new_x] == start_color:
+                    needs_painting.add((new_y, new_x))
+
+        return image
 
 # (my solution)
 # time: I think it might be O(n log n)? there is a bit of overlap when
-# get_neighbors is performed
+# get_neighbors is performed [edit: was wrong about that]
+# corrected version: O(m * n)
 # space: O(n) worst case when every pixel needs to be painted
+# corrected version: O(m * n)
 class Solution:
     # return up to four valid neighbors within contraints of image size and paint color
     def get_neighbors(self, image, start_color, target_color, width, height, x, y):
