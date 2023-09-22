@@ -20,22 +20,22 @@
 
 
 # (my solution)
-# time:
-# space:
+# time: I think it might be O(n log n)? there is a bit of overlap when
+# get_neighbors is performed
+# space: O(n) worst case when every pixel needs to be painted
 class Solution:
     def should_paint(self, start_color, actual_color, target_color):
-        print(f"should paint: {start_color}, {actual_color}, {target_color}")
         return start_color == actual_color and actual_color != target_color
 
     # return up to four valid neighbors within contraints of image size and paint color
     def get_neighbors(self, image, start_color, target_color, width, height, x, y):
         neighbors = []
         if x - 1 >= 0 and image[y][x - 1] == start_color and image[y][x - 1] != target_color:
-            neighbors.append((x - 1, y))
+            neighbors.append((y, x - 1))
         if x + 1 < width and image[y][x + 1] == start_color and image[y][x + 1] != target_color:
-            neighbors.append((x + 1, y))
+            neighbors.append((y, x + 1))
         if y - 1 >= 0 and image[y - 1][x] == start_color and image[y - 1][x] != target_color:
-            neighbors.append((x, y - 1))
+            neighbors.append((y - 1, x))
         if y + 1 < height and image[y + 1][x] == start_color and image[y + 1][x] != target_color:
             neighbors.append((y + 1, x))
         return neighbors
@@ -49,24 +49,18 @@ class Solution:
         candidates = [(sr, sc)]
         height = len(image)
         width = len(image[0])
-        print(f"height, width: {height}, {width}")
         START_COLOR = image[sr][sc]
-        print(f"start color: {START_COLOR}")
 
         while candidates:
-            print(f"starting while loop candidates: {candidates}")
             # check to see if current pixels under evaluation need to be painted
             new_should_paint = set()
             for candidate in candidates:
-                print(f"what's the candidate? {candidate}")
-                print(f"image color at candidate location: {image[candidate[0]][candidate[1]]}")
                 if self.should_paint(START_COLOR, image[candidate[0]][candidate[1]], color):
                     new_should_paint.add(candidate)
 
             if not new_should_paint:  # if we didn't find any new pixels, stop
                 break
             needs_painting.update(new_should_paint)
-            print(f"needs_painting {needs_painting}")
 
             # find neighbors of all current pixels under evaluation
             neighbors = set()
@@ -81,21 +75,17 @@ class Solution:
                     candidate[0]
                 )
                 neighbors.update(new_neighbors)
-            print(f"neighbors {neighbors}")
 
-            # create a new list of candidate pixels for later evaluation
-            # when the loop repeats; skip any that shouldn't be painted
+            # create a new list of candidate pixels for later evaluation when
+            # the loop repeats
             candidates = []
             for neighbor in neighbors:
-                if neighbor not in needs_painting:
+                if neighbor not in needs_painting:  # skip pixels we know about
                     candidates.append(neighbor)
-            print(f"(after loop)candidates {candidates}")
-            print("----------------------------------------")
 
         # actually paint the pixels
         for item in needs_painting:
             image[item[0]][item[1]] = color
-
         return image
 # ---------------------------------------------------------------------------
 
