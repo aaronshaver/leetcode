@@ -24,9 +24,6 @@
 # get_neighbors is performed
 # space: O(n) worst case when every pixel needs to be painted
 class Solution:
-    def should_paint(self, start_color, actual_color, target_color):
-        return start_color == actual_color and actual_color != target_color
-
     # return up to four valid neighbors within contraints of image size and paint color
     def get_neighbors(self, image, start_color, target_color, width, height, x, y):
         neighbors = []
@@ -40,9 +37,9 @@ class Solution:
             neighbors.append((y + 1, x))
         return neighbors
 
-    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, target_color: int) -> List[List[int]]:
         # short circuit basic negative case of first pixel already being the target color
-        if image[sr][sc] == color:
+        if image[sr][sc] == target_color:
             return image
 
         needs_painting = set()  # for all pixels that need to change
@@ -55,20 +52,21 @@ class Solution:
             # check to see if current pixels under evaluation need to be painted
             new_should_paint = set()
             for candidate in candidates:
-                if self.should_paint(START_COLOR, image[candidate[0]][candidate[1]], color):
+                actual_color = image[candidate[0]][candidate[1]]
+                if actual_color == START_COLOR and actual_color != target_color:
                     new_should_paint.add(candidate)
 
-            if not new_should_paint:  # if we didn't find any new pixels, stop
+            if not new_should_paint:  # if no valid new pixels, stop
                 break
             needs_painting.update(new_should_paint)
 
-            # find neighbors of all current pixels under evaluation
+            # find valid neighbors of all current pixels under evaluation
             neighbors = set()
             for candidate in candidates:
                 new_neighbors = self.get_neighbors(
                     image,
                     START_COLOR,
-                    color,
+                    target_color,
                     width,
                     height,
                     candidate[1],
@@ -85,7 +83,7 @@ class Solution:
 
         # actually paint the pixels
         for item in needs_painting:
-            image[item[0]][item[1]] = color
+            image[item[0]][item[1]] = target_color
         return image
 # ---------------------------------------------------------------------------
 
