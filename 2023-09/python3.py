@@ -14,6 +14,65 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/flood-fill/description/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+
+
+# (my solution)
+# time:
+# space:
+class Solution:
+    def should_paint(self, source_color, target_color):
+        return source_color != target_color
+
+    # return up to four valid neighbors within contraints of image size
+    def get_neighbors(self, width, height, x, y):
+        neighbors = []
+        if x - 1 >= 0:
+            neighbors.append((x - 1, y))
+        if x + 1 < width:
+            neighbors.append((x + 1, y))
+        if y - 1 >= 0:
+            neighbors.append((x, y - 1))
+        if y + 1 < height:
+            neighbors.append((x, y + 1))
+        return neighbors
+
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        needs_painting = set()
+        candidates = [(sr, sc)]
+        height = len(image)
+        width = len(image[0])
+
+        while candidates:
+            # check to see if current pixels under evaluation need to be painted
+            new_should_paint = set()
+            for candidate in candidates:
+                if self.should_paint(image[candidate[1]][candidate[0]], color):
+                    new_should_paint.add(candidate)
+            needs_painting.update(new_should_paint)
+
+            # find neighbors of all current pixels under evaluation
+            neighbors = set()
+            for candidate in candidates:
+                new_neighbors = self.get_neighbors(width, height, candidate[0], candidate[1])
+                neighbors.update(new_neighbors)
+
+            # create a new list of candidate pixels for later evaluation when the loop repeats
+            candidates = []
+            for neighbor in neighbors:
+                if neighbor not in needs_painting:
+                    candidates.append(neighbor)
+
+        # actually paint the pixels
+        for item in needs_painting:
+            image[item[1]][item[0]] = color
+
+        return image
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/binary-search/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
