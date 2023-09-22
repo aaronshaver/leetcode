@@ -24,19 +24,20 @@
 # space:
 class Solution:
     def should_paint(self, start_color, actual_color, target_color):
+        print(f"should paint: {start_color}, {actual_color}, {target_color}")
         return start_color == actual_color and actual_color != target_color
 
-    # return up to four valid neighbors within contraints of image size
-    def get_neighbors(self, image, start_color, width, height, x, y):
+    # return up to four valid neighbors within contraints of image size and paint color
+    def get_neighbors(self, image, start_color, target_color, width, height, x, y):
         neighbors = []
-        if x - 1 >= 0:
+        if x - 1 >= 0 and image[y][x - 1] == start_color and image[y][x - 1] != target_color:
             neighbors.append((x - 1, y))
-        if x + 1 < width:
+        if x + 1 < width and image[y][x + 1] == start_color and image[y][x + 1] != target_color:
             neighbors.append((x + 1, y))
-        if y - 1 >= 0:
+        if y - 1 >= 0 and image[y - 1][x] == start_color and image[y - 1][x] != target_color:
             neighbors.append((x, y - 1))
-        if y + 1 < height:
-            neighbors.append((x, y + 1))
+        if y + 1 < height and image[y + 1][x] == start_color and image[y + 1][x] != target_color:
+            neighbors.append((y + 1, x))
         return neighbors
 
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
@@ -44,35 +45,56 @@ class Solution:
         if image[sr][sc] == color:
             return image
 
-        needs_painting = set()
+        needs_painting = set()  # for all pixels that need to change
         candidates = [(sr, sc)]
         height = len(image)
         width = len(image[0])
-        start_color = image[sr][sc]
+        print(f"height, width: {height}, {width}")
+        START_COLOR = image[sr][sc]
+        print(f"start color: {START_COLOR}")
 
         while candidates:
+            print(f"starting while loop candidates: {candidates}")
             # check to see if current pixels under evaluation need to be painted
             new_should_paint = set()
             for candidate in candidates:
-                if self.should_paint(start_color, image[candidate[1]][candidate[0]], color):
+                print(f"what's the candidate? {candidate}")
+                print(f"image color at candidate location: {image[candidate[0]][candidate[1]]}")
+                if self.should_paint(START_COLOR, image[candidate[0]][candidate[1]], color):
                     new_should_paint.add(candidate)
+
+            if not new_should_paint:  # if we didn't find any new pixels, stop
+                break
             needs_painting.update(new_should_paint)
+            print(f"needs_painting {needs_painting}")
 
             # find neighbors of all current pixels under evaluation
             neighbors = set()
             for candidate in candidates:
-                new_neighbors = self.get_neighbors(image, start_color, width, height, candidate[0], candidate[1])
+                new_neighbors = self.get_neighbors(
+                    image,
+                    START_COLOR,
+                    color,
+                    width,
+                    height,
+                    candidate[1],
+                    candidate[0]
+                )
                 neighbors.update(new_neighbors)
+            print(f"neighbors {neighbors}")
 
-            # create a new list of candidate pixels for later evaluation when the loop repeats
+            # create a new list of candidate pixels for later evaluation
+            # when the loop repeats; skip any that shouldn't be painted
             candidates = []
             for neighbor in neighbors:
                 if neighbor not in needs_painting:
                     candidates.append(neighbor)
+            print(f"(after loop)candidates {candidates}")
+            print("----------------------------------------")
 
         # actually paint the pixels
         for item in needs_painting:
-            image[item[1]][item[0]] = color
+            image[item[0]][item[1]] = color
 
         return image
 # ---------------------------------------------------------------------------
