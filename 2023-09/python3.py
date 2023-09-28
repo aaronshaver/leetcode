@@ -14,6 +14,97 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+# GPT-4's solution, which is both shorter and more elegant: "if p and q are
+# smaller than the current node value, search left (which is guaranteed to be
+# smaller vals) and if p and q are larger, search right/larger section of tree"
+class Solution:
+    def lowestCommonAncestor(self, root, p, q):
+        if not root:
+            return None
+        if p.val < root.val and q.val < root.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        elif p.val > root.val and q.val > root.val:
+            return self.lowestCommonAncestor(root.right, p, q)
+        else:
+            return root
+
+
+
+# (my solution; second, successful attempt after getting a couple hints)
+# the key to the puzzle is that the LCA in a BST will always been greater than
+# or equal to the smaller of the two node values, and smaller than or equal to
+# the larger of the two node values
+# time:
+# space:
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def lowestCommonAncestor(self, root, p, q):
+        if not root or root.val is None:  # val of root could be 0 and thus falsey, so check for null instead
+            return
+        if root.val >= min(p.val, q.val) and root.val <= max(p.val, q.val):
+            return root
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        if left is not None:
+            return left
+        if right is not None:
+            return right
+
+# (my solution; first, failing attempt)
+# time:
+# space:
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def __init__(self):
+        self.sequences = []
+        self.nodes = {}
+
+    def lowestCommonAncestorCrawler(self, root, p, q, accumulator):
+        if root and root.val:
+            accumulator += [root.val]
+            self.nodes[root.val] = root
+        else:
+            return
+        self.sequences.append(accumulator)
+        self.lowestCommonAncestorCrawler(root.left, p, q, accumulator)
+        self.lowestCommonAncestorCrawler(root.right, p, q, accumulator)
+
+    def lowestCommonAncestor(self, root, p, q):
+        self.lowestCommonAncestorCrawler(root, p, q, [])
+        print(self.sequences)
+        print(self.nodes)
+        for sequence in self.sequences:
+            if p.val in sequence:
+                p_index = sequence.index(p.val)
+            else:
+                continue
+            if q.val in sequence:
+                q_index = sequence.index(q.val)
+            else:
+                continue
+            smallest_index = min(p_index, q_index)
+            if smallest_index > 0:
+                return self.nodes[sequence[smallest_index - 1]]
+            if abs(p_index - q_index) == 1:
+                value = sequence[smallest_index]
+                return p if p.val == value else q
+
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/flood-fill/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
