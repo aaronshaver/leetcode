@@ -20,6 +20,13 @@
 # GPT-4's solution, which is both shorter and more elegant: "if p and q are
 # smaller than the current node value, search left (which is guaranteed to be
 # smaller vals) and if p and q are larger, search right/larger section of tree"
+#
+# the time complexity here is better, because it achieves O(h) -- which is
+# O(log n) in a balanced tree, but as bad as O(n) on a skewed tree (e.g. a
+# straight line)
+# It's able to do this by skipping half the tree: going to the smaller/larger
+# child
+# My code below was always doing all branches
 class Solution:
     def lowestCommonAncestor(self, root, p, q):
         if not root:
@@ -31,15 +38,26 @@ class Solution:
         else:
             return root
 
-
-
 # (my solution; second, successful attempt after getting a couple hints)
+#
 # the key to the puzzle is that the LCA in a BST will always been greater than
 # or equal to the smaller of the two node values, and smaller than or equal to
 # the larger of the two node values
-# time:
-# space:
+#
+# my solution still isn't great, though. it isn't taking advantage of the BST
+# properties. with GPT's solution above, on a balanced tree, it's able to
+# eliminate half of the remaining tree at each step
+#
+# time: O(log n)? I think the properties of the search tree will mean it should
+# avoid O(n)
+# EDIT: I was wrong. Time complexity is O(n) in the worst case for THIS code.
+# but my intuition was right in that in better code (above), it is indeed
+# O(log n) AKA O(h)
+#
+# space: O(1) because only references to nodes, not creating anything
 # Definition for a binary tree node.
+# EDIT: I was wrong. Space complexity is O(h) where h is the height of the tree
+# to account for recursion stack depth
 # class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
