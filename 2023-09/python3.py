@@ -20,8 +20,10 @@
 
 
 # (my solution)
-# time:
-# space:
+# it's a mess, but it does work
+#
+# time: O(n)
+# space: O(1)
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -29,9 +31,34 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    def get_height(self, root, stats=(0, True)):
+        height = stats[0]
+        is_balanced = stats[1]
+        if root is None:
+            return (height, True)
+        if not is_balanced:
+            return(height, False)
+        left_height = 0
+        right_height = 0
+        left_balanced = True
+        right_balanced = True
+        if root.left:
+            left_height, left_balanced = self.get_height(root.left, (height, is_balanced))
+        if root.right:
+            right_height, right_balanced = self.get_height(root.right, (height, is_balanced))
+        if not left_balanced or not right_balanced or abs(left_height - right_height) > 1:
+            return (max(left_height, right_height), False)
+        is_balanced = abs(left_height - right_height) <= 1 and left_balanced and right_balanced
+        return (max(left_height, right_height) + 1, is_balanced)
+
     def isBalanced(self, root):
-
-
+        if not root:
+            return True
+        if not root.left and not root.right:
+            return True
+        left, left_balanced = self.get_height(root.left)
+        right, right_balanced = self.get_height(root.right)
+        return left_balanced and right_balanced and abs(left - right) <= 1
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
