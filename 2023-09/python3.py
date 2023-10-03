@@ -17,13 +17,25 @@
 # url: https://leetcode.com/problems/balanced-binary-tree/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
-
+# a solution from LeetCode; it's short and clever, however, I feel it sacrifices
+# readability: it's using an integer as both the height and whether a subtree is
+# balanced, so it requires special knowledge that -1 means an unbalanced subtree
+class Solution(object):
+    def isBalanced(self, root):
+        return (self.Height(root) >= 0)
+    def Height(self, root):
+        if root is None:  return 0
+        leftheight, rightheight = self.Height(root.left), self.Height(root.right)
+        if leftheight < 0 or rightheight < 0 or abs(leftheight - rightheight) > 1:  return -1
+        return max(leftheight, rightheight) + 1
 
 # (my solution)
 # it's a mess, but it does work
 #
 # time: O(n)
 # space: O(1)
+# EDIT: I was wrong; it's O(n) for a skewed tree, O(log n) AKA O(h) for a
+# balanced tree
 #
 # Definition for a binary tree node.
 # class TreeNode:
@@ -35,8 +47,9 @@ class Solution:
     def get_height(self, root, stats=(0, True)):
         height = stats[0]
         is_balanced = stats[1]
+        # NOTE: you can instead do a, b = tuple (tuple unpacking)
         if root is None:  # no children; cannot be unbalanced from here on out
-            return (height, True)
+            return (0, True)
         left_height = 0
         right_height = 0
         left_balanced = True
@@ -45,18 +58,19 @@ class Solution:
             left_height, left_balanced = self.get_height(root.left, (height, is_balanced))
         if root.right:
             right_height, right_balanced = self.get_height(root.right, (height, is_balanced))
-        # left or right subtrees are unbalanced OR the heights of left and right are unbalanced
+        # left or right trees unbalanced OR heights of left and right are unbalanced
         if not left_balanced or not right_balanced or abs(left_height - right_height) > 1:
             return (0, False)
         # add 1 to account for parent node height contribution
         return (max(left_height, right_height) + 1, True)
 
     def isBalanced(self, root):
-        if not root or (not root.left and not root.right):  # empty tree case and single node case
+        # empty tree case and single node case
+        if not root or (not root.left and not root.right):
             return True
-        left, left_balanced = self.get_height(root.left)
-        right, right_balanced = self.get_height(root.right)
-        return left_balanced and right_balanced and abs(left - right) <= 1
+        left_height, left_balanced = self.get_height(root.left)
+        right_height, right_balanced = self.get_height(root.right)
+        return left_balanced and right_balanced and abs(left_height - right_height) <= 1
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
