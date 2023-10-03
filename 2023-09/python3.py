@@ -24,6 +24,7 @@
 #
 # time: O(n)
 # space: O(1)
+#
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -34,10 +35,8 @@ class Solution:
     def get_height(self, root, stats=(0, True)):
         height = stats[0]
         is_balanced = stats[1]
-        if root is None:
+        if root is None:  # no children; cannot be unbalanced from here on out
             return (height, True)
-        if not is_balanced:
-            return(height, False)
         left_height = 0
         right_height = 0
         left_balanced = True
@@ -46,15 +45,14 @@ class Solution:
             left_height, left_balanced = self.get_height(root.left, (height, is_balanced))
         if root.right:
             right_height, right_balanced = self.get_height(root.right, (height, is_balanced))
+        # left or right subtrees are unbalanced OR the heights of left and right are unbalanced
         if not left_balanced or not right_balanced or abs(left_height - right_height) > 1:
-            return (max(left_height, right_height), False)
-        is_balanced = abs(left_height - right_height) <= 1 and left_balanced and right_balanced
-        return (max(left_height, right_height) + 1, is_balanced)
+            return (0, False)
+        # add 1 to account for parent node height contribution
+        return (max(left_height, right_height) + 1, True)
 
     def isBalanced(self, root):
-        if not root:
-            return True
-        if not root.left and not root.right:
+        if not root or (not root.left and not root.right):  # empty tree case and single node case
             return True
         left, left_balanced = self.get_height(root.left)
         right, right_balanced = self.get_height(root.right)
