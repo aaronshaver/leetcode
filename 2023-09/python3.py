@@ -14,6 +14,76 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/linked-list-cycle/description/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+#
+# ideal solution with space O(1) using Tortoise and the Hare (or Floyd's Cycle
+# Detection Algorithm)
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if not head or not head.next:
+            return False
+
+        tortoise, hare = head, head.next
+
+        while hare != tortoise:
+            if not hare or not hare.next:
+                return False
+            tortoise = tortoise.next
+            hare = hare.next.next
+
+        return True
+
+# GPT-4 improvement to my code: we don't have to check the length of the set; we
+# can simply see if the current node is already in the set: `if head in seen`
+#
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if not head:
+            return False
+        seen = set()
+        while head:
+            if head in seen:  # had seen node earlier; hence, cycle
+                return True
+            seen.add(head)
+            head = head.next
+        return False
+
+# (my solution)
+# time: worst is O(n) for no-cycles linked list
+# space: I think O(1)? we're just storing references?
+#
+# EDIT: I was wrong: it's O(n) for a no-cycles linked list; even though we're
+# only storing references (pointers), they're still growing in proportion to the
+# size of the input and still take up memory
+#
+# Notes from GPT:
+# We're interested in growth. It's about how memory usage grows as the input size increases. Even if a reference is much smaller than a full object, if you need a linear number of references relative to the size of the input, the space complexity is O(n).
+# Constants don't matter in Big O notation. If a full object took up, let's say, 100 units of memory and a reference took up 1 unit, in Big O notation, we'd still disregard that factor of 100 and focus on how the number of these entities grows with the size of the input.
+# It standardizes discussion. Whether we're storing full objects or references, if we need a linear number of them, we say it's O(n). This standardization makes it easier to communicate and reason about algorithmic efficiency without getting bogged down in implementation specifics.
+# In practice, if you're trying to optimize real-world memory usage, then the absolute sizes (like the difference between the size of an object and a reference) can become important. But for algorithmic analysis, we abstract away those details to focus on growth patterns.
+#
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if not head:
+            return False
+        seen = set()
+        while head.next:
+            old_length = len(seen)
+            seen.add(head)
+            if len(seen) == old_length:  # had seen node earlier; hence, cycle
+                return True
+            head = head.next
+        return False
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/balanced-binary-tree/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
