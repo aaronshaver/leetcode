@@ -17,11 +17,38 @@
 # url: https://leetcode.com/problems/implement-queue-using-stacks/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
+# I didn't see anything too impressive in the Solutions tab on LeetCode
+#
+# GPT-4's DRYer version of my code using a helper method:
+class MyQueue:
+    def __init__(self):
+        self.list1 = []  # for push()
+        self.list2 = []  # for peek(), pop()
 
+    def push(self, x: int) -> None:
+        self.list1.append(x)
+
+    def _prepareList2(self):
+        if not self.list2:
+            while self.list1:
+                self.list2.append(self.list1.pop())
+
+    def pop(self) -> int:
+        self._prepareList2()
+        return self.list2.pop()
+
+    def peek(self) -> int:
+        self._prepareList2()
+        return self.list2[-1]
+
+    def empty(self) -> bool:
+        return not self.list1 and not self.list2
 
 # (my solution)
-# time:
-# space:
+# time: O(1) best, O(n) worst?
+#
+# EDIT: amortized O(1)
+# space: O(n)
 class MyQueue:
     def __init__(self):
         self.list1 = []  # for push()
