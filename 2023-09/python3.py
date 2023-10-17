@@ -20,32 +20,32 @@
 
 
 # (my solution)
-# time:
-# space:
+# time: O(log n)
+# space: O(1)
+#
 # The isBadVersion API is already defined for you.
 # def isBadVersion(version: int) -> bool:
 import math
 
 class Solution:
     def firstBadVersion(self, n: int) -> int:
-        lowest_bad_version = None
-        previous_midpoint = 1
-        midpoint = math.ceil(n / 2)
+        left = 0  # 0 is needed to be able to land on a midpoint of 1
+        right = n
+        current_midpoint = math.ceil(n / 2)
         while True:
-            if isBadVersion(midpoint):
-                # left half
-                lowest_bad_version = midpoint
-                new_midpoint = previous_midpoint + ceil((midpoint - previous_midpoint) / 2)
-                if new_midpoint == midpoint:
-                    break
+            if isBadVersion(current_midpoint):
+                # search left half
+                right = current_midpoint
+                new_midpoint = left + ceil((right - left) / 2)
+                if new_midpoint == current_midpoint:
+                    return current_midpoint
             else:
-                # right half
-                new_midpoint = midpoint + ceil((n - midpoint) / 2)
-                if new_midpoint == midpoint:
-                    break
-            previous_midpoint = midpoint
-            midpoint = new_midpoint
-        return lowest_bad_version
+                # search right half
+                left = current_midpoint
+                new_midpoint = current_midpoint + ceil((right - left) / 2)
+                if new_midpoint == current_midpoint:
+                    return current_midpoint
+            current_midpoint = new_midpoint
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
