@@ -17,7 +17,18 @@
 # url: https://leetcode.com/problems/first-bad-version/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
-
+# cleaner solution from GPT; not only is it more terse, but it is easier to
+# reason about the exit condition by way of the left < right
+class Solution:
+    def firstBadVersion(self, n: int) -> int:
+        left, right = 1, n  # Initialize left to 1 as version numbers start from 1
+        while left < right:
+            mid = (left + right) // 2  # Use integer division to find the midpoint
+            if isBadVersion(mid):
+                right = mid  # If mid is bad, search the left half
+            else:
+                left = mid + 1  # If mid is good, search the right half
+        return left  # When left and right converge, return the result
 
 # (my solution)
 # time: O(log n)
