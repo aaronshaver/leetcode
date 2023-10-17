@@ -14,6 +14,41 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/first-bad-version/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+
+
+# (my solution)
+# time:
+# space:
+# The isBadVersion API is already defined for you.
+# def isBadVersion(version: int) -> bool:
+import math
+
+class Solution:
+    def firstBadVersion(self, n: int) -> int:
+        lowest_bad_version = None
+        previous_midpoint = 1
+        midpoint = math.ceil(n / 2)
+        while True:
+            if isBadVersion(midpoint):
+                # left half
+                lowest_bad_version = midpoint
+                new_midpoint = previous_midpoint + ceil((midpoint - previous_midpoint) / 2)
+                if new_midpoint == midpoint:
+                    break
+            else:
+                # right half
+                new_midpoint = midpoint + ceil((n - midpoint) / 2)
+                if new_midpoint == midpoint:
+                    break
+            previous_midpoint = midpoint
+            midpoint = new_midpoint
+        return lowest_bad_version
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/implement-queue-using-stacks/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
