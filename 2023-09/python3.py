@@ -17,11 +17,22 @@
 # url: https://leetcode.com/problems/ransom-note/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
-
+# cool solution from GPT-4 (likely pilfered from leetcode or whatever) that does
+# space complexity of O(1); may or may not be faster, because it's creating
+# strings every iteration
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        for letter in ransomNote:
+            if letter in magazine:
+                magazine = magazine.replace(letter, '', 1)
+            else:
+                return False
+        return True
 
 # (my solution)
 # time: O(n)
-# space: O(n) worst case like all unique letters
+# space: O(n) worst case like all unique letters; i have an intuition that
+# improving this is possible
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
         counts = {}
