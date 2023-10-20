@@ -20,10 +20,24 @@
 
 
 # (my solution)
-# time:
-# space:
+# time: O(n)
+# space: O(n) worst case like all unique letters
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        counts = {}
+        for letter in magazine:
+            if letter in counts:
+                counts[letter] += 1
+            else:
+                counts[letter] = 1
 
+        for letter in ransomNote:
+            if letter not in counts or counts[letter] < 1:
+                return False
+            else:
+                counts[letter] -= 1
 
+        return True
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
