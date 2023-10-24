@@ -17,11 +17,24 @@
 # url: https://leetcode.com/problems/climbing-stairs/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
+#
+# GPT-4's quite terse but readable solution
+class Solution:
+    def __init__(self):
+        self.table = {0: 1, 1: 1}  # Base cases
 
+    def climbStairs(self, n: int) -> int:
+        if n in self.table:
+            return self.table[n]
+
+        self.table[n] = self.climbStairs(n - 1) + self.climbStairs(n - 2)
+        return self.table[n]
 
 # (my solution)
 # time: O(n)?
+# edit: that was correct!
 # space: O(n)?
+# edit: that was correct!
 class Solution:
     def __init__(self):
         # cache Fibonacci values to avoid expensive compute during recursion
@@ -44,7 +57,7 @@ class Solution:
         # we notice a pattern where the answer aligns with the Fibonacci sequence
         # but offset by n+1
         cycles = n + 1
-        for i in range(n):
+        for i in range(n):  # crucially, we go UP from the bottom small n values
             if i not in self.table:
                 self.table[i] = self.get_fibonacci(i)
         return self.get_fibonacci(cycles)
