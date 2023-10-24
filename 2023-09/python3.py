@@ -20,20 +20,33 @@
 
 
 # (my solution)
-# time:
-# space:
+# time: O(n)?
+# space: O(n)?
 class Solution:
+    def __init__(self):
+        # cache Fibonacci values to avoid expensive compute during recursion
+        self.table = {}
+
     def get_fibonacci(self, n):
         if n == 0:
             return 0
         if n == 1:
             return 1
-        return self.get_fibonacci(n - 1) + self.get_fibonacci(n - 2)
+        output = None
+        if n not in self.table:
+            output = self.get_fibonacci(n - 1) + self.get_fibonacci(n - 2)
+        else:
+            output = self.table[n]
+        print(output)
+        return output
 
     def climbStairs(self, n: int) -> int:
         # we notice a pattern where the answer aligns with the Fibonacci sequence
         # but offset by n+1
         cycles = n + 1
+        for i in range(n):
+            if i not in self.table:
+                self.table[i] = self.get_fibonacci(i)
         return self.get_fibonacci(cycles)
 # ---------------------------------------------------------------------------
 
