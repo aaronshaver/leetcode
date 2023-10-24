@@ -14,6 +14,30 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/climbing-stairs/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+
+
+# (my solution)
+# time:
+# space:
+class Solution:
+    def get_fibonacci(self, n):
+        if n == 0:
+            return 0
+        if n == 1:
+            return 1
+        return self.get_fibonacci(n - 1) + self.get_fibonacci(n - 2)
+
+    def climbStairs(self, n: int) -> int:
+        # we notice a pattern where the answer aligns with the Fibonacci sequence
+        # but offset by n+1
+        cycles = n + 1
+        return self.get_fibonacci(cycles)
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/ransom-note/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
