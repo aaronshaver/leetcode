@@ -20,9 +20,31 @@
 
 
 # (my solution)
-# time:
-# space:
+# time: O(n)
+# space: O(n) worst in case of all unique characters, but across different cases,
+# should be < O(n) on average
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        counts = {}
+        for character in s:
+            if character not in counts:
+                counts[character] = 1
+            else:
+                counts[character] += 1
 
+        length = 0
+        odd_numbers = 0
+        for value in counts.values():
+            length += value
+            if value % 2 != 0:
+                odd_numbers += 1
+        # subtract the non-even portions encountered, except leave one,
+        # because a single character can be in the middle and it remains a
+        # palindrome
+        if odd_numbers:
+            length -= odd_numbers - 1
+
+        return length
 
 # ---------------------------------------------------------------------------
 
