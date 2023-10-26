@@ -17,7 +17,21 @@
 # url: https://leetcode.com/problems/longest-palindrome/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
+#
+# GPT-4's solution that makes things more concise while still retaining decent
+# readability, though at the cost of needing an import and needing to understand
+# the generator expression
+from collections import Counter
 
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        counts = Counter(s)
+
+        length = sum((v // 2) * 2 for v in counts.values())
+        if length < len(s):  # there's at least one character with an odd count
+            length += 1
+
+        return length
 
 # (my solution)
 # time: O(n)
@@ -45,7 +59,6 @@ class Solution:
             length -= odd_numbers - 1
 
         return length
-
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
