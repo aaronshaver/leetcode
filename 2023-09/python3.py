@@ -14,6 +14,19 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/reverse-linked-list/
+
+# (notes from LeetCode Solutions tab and/or ChatGPT)
+
+
+# (my solution)
+# time:
+# space:
+
+
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/longest-palindrome/description/
 
 # (notes from LeetCode Solutions tab and/or ChatGPT)
