@@ -20,42 +20,23 @@
 
 
 # (my solution)
-# time:
-# space:
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
+# time: O(n)
+# space: O(n) because of call stack size?
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head:
+    def reverseList(self, current: Optional[ListNode], previous=None) -> Optional[ListNode]:
+        if not current:
             return None
-        if not head.next:
-            return head
-
-        collected_nodes = []
-        while head:
-            collected_nodes.insert(0, head)
-            head = head.next
-        print(collected_nodes)
-
-        current_node = collected_nodes[0]
-        head = current_node
-        while len(collected_nodes) > 1:
-            print()
-            current_node.next = collected_nodes[1]
-            current_node = current_node.next
-            del collected_nodes[0]
-
-        print()
-        print(current_node)
-        return head
+        next_node = current.next
+        current.next = previous
+        if not next_node:  # reached final node or is single node list
+            return current
+        else:
+            return self.reverseList(next_node, current)
 
 # ---------------------------------------------------------------------------
 
