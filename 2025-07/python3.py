@@ -17,7 +17,26 @@
 # url: https://leetcode.com/problems/divisible-and-non-divisible-sums-difference/
 
 # (solution and/or notes from LeetCode Solutions tab and/or an AI model)
+# This solution using mathematical forumulas to do time complexity o(1) instead
+# of o(n)
+class Solution:
+    def differenceOfSums(self, n: int, m: int) -> int:
+        # Calculate the sum of all numbers from 1 to n.
+        # The formula for the sum of the first n integers is n * (n + 1) / 2.
+        total_sum = n * (n + 1) // 2
 
+        # Find the number of integers from 1 to n that are divisible by m.
+        # This is equivalent to floor(n / m).
+        k = n // m
+
+        # Calculate the sum of numbers divisible by m (num2).
+        # This is an arithmetic series: m + 2m + ... + km = m * (1 + 2 + ... + k).
+        # We use the sum formula again for the series 1 to k.
+        sum_of_multiples = m * (k * (k + 1) // 2)
+
+        # The final result is total_sum - 2 * sum_of_multiples.
+        # This comes from the identity: num1 - num2 = (total_sum - num2) - num2.
+        return total_sum - 2 * sum_of_multiples
 
 # (my solution)
 # time: o(n)
