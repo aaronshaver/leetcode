@@ -1,8 +1,9 @@
 # vvvv template vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
 # ---------------------------------------------------------------------------
 # url:
 
-# (notes from LeetCode Solutions tab and/or ChatGPT)
+# (solution and/or notes from LeetCode Solutions tab and/or an AI model)
 
 
 # (my solution)
@@ -11,6 +12,7 @@
 
 
 # ---------------------------------------------------------------------------
+
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
