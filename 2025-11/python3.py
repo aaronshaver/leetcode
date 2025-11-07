@@ -14,7 +14,7 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
-# url:
+# url: https://leetcode.com/problems/build-array-from-permutation/
 
 # (solution and/or notes from LeetCode Solutions tab and/or an AI model)
 
