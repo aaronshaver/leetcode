@@ -14,7 +14,7 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
-# url: ???
+# url: https://leetcode.com/problems/two-sum/description/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
 
