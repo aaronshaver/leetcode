@@ -17,10 +17,11 @@
 # url: https://leetcode.com/problems/two-sum/description/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
-# I half-remembered the solution but I got a hint from the LLM to get the hint
-# about the seen dictionary
 #
-# My version which is still O(n), since constant factors (2n) are dropped:
+# I half-remembered the solution but I needed a hint from the LLM to get the
+# hint about the seen dictionary
+#
+# My new version which is still O(n), since constant factors (2n) are dropped:
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
         seen = {}
@@ -37,7 +38,7 @@ class Solution:
                         return seen[difference]
                 else:
                     return [seen[key][0], seen[difference][0]]
-# nicer version from LLM:
+# nicer version from LLM that avoids the two passes:
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
         seen = {}
