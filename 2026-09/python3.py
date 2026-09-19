@@ -17,9 +17,38 @@
 # url: https://leetcode.com/problems/two-sum/description/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
-# I half-remembered the solution but I got a hint from the LLM to get to the
-# time complexity of O(n)
+# I half-remembered the solution but I got a hint from the LLM to get the hint
+# about the seen dictionary
+#
+# My version which is still O(n), since constant factors (2n) are dropped:
+class Solution:
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
+        seen = {}
+        for i, number in enumerate(nums):
+            if number in seen:
+                seen[number] = seen[number] + [i]
+            else:
+                seen[number] = [i]
+        for key in seen.keys():
+            difference = target - key
+            if difference in seen:
+                if key == difference:
+                    if len(seen[difference]) > 1:
+                        return seen[difference]
+                else:
+                    return [seen[key][0], seen[difference][0]]
+# nicer version from LLM:
+class Solution:
+    def twoSum(self, nums: list[int], target: int) -> list[int]:
+        seen = {}
 
+        for i, number in enumerate(nums):
+            difference = target - number
+
+            if difference in seen:
+                return [seen[difference], i]
+
+            seen[number] = i
 
 # (my solution)
 # time: O(n^2)
