@@ -24,9 +24,7 @@
 # space:
 class Solution:
     def isValid(self, s: str) -> bool:
-        if len(s) < 2:
-            return False
-        if s[0] in [']', '}', ')']:
+        if len(s) < 2 or s[0] in [']', '}', ')']:
             return False
 
         parens = ""
@@ -34,10 +32,9 @@ class Solution:
         for char in s:
             parens += char
             if len(parens) > 1 and char in [']', '}', ')']:
-                two_back = parens[-2]
-                if two_back == parensMap[char]:
-                    parens = parens[:-2]
-        return not parens  # every pair closed and remove
+                if parens[-2] == parensMap[char]:  # if two back is opening paren
+                    parens = parens[:-2]  # remove the closed pair
+        return not parens  # every pair closed and removed
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
