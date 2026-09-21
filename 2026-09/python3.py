@@ -38,8 +38,6 @@ class Solution:
                 if two_back == parensMap[char]:
                     parens = parens[:-2]
         return not parens  # every pair closed and remove
-
-
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
