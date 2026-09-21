@@ -22,8 +22,23 @@
 # (my solution)
 # time:
 # space:
+class Solution:
+    def isValid(self, s: str) -> bool:
+        if len(s) < 2:
+            return False
+        if s[0] in [']', '}', ')']:
+            return False
 
-#  {[()]}
+        parens = ""
+        parensMap = { ')': '(', ']': '[', '}': '{'}
+        for char in s:
+            parens += char
+            if len(parens) > 1 and char in [']', '}', ')']:
+                two_back = parens[-2]
+                if two_back == parensMap[char]:
+                    parens = parens[:-2]
+        return not parens  # every pair closed and remove
+
 
 # ---------------------------------------------------------------------------
 
