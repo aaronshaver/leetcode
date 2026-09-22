@@ -14,6 +14,19 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/merge-two-sorted-lists/description/
+
+# (solution and notes from LeetCode Solutions tab and/or AI model)
+
+
+# (my solution)
+# time:
+# space:
+
+
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/valid-parentheses/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
