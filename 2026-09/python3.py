@@ -20,10 +20,54 @@
 
 
 # (my solution)
-# time:
-# space:
+# time: O(n)
+# space: O(n)
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(self, list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
+        if not list1:
+            return list2
+        elif not list2:
+            return list1
+
+        merged_chain = ListNode()
+        head = merged_chain
+
+        while list1 or list2:
+            node_to_add = None
+            temp = None
 
 
+            # otherwise build chain
+            print("list1.val", list1.val)
+            print("list2.val", list2.val)
+            if list2.val < list1.val:
+                temp = list2.next
+                node_to_add = list2
+                node_to_add.next = None
+                merged_chain.next = node_to_add
+                list2 = temp
+                merged_chain = merged_chain.next
+            else:
+                temp = list1.next
+                node_to_add = list1
+                node_to_add.next = None
+                merged_chain.next = node_to_add
+                list1 = temp
+                merged_chain = merged_chain.next
+
+            # when one of the lists runs out
+            if not list1:
+                merged_chain.next = list2
+                return head.next
+            if not list2:
+                merged_chain.next = list1
+                return head.next
+        return head.next
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
