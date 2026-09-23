@@ -20,8 +20,9 @@
 
 
 # (my solution)
-# time: O(n)
-# space: O(n)
+# time: O(n + m) -- the two lists
+# space: O(1)  -- because we're just reconnecting things, not creating new nodes
+#
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
