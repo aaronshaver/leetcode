@@ -26,30 +26,17 @@
 # IN PROGRESS!
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
-        pairs = []
+        lowest_seen = []
+        highest_seen = []
 
         for i, price in enumerate(prices):
             if i == 0:
                 continue
-
-            temp_pairs = []
-            temp_pairs.append((prices[i-1], i-1))
-            temp_pairs.append((prices[i], i))
-
-            if temp_pairs[0][0] < temp_pairs[1][0] and temp_pairs[0][1] < temp_pairs[1][1]:
-                if not pairs:
-                    pairs.append(temp_pairs[0])
-                    pairs.append(temp_pairs[1])
-                else:
-                    if temp_pairs[0][0] < pairs[0][0] and temp_pairs[0][1] < pairs[1][1]:
-                        pairs[0] = temp_pairs[0]
-                    if temp_pairs[1][0] > pairs[1][0] and temp_pairs[1][1] > pairs[0][1]:
-                        pairs[1] = temp_pairs[1]
-
-        if not pairs:
-            return 0
-        else:
-            return pairs[1][0] - pairs[0][0]
+            lowest = min(price, prices[i-1])
+            if not lowest_seen:
+                lowest_seen = []
+            highest = max(price, prices[i-1])
+            print(lowest, highest)
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
