@@ -20,17 +20,21 @@
 
 
 # (my solution)
-# time:
-# space:
-#
-# this works but it's n^2 i think and too slow for 10k input
+# time: O(n)
+# space: O(1)
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
         profit = 0
-        for i, price in enumerate(prices):
-            for j, previous_price in enumerate(prices[0:i]):
-                if price - previous_price > profit:
-                    profit = price - previous_price
+        lowest_seen = []
+        for price in prices:
+            if not lowest_seen:
+                lowest_seen.append(price)
+                continue
+            if price < lowest_seen[0]:
+                lowest_seen.pop()
+                lowest_seen.append(price)
+            if price - lowest_seen[0] > profit:
+                profit = price - lowest_seen[0]
         return profit
 # ---------------------------------------------------------------------------
 
