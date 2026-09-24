@@ -23,20 +23,15 @@
 # time:
 # space:
 #
-# IN PROGRESS!
+# this works but it's n^2 i think and too slow for 10k input
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
-        lowest_seen = []
-        highest_seen = []
-
+        profit = 0
         for i, price in enumerate(prices):
-            if i == 0:
-                continue
-            lowest = min(price, prices[i-1])
-            if not lowest_seen:
-                lowest_seen = []
-            highest = max(price, prices[i-1])
-            print(lowest, highest)
+            for j, previous_price in enumerate(prices[0:i]):
+                if price - previous_price > profit:
+                    profit = price - previous_price
+        return profit
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
