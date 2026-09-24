@@ -17,24 +17,33 @@
 # url: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
+# GPT-5.6-Sol-High's version that neatly avoids some conditionals
+class Solution:
+    def maxProfit(self, prices: list[int]) -> int:
+        lowest_seen = prices[0]
+        best_profit = 0
 
+        for price in prices:
+            best_profit = max(best_profit, price - lowest_seen)
+            lowest_seen = min(lowest_seen, price)
 
-# (my solution)
+        return best_profit
+
+# (my solution) after a couple tiny hints
 # time: O(n)
 # space: O(1)
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
         profit = 0
-        lowest_seen = []
+        lowest_seen = None
         for price in prices:
-            if not lowest_seen:
-                lowest_seen.append(price)
+            if lowest_seen is None:
+                lowest_seen = price
                 continue
-            if price < lowest_seen[0]:
-                lowest_seen.pop()
-                lowest_seen.append(price)
-            if price - lowest_seen[0] > profit:
-                profit = price - lowest_seen[0]
+            if price < lowest_seen:
+                lowest_seen = price
+            if price - lowest_seen > profit:
+                profit = price - lowest_seen
         return profit
 # ---------------------------------------------------------------------------
 
