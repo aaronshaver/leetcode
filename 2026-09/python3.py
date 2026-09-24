@@ -18,6 +18,7 @@
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
 # GPT-5.6-Sol-High's version that neatly avoids some conditionals
+# but it is a little slower because of max() and min() (I benchmarked it)
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
         lowest_seen = prices[0]
