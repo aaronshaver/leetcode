@@ -14,6 +14,24 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/valid-palindrome/
+
+# (solution and notes from LeetCode Solutions tab and/or AI model)
+
+
+# (my solution)
+# time: O(n)
+# space: O(n)
+import re
+
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        lowered = s.lower()
+        stripped = re.sub(r'[^a-z0-9]', '', lowered)
+        return stripped == "".join(reversed(stripped))
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
