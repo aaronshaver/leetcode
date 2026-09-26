@@ -22,6 +22,7 @@
 # (my solution)
 # time: O(n)
 # space: O(n)
+# first solution:
 import re
 
 class Solution:
@@ -29,6 +30,28 @@ class Solution:
         lowered = s.lower()
         stripped = re.sub(r'[^a-z0-9]', '', lowered)
         return stripped == "".join(reversed(stripped))
+# second solution that is space O(1) but slower:
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        if len(s) < 2:
+            return True
+
+        i = 0
+        j = len(s) - 1
+        while i != j and i < j:
+            if s[i].lower() == s[j].lower():
+                i += 1
+                j -= 1
+            else:
+                while i < len(s) and not s[i].lower().isalnum():
+                    i += 1
+                while j > 0 and not s[j].lower().isalnum():
+                    j -= 1
+                if i > j or s[i].lower() == s[j].lower():
+                    continue
+                else:
+                    return False
+        return True
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
