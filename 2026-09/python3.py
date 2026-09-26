@@ -17,7 +17,26 @@
 # url: https://leetcode.com/problems/valid-palindrome/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
+# GPT-5.6-Sol-High's version:
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        left = 0
+        right = len(s) - 1
 
+        while left < right:
+            while left < right and not s[left].isalnum():
+                left += 1
+
+            while left < right and not s[right].isalnum():
+                right -= 1
+
+            if s[left].lower() != s[right].lower():
+                return False
+
+            left += 1
+            right -= 1
+
+        return True
 
 # (my solution)
 # time: O(n)
@@ -30,7 +49,8 @@ class Solution:
         lowered = s.lower()
         stripped = re.sub(r'[^a-z0-9]', '', lowered)
         return stripped == "".join(reversed(stripped))
-# second solution that is space O(1) but slower:
+# second solution that is space O(1) but is maybe slower? definitely hard to
+# read though
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         if len(s) < 2:
