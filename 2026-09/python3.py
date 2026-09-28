@@ -14,6 +14,29 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url:
+
+# (solution and notes from LeetCode Solutions tab and/or AI model)
+
+
+# (my solution)
+# time:
+# space:
+#
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def invertTree(self, root: TreeNode | None) -> TreeNode | None:
+
+
+
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/valid-palindrome/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
