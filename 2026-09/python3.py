@@ -28,7 +28,25 @@ class Solution:
         root.left, root.right = root.right, root.left
         return root
 
-# (my solution)
+# here's an iterative version that uses a list as a stack to avoid potential
+# edge case huge call recursion stuff
+# time and space complexity are the same
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root:
+            return root
+
+        to_process = [root]
+        while to_process:
+            current_node = to_process.pop()
+            current_node.left, current_node.right = current_node.right, current_node.left
+            if current_node.left:
+                to_process.append(current_node.left)
+            if current_node.right:
+                to_process.append(current_node.right)
+        return root
+#
+# (my original solution)
 # time: O(n)
 # space: O(h) (height of the tree... balanced tree is O(log n), worst case is O(n);
 # the temp references we make are just references; Python copies a reference to an object,
