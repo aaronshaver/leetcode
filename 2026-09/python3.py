@@ -21,7 +21,14 @@
 
 # (my solution)
 # time: O(n)
-# space: O(1)? technically we are copying the sub-trees...
+#
+# space: O(h) (height of the tree... balanced tree is O(log n), worst case is O(n);
+# the temp references we make are just references; Python copies a reference to an object,
+# not the whole object, e.g. tempLeft just points to the exact same object that
+# root.left points to;
+# there apparently is a way to do this non-recursively to reduce the call stack
+# problem
+#
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
