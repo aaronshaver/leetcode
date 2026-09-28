@@ -20,9 +20,8 @@
 
 
 # (my solution)
-# time:
-# space:
-#
+# time: O(n)
+# space: O(1)? technically we are copying the sub-trees...
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -31,9 +30,20 @@
 #         self.right = right
 class Solution:
     def invertTree(self, root: TreeNode | None) -> TreeNode | None:
+        if not root:
+            return None
 
+        tempLeft = root.left
+        tempRight = root.right
+        root.left = tempRight
+        root.right = tempLeft
 
+        if root.left:
+            self.invertTree(root.left)
+        if root.right:
+            self.invertTree(root.right)
 
+        return root
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
