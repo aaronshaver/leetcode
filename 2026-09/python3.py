@@ -21,7 +21,7 @@
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root: #Base Case
-            return None
+            return root
         self.invertTree(root.left) #Call the left substree
         self.invertTree(root.right)  #Call the right substree
         # Swap the nodes
