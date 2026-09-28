@@ -14,14 +14,22 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
-# url:
+# url: https://leetcode.com/problems/invert-binary-tree/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
-
+# LeetCode solution that is cleaner syntax with fewer conditionals
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root: #Base Case
+            return None
+        self.invertTree(root.left) #Call the left substree
+        self.invertTree(root.right)  #Call the right substree
+        # Swap the nodes
+        root.left, root.right = root.right, root.left
+        return root
 
 # (my solution)
 # time: O(n)
-#
 # space: O(h) (height of the tree... balanced tree is O(log n), worst case is O(n);
 # the temp references we make are just references; Python copies a reference to an object,
 # not the whole object, e.g. tempLeft just points to the exact same object that
