@@ -14,6 +14,23 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/valid-anagram/
+
+# (solution and notes from LeetCode Solutions tab and/or AI model)
+
+
+# (my solution)
+# time: O(n log n + m log m)
+# space: O(n + m)
+# my first solution
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        return "".join(sorted(s)) == "".join(sorted(t))
+
+
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/invert-binary-tree/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
