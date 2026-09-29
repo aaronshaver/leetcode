@@ -14,6 +14,19 @@
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 # ---------------------------------------------------------------------------
+# url: https://leetcode.com/problems/binary-search/
+
+# (solution and notes from LeetCode Solutions tab and/or AI model)
+# time:
+# space:
+
+# (my solution)
+# time:
+# space:
+
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
 # url: https://leetcode.com/problems/valid-anagram/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
