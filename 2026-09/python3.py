@@ -3,12 +3,12 @@
 # url:
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
-
+# time:
+# space:
 
 # (my solution)
 # time:
 # space:
-
 
 # ---------------------------------------------------------------------------
 # ^^^^ template ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -17,17 +17,51 @@
 # url: https://leetcode.com/problems/valid-anagram/
 
 # (solution and notes from LeetCode Solutions tab and/or AI model)
+# this is GPT-5.6-Sol-High's version which points out that you can just compare
+# entire dictionaries directly
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        s_count = {}
+        t_count = {}
 
+        for char in s:
+            s_count[char] = s_count.get(char, 0) + 1
 
-# (my solution)
+        for char in t:
+            t_count[char] = t_count.get(char, 0) + 1
+
+        return s_count == t_count
+
 # time: O(n log n + m log m)
 # space: O(n + m)
 # my first solution
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         return "".join(sorted(s)) == "".join(sorted(t))
-
-
+# my second solution using maps
+# time: O(n + m)
+# space: O(1) why? because we know it's all lowercase English letters, so it's
+# a constant
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        sMap = {}
+        tMap = {}
+        for char in s:
+            if char not in sMap:
+                sMap[char] = 1
+            else:
+                sMap[char] = sMap[char] + 1
+        for char in t:
+            if char not in tMap:
+                tMap[char] = 1
+            else:
+                tMap[char] = tMap[char] + 1
+        if len(sMap.keys()) != len(tMap.keys()):
+            return False
+        for key, value in sMap.items():
+            if key not in tMap or tMap[key] != value:
+                return False
+        return True
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
