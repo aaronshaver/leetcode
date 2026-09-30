@@ -23,6 +23,21 @@
 # (my solution)
 # time:
 # space:
+class Solution:
+    def search(self, nums: list[int], target: int) -> int:
+        midpoint = len(nums) // 2
+        print(midpoint)
+        while midpoint >= 0 and midpoint < len(nums):
+            number = nums[midpoint]
+            if number == target:
+                return midpoint
+            else:
+                if number < target:
+                    midpoint = midpoint + ((len(nums) - midpoint) // 2)
+                else:
+                    midpoint = midpoint // 2
+            print(midpoint)
+        return -1
 
 # ---------------------------------------------------------------------------
 
