@@ -21,24 +21,26 @@
 # space:
 
 # (my solution)
-# time:
-# space:
+# time: O(log n)
+# space: O(1)
+import math
+
 class Solution:
     def search(self, nums: list[int], target: int) -> int:
-        midpoint = len(nums) // 2
-        print(midpoint)
-        while midpoint >= 0 and midpoint < len(nums):
-            number = nums[midpoint]
-            if number == target:
+        midpoint = math.floor(len(nums) / 2)
+        left = 0
+        right = len(nums) - 1
+        while left <= right:
+            if nums[midpoint] == target:
                 return midpoint
-            else:
-                if number < target:
-                    midpoint = midpoint + ((len(nums) - midpoint) // 2)
-                else:
-                    midpoint = midpoint // 2
-            print(midpoint)
-        return -1
 
+            if nums[midpoint] < target:
+                left = midpoint + 1
+                midpoint = math.ceil((midpoint + right) / 2)
+            else:
+                right = midpoint - 1
+                midpoint = math.floor((midpoint + left) / 2)
+        return -1
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
