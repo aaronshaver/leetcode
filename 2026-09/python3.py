@@ -19,6 +19,24 @@
 # (solution and notes from LeetCode Solutions tab and/or AI model)
 # time:
 # space:
+# this is same as mine as far a logic, but cleaner and more readable and less
+# syntax and no import
+class Solution:
+    def search(self, nums: list[int], target: int) -> int:
+        left = 0
+        right = len(nums) - 1
+
+        while left <= right:
+            midpoint = (left + right) // 2
+
+            if nums[midpoint] == target:
+                return midpoint
+            if nums[midpoint] < target:
+                left = midpoint + 1
+            else:
+                right = midpoint - 1
+
+        return -1
 
 # (my solution)
 # time: O(log n)
